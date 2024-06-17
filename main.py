@@ -1,3 +1,12 @@
+"""
+SOFG1009
+Avance 1 - Analizador Léxico
+
+Integrantes:
+- José Baidal (Paralelo 1)
+- Christopher Díaz (Paralelo 2)
+"""
+
 import ply.lex as lex
 from logger import logger
 
