@@ -1,8 +1,20 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
-from logger import logger
+# Logger básico para imprimir tokens
+def logger(lexer):
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break  # No more input
+        print(tok)
 
+# Función para manejar errores léxicos
+def t_error(t):
+    print(f"Illegal character '{t.value[0]}'")
+    t.lexer.skip(1)
+
+# Palabras reservadas en PHP
 palabras_reservadas = {
     'abstract': 'ABSTRACT',
     'and': 'AND',
@@ -37,6 +49,7 @@ palabras_reservadas = {
     'finally': 'FINALLY',
 }
 
+# Lista de tokens
 tokens = (
     'NUMBER',
     'STRING',
@@ -71,9 +84,9 @@ tokens = (
     'MULTIPLY',
     'MODULO',
     'COMMENT',
-)
-
-tokens = tokens + tuple(palabras_reservadas.values())
+    'CONCATENATION_ASSIGNMENT',
+    'CONCATENATION'
+) + tuple(palabras_reservadas.values())
 
 # Expresiones regulares para tokens simples
 t_EQUALS = r'='
@@ -99,6 +112,8 @@ t_MINUS = r'-'
 t_MULTIPLY = r'\*'
 t_MODULO = r'%'
 t_ignore_WHITESPACE = r'\s+'
+t_CONCATENATION_ASSIGNMENT = r'\.='
+t_CONCATENATION = r'\.'
 
 # Expresiones regulares para tokens más complejos
 def t_NUMBER(t):
@@ -107,8 +122,8 @@ def t_NUMBER(t):
     return t
 
 def t_STRING(t):
-    r'\"([^\\\n]|(\\.))*?\"'
-    t.value = t.value[1:-1]  # Remover las comillas alrededor de la cadena
+    r'(\"([^\\\n]|(\\.))?\")|(\'([^\\\n]|(\\.))?\')'
+    t.value = t.value[1:-1]  # Remove surrounding quotes
     return t
 
 def t_BOOLEAN(t):
@@ -122,12 +137,12 @@ def t_NULL(t):
     return t
 
 def t_VARIABLE(t):
-    r'\$[a-zA-Z_][a-zA-Z0-9_]*'
+    r'\$[a-zA-Z_ñÑ][a-zA-Z0-9_ñÑ]*'
     return t
 
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER')  # Verificar palabras reservadas
+    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER')  # Check for reserved words
     return t
 
 def t_OPEN_TAG(t):
@@ -143,24 +158,20 @@ def t_OPEN_TAG_WITH_ECHO(t):
     return t
 
 def t_COMMENT(t):
-    r'(//.*|/\*[\s\S]*?\*/)'
-    pass  # Ignorar los comentarios
+    r'(//.|/\[\s\S]?\/)'
+    pass  # Ignore comments
 
-# Manejo de errores
-def t_error(t):
-    print(f"Illegal character '{t.value[0]}'")
-    t.lexer.skip(1)
-
-# Construir el lexer
+# Build the lexer
 lexer = lex.lex()
 
-# Prueba del lexer
+# Test the lexer
 data = '''
 <?php
 function generarContrasena($longitud = 12) {
     // Caracteres permitidos en la contraseña
     $letrasMayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $letrasMinusculas = 'abcdefghijklmnopqrstuvwxyz';
+    $meee = 'deñdllde';
     $numeros = '0123456789';
     $caracteresEspeciales = '!@#$%^&*()-_[]{}<>~`+=,.;:/?|';
     
@@ -185,6 +196,46 @@ function generarContrasena($longitud = 12) {
     return $contraseña;
 }
 
+// Función para verificar si un número es primo
+function esPrimo($numero) {
+    if ($numero <= 1) {
+        return false;
+    }
+    for ($i = 2; $i <= sqrt($numero); $i++) {
+        if ($numero % $i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Función para obtener la suma de los dígitos de un número
+function sumaDigitos($numero) {
+    $suma = 0;
+    while ($numero > 0) {
+        $suma += $numero % 10;
+        $numero = (int) $numero / 10;
+    }
+    return $suma;
+}
+
+// Función para verificar si la suma de los dígitos es un número primo
+function sumaDigitosEsPrimo($numero) {
+    $suma = sumaDigitos($numero);
+    return esPrimo($suma);
+}
+
+// Ejemplo de uso
+$num = 12345;
+$suma = sumaDigitos($num);
+if (sumaDigitosEsPrimo($num)) {
+    echo "La suma de los dígitos de {$num} es {$suma}, que es un número primo.";
+} else {
+    echo "La suma de los dígitos de {$num} es {$suma}, que no es un número primo.";
+}
+
+
+
 // Ejemplo de uso
 $longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
 $contraseña = generarContrasena($longitudDeseada);
@@ -195,4 +246,5 @@ echo "Contraseña generada: " . $contraseña;
 
 lexer.input(data)
 
+# Ejecutar el lexer y mostrar los tokens
 logger(lexer)
