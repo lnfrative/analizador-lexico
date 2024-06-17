@@ -1,20 +1,7 @@
 import ply.lex as lex
-import ply.yacc as yacc
+from logger import logger
 
-# Logger básico para imprimir tokens
-def logger(lexer):
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break  # No more input
-        print(tok)
-
-# Función para manejar errores léxicos
-def t_error(t):
-    print(f"Illegal character '{t.value[0]}'")
-    t.lexer.skip(1)
-
-# Palabras reservadas en PHP
+# Palabras reservadas en PHP - José Baidal
 palabras_reservadas = {
     'abstract': 'ABSTRACT',
     'and': 'AND',
@@ -49,7 +36,7 @@ palabras_reservadas = {
     'finally': 'FINALLY',
 }
 
-# Lista de tokens
+# Lista de tokens - Christopher Díaz
 tokens = (
     'NUMBER',
     'STRING',
@@ -122,8 +109,8 @@ def t_NUMBER(t):
     return t
 
 def t_STRING(t):
-    r'(\"([^\\\n]|(\\.))?\")|(\'([^\\\n]|(\\.))?\')'
-    t.value = t.value[1:-1]  # Remove surrounding quotes
+    r'\'(?:\\.|[^\\\'])*\' | \"(?:\\.|[^\\\"])*\"'
+    t.value = t.value[1:-1]
     return t
 
 def t_BOOLEAN(t):
@@ -142,7 +129,7 @@ def t_VARIABLE(t):
 
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER')  # Check for reserved words
+    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER')
     return t
 
 def t_OPEN_TAG(t):
@@ -158,15 +145,19 @@ def t_OPEN_TAG_WITH_ECHO(t):
     return t
 
 def t_COMMENT(t):
-    r'(//.|/\[\s\S]?\/)'
-    pass  # Ignore comments
+    r'\/\/.*[ñÑ]*.*'
+    pass
 
-# Build the lexer
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
+
 lexer = lex.lex()
 
-# Test the lexer
 data = '''
 <?php
+
+// Algoritmo para generar contraseñas - Christopher Díaz
 function generarContrasena($longitud = 12) {
     // Caracteres permitidos en la contraseña
     $letrasMayusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -196,7 +187,8 @@ function generarContrasena($longitud = 12) {
     return $contraseña;
 }
 
-// Función para verificar si un número es primo
+
+// Función para verificar si un número es primo - José Baidal
 function esPrimo($numero) {
     if ($numero <= 1) {
         return false;
@@ -225,7 +217,7 @@ function sumaDigitosEsPrimo($numero) {
     return esPrimo($suma);
 }
 
-// Ejemplo de uso
+// Ejemplo de uso 1
 $num = 12345;
 $suma = sumaDigitos($num);
 if (sumaDigitosEsPrimo($num)) {
@@ -234,12 +226,11 @@ if (sumaDigitosEsPrimo($num)) {
     echo "La suma de los dígitos de {$num} es {$suma}, que no es un número primo.";
 }
 
-
-
-// Ejemplo de uso
+// Ejemplo de uso 2
 $longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
 $contraseña = generarContrasena($longitudDeseada);
 echo "Contraseña generada: " . $contraseña;
+
 ?>
 
 '''
