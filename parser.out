@@ -22,7 +22,6 @@ Unused terminals:
     DIE
     DO
     DOUBLE_COLON
-    ECHO
     ELSE
     ELSEIF
     EMPTY
@@ -54,75 +53,82 @@ Rule 4     statement -> expression_statement
 Rule 5     statement -> function_declaration
 Rule 6     statement -> assignment
 Rule 7     statement -> if_statement
-Rule 8     assignment -> VARIABLE EQUALS expression SEMICOLON
-Rule 9     expression_statement -> expression SEMICOLON
-Rule 10    function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
-Rule 11    body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
-Rule 12    body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
-Rule 13    parameter_list -> parameter
-Rule 14    parameter_list -> parameter_list COMMA parameter
-Rule 15    parameter_list -> empty
-Rule 16    parameter -> VARIABLE
-Rule 17    empty -> <empty>
-Rule 18    expression -> VARIABLE
-Rule 19    expression -> NUMBER
-Rule 20    expression -> STRING
-Rule 21    expression -> BOOLEAN
-Rule 22    expression -> NULL
-Rule 23    expression -> function_call
-Rule 24    expression -> expression PLUS expression
-Rule 25    expression -> expression MINUS expression
-Rule 26    expression -> expression MULTIPLY expression
-Rule 27    expression -> expression DIVIDE expression
-Rule 28    expression -> expression MODULO expression
-Rule 29    expression -> expression CONCATENATION expression
-Rule 30    expression -> expression CONCATENATION_ASSIGNMENT expression
-Rule 31    function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
-Rule 32    if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-Rule 33    condition -> expression
-Rule 34    condition -> expression comparison expression
-Rule 35    condition -> NOT condition
-Rule 36    condition -> condition AND condition
-Rule 37    condition -> condition OR condition
-Rule 38    comparison -> DOUBLE_EQUALS
-Rule 39    comparison -> NOT_EQUALS
-Rule 40    comparison -> GREATER_THAN
-Rule 41    comparison -> LESS_THAN
-Rule 42    comparison -> GREATER_THAN_OR_EQUALS
-Rule 43    comparison -> LESS_THAN_OR_EQUALS
+Rule 8     statement -> impresion
+Rule 9     statement -> condition
+Rule 10    assignment -> VARIABLE EQUALS expression SEMICOLON
+Rule 11    expression_statement -> expression SEMICOLON
+Rule 12    function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+Rule 13    body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+Rule 14    body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+Rule 15    parameter_list -> parameter
+Rule 16    parameter_list -> parameter_list COMMA parameter
+Rule 17    parameter_list -> empty
+Rule 18    parameter -> VARIABLE
+Rule 19    value_parameter_list -> value_parameter
+Rule 20    value_parameter_list -> value_parameter_list COMMA value_parameter
+Rule 21    value_parameter_list -> empty
+Rule 22    value_parameter -> expression
+Rule 23    empty -> <empty>
+Rule 24    expression -> VARIABLE
+Rule 25    expression -> NUMBER
+Rule 26    expression -> STRING
+Rule 27    expression -> BOOLEAN
+Rule 28    expression -> NULL
+Rule 29    expression -> function_call
+Rule 30    expression -> expression PLUS expression
+Rule 31    expression -> expression MINUS expression
+Rule 32    expression -> expression MULTIPLY expression
+Rule 33    expression -> expression DIVIDE expression
+Rule 34    expression -> expression MODULO expression
+Rule 35    expression -> expression CONCATENATION expression
+Rule 36    expression -> expression CONCATENATION_ASSIGNMENT expression
+Rule 37    function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+Rule 38    if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+Rule 39    impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+Rule 40    condition -> expression
+Rule 41    condition -> expression comparison expression
+Rule 42    condition -> NOT condition
+Rule 43    condition -> condition AND condition
+Rule 44    condition -> condition OR condition
+Rule 45    comparison -> DOUBLE_EQUALS
+Rule 46    comparison -> NOT_EQUALS
+Rule 47    comparison -> GREATER_THAN
+Rule 48    comparison -> LESS_THAN
+Rule 49    comparison -> GREATER_THAN_OR_EQUALS
+Rule 50    comparison -> LESS_THAN_OR_EQUALS
 
 Terminals, with rules where they appear
 
 ABSTRACT             : 
-AND                  : 36
+AND                  : 43
 ARRAY                : 
 AS                   : 
-BOOLEAN              : 21
+BOOLEAN              : 27
 BREAK                : 
 CALLABLE             : 
 CASE                 : 
 CATCH                : 
 CLASS                : 
 CLONE                : 
-CLOSE_CURLY_BRACKET  : 11 12
-CLOSE_PARENTHESIS    : 10 31 32
+CLOSE_CURLY_BRACKET  : 13 14
+CLOSE_PARENTHESIS    : 12 37 38 39
 CLOSE_SQUARE_BRACKET : 
 CLOSE_TAG            : 
 COLON                : 
-COMMA                : 14
+COMMA                : 16 20
 COMMENT              : 
-CONCATENATION        : 29
-CONCATENATION_ASSIGNMENT : 30
+CONCATENATION        : 35
+CONCATENATION_ASSIGNMENT : 36
 CONST                : 
 CONTINUE             : 
 DECLARE              : 
 DEFAULT              : 
 DIE                  : 
-DIVIDE               : 27
+DIVIDE               : 33
 DO                   : 
 DOUBLE_COLON         : 
-DOUBLE_EQUALS        : 38
-ECHO                 : 
+DOUBLE_EQUALS        : 45
+ECHO                 : 39
 ELSE                 : 
 ELSEIF               : 
 EMPTY                : 
@@ -132,58 +138,61 @@ ENDFOREACH           :
 ENDIF                : 
 ENDSWITCH            : 
 ENDWHILE             : 
-EQUALS               : 8
+EQUALS               : 10
 EVAL                 : 
 EXIT                 : 
 EXTENDS              : 
 FINAL                : 
 FINALLY              : 
 FOR                  : 
-FUNCTION             : 10
-GREATER_THAN         : 40
-GREATER_THAN_OR_EQUALS : 42
-IDENTIFIER           : 10 31
-IF                   : 32
-LESS_THAN            : 41
-LESS_THAN_OR_EQUALS  : 43
-MINUS                : 25
-MODULO               : 28
-MULTIPLY             : 26
-NOT                  : 35
-NOT_EQUALS           : 39
-NULL                 : 22
-NUMBER               : 19
-OPEN_CURLY_BRACKET   : 11 12
-OPEN_PARENTHESIS     : 10 31 32
+FUNCTION             : 12
+GREATER_THAN         : 47
+GREATER_THAN_OR_EQUALS : 49
+IDENTIFIER           : 12 37
+IF                   : 38
+LESS_THAN            : 48
+LESS_THAN_OR_EQUALS  : 50
+MINUS                : 31
+MODULO               : 34
+MULTIPLY             : 32
+NOT                  : 42
+NOT_EQUALS           : 46
+NULL                 : 28
+NUMBER               : 25
+OPEN_CURLY_BRACKET   : 13 14
+OPEN_PARENTHESIS     : 12 37 38 39
 OPEN_SQUARE_BRACKET  : 
 OPEN_TAG             : 
 OPEN_TAG_WITH_ECHO   : 
-OR                   : 37
-PLUS                 : 24
+OR                   : 44
+PLUS                 : 30
 RETURN               : 
-SEMICOLON            : 8 9
-STRING               : 20
-VARIABLE             : 8 16 18
+SEMICOLON            : 10 11 39
+STRING               : 26
+VARIABLE             : 10 18 24
 WHITESPACE           : 
 error                : 
 
 Nonterminals, with rules where they appear
 
 assignment           : 6
-body_statement_list  : 10 32
-comparison           : 34
-condition            : 32 35 36 36 37 37
-empty                : 12 15
-expression           : 8 9 24 24 25 25 26 26 27 27 28 28 29 29 30 30 33 34 34
+body_statement_list  : 12 38
+comparison           : 41
+condition            : 9 38 42 43 43 44 44
+empty                : 14 17 21
+expression           : 10 11 22 30 30 31 31 32 32 33 33 34 34 35 35 36 36 40 41 41
 expression_statement : 4
-function_call        : 23
+function_call        : 29
 function_declaration : 5
 if_statement         : 7
-parameter            : 13 14
-parameter_list       : 10 14
+impresion            : 8
+parameter            : 15 16
+parameter_list       : 12 16
 program              : 0
 statement            : 2 3
-statement_list       : 1 3 11
+statement_list       : 1 3 13
+value_parameter      : 19 20
+value_parameter_list : 20 39
 
 Parsing method: LALR
 
@@ -197,33 +206,43 @@ state 0
     (5) statement -> . function_declaration
     (6) statement -> . assignment
     (7) statement -> . if_statement
-    (9) expression_statement -> . expression SEMICOLON
-    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
-    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
-    (32) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (8) statement -> . impresion
+    (9) statement -> . condition
+    (11) expression_statement -> . expression SEMICOLON
+    (12) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (10) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (38) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    (39) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    FUNCTION        shift and go to state 9
-    VARIABLE        shift and go to state 11
-    IF              shift and go to state 12
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    FUNCTION        shift and go to state 11
+    VARIABLE        shift and go to state 13
+    IF              shift and go to state 14
+    ECHO            shift and go to state 15
+    NOT             shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
     program                        shift and go to state 1
     statement_list                 shift and go to state 2
@@ -232,8 +251,10 @@ state 0
     function_declaration           shift and go to state 5
     assignment                     shift and go to state 6
     if_statement                   shift and go to state 7
-    expression                     shift and go to state 8
-    function_call                  shift and go to state 17
+    impresion                      shift and go to state 8
+    condition                      shift and go to state 9
+    expression                     shift and go to state 10
+    function_call                  shift and go to state 21
 
 state 1
 
@@ -249,42 +270,54 @@ state 2
     (5) statement -> . function_declaration
     (6) statement -> . assignment
     (7) statement -> . if_statement
-    (9) expression_statement -> . expression SEMICOLON
-    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
-    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
-    (32) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (8) statement -> . impresion
+    (9) statement -> . condition
+    (11) expression_statement -> . expression SEMICOLON
+    (12) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (10) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (38) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    (39) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
     $end            reduce using rule 1 (program -> statement_list .)
-    FUNCTION        shift and go to state 9
-    VARIABLE        shift and go to state 11
-    IF              shift and go to state 12
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    FUNCTION        shift and go to state 11
+    VARIABLE        shift and go to state 13
+    IF              shift and go to state 14
+    ECHO            shift and go to state 15
+    NOT             shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    statement                      shift and go to state 18
+    statement                      shift and go to state 22
     expression_statement           shift and go to state 4
     function_declaration           shift and go to state 5
     assignment                     shift and go to state 6
     if_statement                   shift and go to state 7
-    expression                     shift and go to state 8
-    function_call                  shift and go to state 17
+    impresion                      shift and go to state 8
+    condition                      shift and go to state 9
+    expression                     shift and go to state 10
+    function_call                  shift and go to state 21
 
 state 3
 
@@ -293,6 +326,8 @@ state 3
     FUNCTION        reduce using rule 2 (statement_list -> statement .)
     VARIABLE        reduce using rule 2 (statement_list -> statement .)
     IF              reduce using rule 2 (statement_list -> statement .)
+    ECHO            reduce using rule 2 (statement_list -> statement .)
+    NOT             reduce using rule 2 (statement_list -> statement .)
     NUMBER          reduce using rule 2 (statement_list -> statement .)
     STRING          reduce using rule 2 (statement_list -> statement .)
     BOOLEAN         reduce using rule 2 (statement_list -> statement .)
@@ -309,6 +344,8 @@ state 4
     FUNCTION        reduce using rule 4 (statement -> expression_statement .)
     VARIABLE        reduce using rule 4 (statement -> expression_statement .)
     IF              reduce using rule 4 (statement -> expression_statement .)
+    ECHO            reduce using rule 4 (statement -> expression_statement .)
+    NOT             reduce using rule 4 (statement -> expression_statement .)
     NUMBER          reduce using rule 4 (statement -> expression_statement .)
     STRING          reduce using rule 4 (statement -> expression_statement .)
     BOOLEAN         reduce using rule 4 (statement -> expression_statement .)
@@ -325,6 +362,8 @@ state 5
     FUNCTION        reduce using rule 5 (statement -> function_declaration .)
     VARIABLE        reduce using rule 5 (statement -> function_declaration .)
     IF              reduce using rule 5 (statement -> function_declaration .)
+    ECHO            reduce using rule 5 (statement -> function_declaration .)
+    NOT             reduce using rule 5 (statement -> function_declaration .)
     NUMBER          reduce using rule 5 (statement -> function_declaration .)
     STRING          reduce using rule 5 (statement -> function_declaration .)
     BOOLEAN         reduce using rule 5 (statement -> function_declaration .)
@@ -341,6 +380,8 @@ state 6
     FUNCTION        reduce using rule 6 (statement -> assignment .)
     VARIABLE        reduce using rule 6 (statement -> assignment .)
     IF              reduce using rule 6 (statement -> assignment .)
+    ECHO            reduce using rule 6 (statement -> assignment .)
+    NOT             reduce using rule 6 (statement -> assignment .)
     NUMBER          reduce using rule 6 (statement -> assignment .)
     STRING          reduce using rule 6 (statement -> assignment .)
     BOOLEAN         reduce using rule 6 (statement -> assignment .)
@@ -357,6 +398,8 @@ state 7
     FUNCTION        reduce using rule 7 (statement -> if_statement .)
     VARIABLE        reduce using rule 7 (statement -> if_statement .)
     IF              reduce using rule 7 (statement -> if_statement .)
+    ECHO            reduce using rule 7 (statement -> if_statement .)
+    NOT             reduce using rule 7 (statement -> if_statement .)
     NUMBER          reduce using rule 7 (statement -> if_statement .)
     STRING          reduce using rule 7 (statement -> if_statement .)
     BOOLEAN         reduce using rule 7 (statement -> if_statement .)
@@ -368,184 +411,382 @@ state 7
 
 state 8
 
-    (9) expression_statement -> expression . SEMICOLON
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (8) statement -> impresion .
 
-    SEMICOLON       shift and go to state 19
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-    CONCATENATION   shift and go to state 25
-    CONCATENATION_ASSIGNMENT shift and go to state 26
+    FUNCTION        reduce using rule 8 (statement -> impresion .)
+    VARIABLE        reduce using rule 8 (statement -> impresion .)
+    IF              reduce using rule 8 (statement -> impresion .)
+    ECHO            reduce using rule 8 (statement -> impresion .)
+    NOT             reduce using rule 8 (statement -> impresion .)
+    NUMBER          reduce using rule 8 (statement -> impresion .)
+    STRING          reduce using rule 8 (statement -> impresion .)
+    BOOLEAN         reduce using rule 8 (statement -> impresion .)
+    NULL            reduce using rule 8 (statement -> impresion .)
+    IDENTIFIER      reduce using rule 8 (statement -> impresion .)
+    $end            reduce using rule 8 (statement -> impresion .)
+    CLOSE_CURLY_BRACKET reduce using rule 8 (statement -> impresion .)
 
 
 state 9
 
-    (10) function_declaration -> FUNCTION . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (9) statement -> condition .
+    (43) condition -> condition . AND condition
+    (44) condition -> condition . OR condition
 
-    IDENTIFIER      shift and go to state 27
+    FUNCTION        reduce using rule 9 (statement -> condition .)
+    VARIABLE        reduce using rule 9 (statement -> condition .)
+    IF              reduce using rule 9 (statement -> condition .)
+    ECHO            reduce using rule 9 (statement -> condition .)
+    NOT             reduce using rule 9 (statement -> condition .)
+    NUMBER          reduce using rule 9 (statement -> condition .)
+    STRING          reduce using rule 9 (statement -> condition .)
+    BOOLEAN         reduce using rule 9 (statement -> condition .)
+    NULL            reduce using rule 9 (statement -> condition .)
+    IDENTIFIER      reduce using rule 9 (statement -> condition .)
+    $end            reduce using rule 9 (statement -> condition .)
+    CLOSE_CURLY_BRACKET reduce using rule 9 (statement -> condition .)
+    AND             shift and go to state 23
+    OR              shift and go to state 24
 
 
 state 10
 
-    (31) function_call -> IDENTIFIER . OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (11) expression_statement -> expression . SEMICOLON
+    (40) condition -> expression .
+    (41) condition -> expression . comparison expression
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (45) comparison -> . DOUBLE_EQUALS
+    (46) comparison -> . NOT_EQUALS
+    (47) comparison -> . GREATER_THAN
+    (48) comparison -> . LESS_THAN
+    (49) comparison -> . GREATER_THAN_OR_EQUALS
+    (50) comparison -> . LESS_THAN_OR_EQUALS
 
-    OPEN_PARENTHESIS shift and go to state 28
+    SEMICOLON       shift and go to state 25
+    AND             reduce using rule 40 (condition -> expression .)
+    OR              reduce using rule 40 (condition -> expression .)
+    FUNCTION        reduce using rule 40 (condition -> expression .)
+    VARIABLE        reduce using rule 40 (condition -> expression .)
+    IF              reduce using rule 40 (condition -> expression .)
+    ECHO            reduce using rule 40 (condition -> expression .)
+    NOT             reduce using rule 40 (condition -> expression .)
+    NUMBER          reduce using rule 40 (condition -> expression .)
+    STRING          reduce using rule 40 (condition -> expression .)
+    BOOLEAN         reduce using rule 40 (condition -> expression .)
+    NULL            reduce using rule 40 (condition -> expression .)
+    IDENTIFIER      reduce using rule 40 (condition -> expression .)
+    $end            reduce using rule 40 (condition -> expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 40 (condition -> expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+    CONCATENATION   shift and go to state 32
+    CONCATENATION_ASSIGNMENT shift and go to state 33
+    DOUBLE_EQUALS   shift and go to state 34
+    NOT_EQUALS      shift and go to state 35
+    GREATER_THAN    shift and go to state 36
+    LESS_THAN       shift and go to state 37
+    GREATER_THAN_OR_EQUALS shift and go to state 38
+    LESS_THAN_OR_EQUALS shift and go to state 39
 
+    comparison                     shift and go to state 26
 
 state 11
 
-    (8) assignment -> VARIABLE . EQUALS expression SEMICOLON
-    (18) expression -> VARIABLE .
+    (12) function_declaration -> FUNCTION . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
 
-    EQUALS          shift and go to state 29
-    SEMICOLON       reduce using rule 18 (expression -> VARIABLE .)
-    PLUS            reduce using rule 18 (expression -> VARIABLE .)
-    MINUS           reduce using rule 18 (expression -> VARIABLE .)
-    MULTIPLY        reduce using rule 18 (expression -> VARIABLE .)
-    DIVIDE          reduce using rule 18 (expression -> VARIABLE .)
-    MODULO          reduce using rule 18 (expression -> VARIABLE .)
-    CONCATENATION   reduce using rule 18 (expression -> VARIABLE .)
-    CONCATENATION_ASSIGNMENT reduce using rule 18 (expression -> VARIABLE .)
+    IDENTIFIER      shift and go to state 40
 
 
 state 12
 
-    (32) if_statement -> IF . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    (37) function_call -> IDENTIFIER . OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    OPEN_PARENTHESIS shift and go to state 30
+    OPEN_PARENTHESIS shift and go to state 41
 
 
 state 13
 
-    (19) expression -> NUMBER .
+    (10) assignment -> VARIABLE . EQUALS expression SEMICOLON
+    (24) expression -> VARIABLE .
 
-    SEMICOLON       reduce using rule 19 (expression -> NUMBER .)
-    PLUS            reduce using rule 19 (expression -> NUMBER .)
-    MINUS           reduce using rule 19 (expression -> NUMBER .)
-    MULTIPLY        reduce using rule 19 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 19 (expression -> NUMBER .)
-    MODULO          reduce using rule 19 (expression -> NUMBER .)
-    CONCATENATION   reduce using rule 19 (expression -> NUMBER .)
-    CONCATENATION_ASSIGNMENT reduce using rule 19 (expression -> NUMBER .)
-    DOUBLE_EQUALS   reduce using rule 19 (expression -> NUMBER .)
-    NOT_EQUALS      reduce using rule 19 (expression -> NUMBER .)
-    GREATER_THAN    reduce using rule 19 (expression -> NUMBER .)
-    LESS_THAN       reduce using rule 19 (expression -> NUMBER .)
-    GREATER_THAN_OR_EQUALS reduce using rule 19 (expression -> NUMBER .)
-    LESS_THAN_OR_EQUALS reduce using rule 19 (expression -> NUMBER .)
-    CLOSE_PARENTHESIS reduce using rule 19 (expression -> NUMBER .)
-    AND             reduce using rule 19 (expression -> NUMBER .)
-    OR              reduce using rule 19 (expression -> NUMBER .)
+    EQUALS          shift and go to state 42
+    SEMICOLON       reduce using rule 24 (expression -> VARIABLE .)
+    PLUS            reduce using rule 24 (expression -> VARIABLE .)
+    MINUS           reduce using rule 24 (expression -> VARIABLE .)
+    MULTIPLY        reduce using rule 24 (expression -> VARIABLE .)
+    DIVIDE          reduce using rule 24 (expression -> VARIABLE .)
+    MODULO          reduce using rule 24 (expression -> VARIABLE .)
+    CONCATENATION   reduce using rule 24 (expression -> VARIABLE .)
+    CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> VARIABLE .)
+    DOUBLE_EQUALS   reduce using rule 24 (expression -> VARIABLE .)
+    NOT_EQUALS      reduce using rule 24 (expression -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (expression -> VARIABLE .)
+    LESS_THAN       reduce using rule 24 (expression -> VARIABLE .)
+    GREATER_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    LESS_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    AND             reduce using rule 24 (expression -> VARIABLE .)
+    OR              reduce using rule 24 (expression -> VARIABLE .)
+    FUNCTION        reduce using rule 24 (expression -> VARIABLE .)
+    VARIABLE        reduce using rule 24 (expression -> VARIABLE .)
+    IF              reduce using rule 24 (expression -> VARIABLE .)
+    ECHO            reduce using rule 24 (expression -> VARIABLE .)
+    NOT             reduce using rule 24 (expression -> VARIABLE .)
+    NUMBER          reduce using rule 24 (expression -> VARIABLE .)
+    STRING          reduce using rule 24 (expression -> VARIABLE .)
+    BOOLEAN         reduce using rule 24 (expression -> VARIABLE .)
+    NULL            reduce using rule 24 (expression -> VARIABLE .)
+    IDENTIFIER      reduce using rule 24 (expression -> VARIABLE .)
+    $end            reduce using rule 24 (expression -> VARIABLE .)
+    CLOSE_CURLY_BRACKET reduce using rule 24 (expression -> VARIABLE .)
 
 
 state 14
 
-    (20) expression -> STRING .
+    (38) if_statement -> IF . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
 
-    SEMICOLON       reduce using rule 20 (expression -> STRING .)
-    PLUS            reduce using rule 20 (expression -> STRING .)
-    MINUS           reduce using rule 20 (expression -> STRING .)
-    MULTIPLY        reduce using rule 20 (expression -> STRING .)
-    DIVIDE          reduce using rule 20 (expression -> STRING .)
-    MODULO          reduce using rule 20 (expression -> STRING .)
-    CONCATENATION   reduce using rule 20 (expression -> STRING .)
-    CONCATENATION_ASSIGNMENT reduce using rule 20 (expression -> STRING .)
-    DOUBLE_EQUALS   reduce using rule 20 (expression -> STRING .)
-    NOT_EQUALS      reduce using rule 20 (expression -> STRING .)
-    GREATER_THAN    reduce using rule 20 (expression -> STRING .)
-    LESS_THAN       reduce using rule 20 (expression -> STRING .)
-    GREATER_THAN_OR_EQUALS reduce using rule 20 (expression -> STRING .)
-    LESS_THAN_OR_EQUALS reduce using rule 20 (expression -> STRING .)
-    CLOSE_PARENTHESIS reduce using rule 20 (expression -> STRING .)
-    AND             reduce using rule 20 (expression -> STRING .)
-    OR              reduce using rule 20 (expression -> STRING .)
+    OPEN_PARENTHESIS shift and go to state 43
 
 
 state 15
 
-    (21) expression -> BOOLEAN .
+    (39) impresion -> ECHO . OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
 
-    SEMICOLON       reduce using rule 21 (expression -> BOOLEAN .)
-    PLUS            reduce using rule 21 (expression -> BOOLEAN .)
-    MINUS           reduce using rule 21 (expression -> BOOLEAN .)
-    MULTIPLY        reduce using rule 21 (expression -> BOOLEAN .)
-    DIVIDE          reduce using rule 21 (expression -> BOOLEAN .)
-    MODULO          reduce using rule 21 (expression -> BOOLEAN .)
-    CONCATENATION   reduce using rule 21 (expression -> BOOLEAN .)
-    CONCATENATION_ASSIGNMENT reduce using rule 21 (expression -> BOOLEAN .)
-    DOUBLE_EQUALS   reduce using rule 21 (expression -> BOOLEAN .)
-    NOT_EQUALS      reduce using rule 21 (expression -> BOOLEAN .)
-    GREATER_THAN    reduce using rule 21 (expression -> BOOLEAN .)
-    LESS_THAN       reduce using rule 21 (expression -> BOOLEAN .)
-    GREATER_THAN_OR_EQUALS reduce using rule 21 (expression -> BOOLEAN .)
-    LESS_THAN_OR_EQUALS reduce using rule 21 (expression -> BOOLEAN .)
-    CLOSE_PARENTHESIS reduce using rule 21 (expression -> BOOLEAN .)
-    AND             reduce using rule 21 (expression -> BOOLEAN .)
-    OR              reduce using rule 21 (expression -> BOOLEAN .)
+    OPEN_PARENTHESIS shift and go to state 44
 
 
 state 16
 
-    (22) expression -> NULL .
+    (42) condition -> NOT . condition
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    SEMICOLON       reduce using rule 22 (expression -> NULL .)
-    PLUS            reduce using rule 22 (expression -> NULL .)
-    MINUS           reduce using rule 22 (expression -> NULL .)
-    MULTIPLY        reduce using rule 22 (expression -> NULL .)
-    DIVIDE          reduce using rule 22 (expression -> NULL .)
-    MODULO          reduce using rule 22 (expression -> NULL .)
-    CONCATENATION   reduce using rule 22 (expression -> NULL .)
-    CONCATENATION_ASSIGNMENT reduce using rule 22 (expression -> NULL .)
-    DOUBLE_EQUALS   reduce using rule 22 (expression -> NULL .)
-    NOT_EQUALS      reduce using rule 22 (expression -> NULL .)
-    GREATER_THAN    reduce using rule 22 (expression -> NULL .)
-    LESS_THAN       reduce using rule 22 (expression -> NULL .)
-    GREATER_THAN_OR_EQUALS reduce using rule 22 (expression -> NULL .)
-    LESS_THAN_OR_EQUALS reduce using rule 22 (expression -> NULL .)
-    CLOSE_PARENTHESIS reduce using rule 22 (expression -> NULL .)
-    AND             reduce using rule 22 (expression -> NULL .)
-    OR              reduce using rule 22 (expression -> NULL .)
+    NOT             shift and go to state 16
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
+    condition                      shift and go to state 45
+    expression                     shift and go to state 46
+    function_call                  shift and go to state 21
 
 state 17
 
-    (23) expression -> function_call .
+    (25) expression -> NUMBER .
 
-    SEMICOLON       reduce using rule 23 (expression -> function_call .)
-    PLUS            reduce using rule 23 (expression -> function_call .)
-    MINUS           reduce using rule 23 (expression -> function_call .)
-    MULTIPLY        reduce using rule 23 (expression -> function_call .)
-    DIVIDE          reduce using rule 23 (expression -> function_call .)
-    MODULO          reduce using rule 23 (expression -> function_call .)
-    CONCATENATION   reduce using rule 23 (expression -> function_call .)
-    CONCATENATION_ASSIGNMENT reduce using rule 23 (expression -> function_call .)
-    DOUBLE_EQUALS   reduce using rule 23 (expression -> function_call .)
-    NOT_EQUALS      reduce using rule 23 (expression -> function_call .)
-    GREATER_THAN    reduce using rule 23 (expression -> function_call .)
-    LESS_THAN       reduce using rule 23 (expression -> function_call .)
-    GREATER_THAN_OR_EQUALS reduce using rule 23 (expression -> function_call .)
-    LESS_THAN_OR_EQUALS reduce using rule 23 (expression -> function_call .)
-    CLOSE_PARENTHESIS reduce using rule 23 (expression -> function_call .)
-    AND             reduce using rule 23 (expression -> function_call .)
-    OR              reduce using rule 23 (expression -> function_call .)
+    SEMICOLON       reduce using rule 25 (expression -> NUMBER .)
+    PLUS            reduce using rule 25 (expression -> NUMBER .)
+    MINUS           reduce using rule 25 (expression -> NUMBER .)
+    MULTIPLY        reduce using rule 25 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 25 (expression -> NUMBER .)
+    MODULO          reduce using rule 25 (expression -> NUMBER .)
+    CONCATENATION   reduce using rule 25 (expression -> NUMBER .)
+    CONCATENATION_ASSIGNMENT reduce using rule 25 (expression -> NUMBER .)
+    DOUBLE_EQUALS   reduce using rule 25 (expression -> NUMBER .)
+    NOT_EQUALS      reduce using rule 25 (expression -> NUMBER .)
+    GREATER_THAN    reduce using rule 25 (expression -> NUMBER .)
+    LESS_THAN       reduce using rule 25 (expression -> NUMBER .)
+    GREATER_THAN_OR_EQUALS reduce using rule 25 (expression -> NUMBER .)
+    LESS_THAN_OR_EQUALS reduce using rule 25 (expression -> NUMBER .)
+    AND             reduce using rule 25 (expression -> NUMBER .)
+    OR              reduce using rule 25 (expression -> NUMBER .)
+    FUNCTION        reduce using rule 25 (expression -> NUMBER .)
+    VARIABLE        reduce using rule 25 (expression -> NUMBER .)
+    IF              reduce using rule 25 (expression -> NUMBER .)
+    ECHO            reduce using rule 25 (expression -> NUMBER .)
+    NOT             reduce using rule 25 (expression -> NUMBER .)
+    NUMBER          reduce using rule 25 (expression -> NUMBER .)
+    STRING          reduce using rule 25 (expression -> NUMBER .)
+    BOOLEAN         reduce using rule 25 (expression -> NUMBER .)
+    NULL            reduce using rule 25 (expression -> NUMBER .)
+    IDENTIFIER      reduce using rule 25 (expression -> NUMBER .)
+    $end            reduce using rule 25 (expression -> NUMBER .)
+    CLOSE_PARENTHESIS reduce using rule 25 (expression -> NUMBER .)
+    CLOSE_CURLY_BRACKET reduce using rule 25 (expression -> NUMBER .)
+    COMMA           reduce using rule 25 (expression -> NUMBER .)
 
 
 state 18
+
+    (26) expression -> STRING .
+
+    SEMICOLON       reduce using rule 26 (expression -> STRING .)
+    PLUS            reduce using rule 26 (expression -> STRING .)
+    MINUS           reduce using rule 26 (expression -> STRING .)
+    MULTIPLY        reduce using rule 26 (expression -> STRING .)
+    DIVIDE          reduce using rule 26 (expression -> STRING .)
+    MODULO          reduce using rule 26 (expression -> STRING .)
+    CONCATENATION   reduce using rule 26 (expression -> STRING .)
+    CONCATENATION_ASSIGNMENT reduce using rule 26 (expression -> STRING .)
+    DOUBLE_EQUALS   reduce using rule 26 (expression -> STRING .)
+    NOT_EQUALS      reduce using rule 26 (expression -> STRING .)
+    GREATER_THAN    reduce using rule 26 (expression -> STRING .)
+    LESS_THAN       reduce using rule 26 (expression -> STRING .)
+    GREATER_THAN_OR_EQUALS reduce using rule 26 (expression -> STRING .)
+    LESS_THAN_OR_EQUALS reduce using rule 26 (expression -> STRING .)
+    AND             reduce using rule 26 (expression -> STRING .)
+    OR              reduce using rule 26 (expression -> STRING .)
+    FUNCTION        reduce using rule 26 (expression -> STRING .)
+    VARIABLE        reduce using rule 26 (expression -> STRING .)
+    IF              reduce using rule 26 (expression -> STRING .)
+    ECHO            reduce using rule 26 (expression -> STRING .)
+    NOT             reduce using rule 26 (expression -> STRING .)
+    NUMBER          reduce using rule 26 (expression -> STRING .)
+    STRING          reduce using rule 26 (expression -> STRING .)
+    BOOLEAN         reduce using rule 26 (expression -> STRING .)
+    NULL            reduce using rule 26 (expression -> STRING .)
+    IDENTIFIER      reduce using rule 26 (expression -> STRING .)
+    $end            reduce using rule 26 (expression -> STRING .)
+    CLOSE_PARENTHESIS reduce using rule 26 (expression -> STRING .)
+    CLOSE_CURLY_BRACKET reduce using rule 26 (expression -> STRING .)
+    COMMA           reduce using rule 26 (expression -> STRING .)
+
+
+state 19
+
+    (27) expression -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 27 (expression -> BOOLEAN .)
+    PLUS            reduce using rule 27 (expression -> BOOLEAN .)
+    MINUS           reduce using rule 27 (expression -> BOOLEAN .)
+    MULTIPLY        reduce using rule 27 (expression -> BOOLEAN .)
+    DIVIDE          reduce using rule 27 (expression -> BOOLEAN .)
+    MODULO          reduce using rule 27 (expression -> BOOLEAN .)
+    CONCATENATION   reduce using rule 27 (expression -> BOOLEAN .)
+    CONCATENATION_ASSIGNMENT reduce using rule 27 (expression -> BOOLEAN .)
+    DOUBLE_EQUALS   reduce using rule 27 (expression -> BOOLEAN .)
+    NOT_EQUALS      reduce using rule 27 (expression -> BOOLEAN .)
+    GREATER_THAN    reduce using rule 27 (expression -> BOOLEAN .)
+    LESS_THAN       reduce using rule 27 (expression -> BOOLEAN .)
+    GREATER_THAN_OR_EQUALS reduce using rule 27 (expression -> BOOLEAN .)
+    LESS_THAN_OR_EQUALS reduce using rule 27 (expression -> BOOLEAN .)
+    AND             reduce using rule 27 (expression -> BOOLEAN .)
+    OR              reduce using rule 27 (expression -> BOOLEAN .)
+    FUNCTION        reduce using rule 27 (expression -> BOOLEAN .)
+    VARIABLE        reduce using rule 27 (expression -> BOOLEAN .)
+    IF              reduce using rule 27 (expression -> BOOLEAN .)
+    ECHO            reduce using rule 27 (expression -> BOOLEAN .)
+    NOT             reduce using rule 27 (expression -> BOOLEAN .)
+    NUMBER          reduce using rule 27 (expression -> BOOLEAN .)
+    STRING          reduce using rule 27 (expression -> BOOLEAN .)
+    BOOLEAN         reduce using rule 27 (expression -> BOOLEAN .)
+    NULL            reduce using rule 27 (expression -> BOOLEAN .)
+    IDENTIFIER      reduce using rule 27 (expression -> BOOLEAN .)
+    $end            reduce using rule 27 (expression -> BOOLEAN .)
+    CLOSE_PARENTHESIS reduce using rule 27 (expression -> BOOLEAN .)
+    CLOSE_CURLY_BRACKET reduce using rule 27 (expression -> BOOLEAN .)
+    COMMA           reduce using rule 27 (expression -> BOOLEAN .)
+
+
+state 20
+
+    (28) expression -> NULL .
+
+    SEMICOLON       reduce using rule 28 (expression -> NULL .)
+    PLUS            reduce using rule 28 (expression -> NULL .)
+    MINUS           reduce using rule 28 (expression -> NULL .)
+    MULTIPLY        reduce using rule 28 (expression -> NULL .)
+    DIVIDE          reduce using rule 28 (expression -> NULL .)
+    MODULO          reduce using rule 28 (expression -> NULL .)
+    CONCATENATION   reduce using rule 28 (expression -> NULL .)
+    CONCATENATION_ASSIGNMENT reduce using rule 28 (expression -> NULL .)
+    DOUBLE_EQUALS   reduce using rule 28 (expression -> NULL .)
+    NOT_EQUALS      reduce using rule 28 (expression -> NULL .)
+    GREATER_THAN    reduce using rule 28 (expression -> NULL .)
+    LESS_THAN       reduce using rule 28 (expression -> NULL .)
+    GREATER_THAN_OR_EQUALS reduce using rule 28 (expression -> NULL .)
+    LESS_THAN_OR_EQUALS reduce using rule 28 (expression -> NULL .)
+    AND             reduce using rule 28 (expression -> NULL .)
+    OR              reduce using rule 28 (expression -> NULL .)
+    FUNCTION        reduce using rule 28 (expression -> NULL .)
+    VARIABLE        reduce using rule 28 (expression -> NULL .)
+    IF              reduce using rule 28 (expression -> NULL .)
+    ECHO            reduce using rule 28 (expression -> NULL .)
+    NOT             reduce using rule 28 (expression -> NULL .)
+    NUMBER          reduce using rule 28 (expression -> NULL .)
+    STRING          reduce using rule 28 (expression -> NULL .)
+    BOOLEAN         reduce using rule 28 (expression -> NULL .)
+    NULL            reduce using rule 28 (expression -> NULL .)
+    IDENTIFIER      reduce using rule 28 (expression -> NULL .)
+    $end            reduce using rule 28 (expression -> NULL .)
+    CLOSE_PARENTHESIS reduce using rule 28 (expression -> NULL .)
+    CLOSE_CURLY_BRACKET reduce using rule 28 (expression -> NULL .)
+    COMMA           reduce using rule 28 (expression -> NULL .)
+
+
+state 21
+
+    (29) expression -> function_call .
+
+    SEMICOLON       reduce using rule 29 (expression -> function_call .)
+    PLUS            reduce using rule 29 (expression -> function_call .)
+    MINUS           reduce using rule 29 (expression -> function_call .)
+    MULTIPLY        reduce using rule 29 (expression -> function_call .)
+    DIVIDE          reduce using rule 29 (expression -> function_call .)
+    MODULO          reduce using rule 29 (expression -> function_call .)
+    CONCATENATION   reduce using rule 29 (expression -> function_call .)
+    CONCATENATION_ASSIGNMENT reduce using rule 29 (expression -> function_call .)
+    DOUBLE_EQUALS   reduce using rule 29 (expression -> function_call .)
+    NOT_EQUALS      reduce using rule 29 (expression -> function_call .)
+    GREATER_THAN    reduce using rule 29 (expression -> function_call .)
+    LESS_THAN       reduce using rule 29 (expression -> function_call .)
+    GREATER_THAN_OR_EQUALS reduce using rule 29 (expression -> function_call .)
+    LESS_THAN_OR_EQUALS reduce using rule 29 (expression -> function_call .)
+    AND             reduce using rule 29 (expression -> function_call .)
+    OR              reduce using rule 29 (expression -> function_call .)
+    FUNCTION        reduce using rule 29 (expression -> function_call .)
+    VARIABLE        reduce using rule 29 (expression -> function_call .)
+    IF              reduce using rule 29 (expression -> function_call .)
+    ECHO            reduce using rule 29 (expression -> function_call .)
+    NOT             reduce using rule 29 (expression -> function_call .)
+    NUMBER          reduce using rule 29 (expression -> function_call .)
+    STRING          reduce using rule 29 (expression -> function_call .)
+    BOOLEAN         reduce using rule 29 (expression -> function_call .)
+    NULL            reduce using rule 29 (expression -> function_call .)
+    IDENTIFIER      reduce using rule 29 (expression -> function_call .)
+    $end            reduce using rule 29 (expression -> function_call .)
+    CLOSE_PARENTHESIS reduce using rule 29 (expression -> function_call .)
+    CLOSE_CURLY_BRACKET reduce using rule 29 (expression -> function_call .)
+    COMMA           reduce using rule 29 (expression -> function_call .)
+
+
+state 22
 
     (3) statement_list -> statement_list statement .
 
     FUNCTION        reduce using rule 3 (statement_list -> statement_list statement .)
     VARIABLE        reduce using rule 3 (statement_list -> statement_list statement .)
     IF              reduce using rule 3 (statement_list -> statement_list statement .)
+    ECHO            reduce using rule 3 (statement_list -> statement_list statement .)
+    NOT             reduce using rule 3 (statement_list -> statement_list statement .)
     NUMBER          reduce using rule 3 (statement_list -> statement_list statement .)
     STRING          reduce using rule 3 (statement_list -> statement_list statement .)
     BOOLEAN         reduce using rule 3 (statement_list -> statement_list statement .)
@@ -555,1226 +796,1552 @@ state 18
     CLOSE_CURLY_BRACKET reduce using rule 3 (statement_list -> statement_list statement .)
 
 
-state 19
-
-    (9) expression_statement -> expression SEMICOLON .
-
-    FUNCTION        reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    VARIABLE        reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    IF              reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    NUMBER          reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    STRING          reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    BOOLEAN         reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    NULL            reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    IDENTIFIER      reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    $end            reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-    CLOSE_CURLY_BRACKET reduce using rule 9 (expression_statement -> expression SEMICOLON .)
-
-
-state 20
-
-    (24) expression -> expression PLUS . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
-
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
-
-    expression                     shift and go to state 31
-    function_call                  shift and go to state 17
-
-state 21
-
-    (25) expression -> expression MINUS . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
-
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
-
-    expression                     shift and go to state 33
-    function_call                  shift and go to state 17
-
-state 22
-
-    (26) expression -> expression MULTIPLY . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
-
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
-
-    expression                     shift and go to state 34
-    function_call                  shift and go to state 17
-
 state 23
 
-    (27) expression -> expression DIVIDE . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (43) condition -> condition AND . condition
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    NOT             shift and go to state 16
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    expression                     shift and go to state 35
-    function_call                  shift and go to state 17
+    condition                      shift and go to state 48
+    expression                     shift and go to state 46
+    function_call                  shift and go to state 21
 
 state 24
 
-    (28) expression -> expression MODULO . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (44) condition -> condition OR . condition
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    NOT             shift and go to state 16
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    expression                     shift and go to state 36
-    function_call                  shift and go to state 17
+    condition                      shift and go to state 49
+    expression                     shift and go to state 46
+    function_call                  shift and go to state 21
 
 state 25
 
-    (29) expression -> expression CONCATENATION . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (11) expression_statement -> expression SEMICOLON .
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    FUNCTION        reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    VARIABLE        reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    IF              reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    ECHO            reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    NOT             reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    NUMBER          reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    STRING          reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    BOOLEAN         reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    NULL            reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    $end            reduce using rule 11 (expression_statement -> expression SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 11 (expression_statement -> expression SEMICOLON .)
 
-    expression                     shift and go to state 37
-    function_call                  shift and go to state 17
 
 state 26
 
-    (30) expression -> expression CONCATENATION_ASSIGNMENT . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (41) condition -> expression comparison . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    expression                     shift and go to state 38
-    function_call                  shift and go to state 17
+    expression                     shift and go to state 50
+    function_call                  shift and go to state 21
 
 state 27
 
-    (10) function_declaration -> FUNCTION IDENTIFIER . OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (30) expression -> expression PLUS . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    OPEN_PARENTHESIS shift and go to state 39
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
+    expression                     shift and go to state 51
+    function_call                  shift and go to state 21
 
 state 28
 
-    (31) function_call -> IDENTIFIER OPEN_PARENTHESIS . CLOSE_PARENTHESIS
+    (31) expression -> expression MINUS . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_PARENTHESIS shift and go to state 40
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
+    expression                     shift and go to state 52
+    function_call                  shift and go to state 21
 
 state 29
 
-    (8) assignment -> VARIABLE EQUALS . expression SEMICOLON
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (32) expression -> expression MULTIPLY . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    expression                     shift and go to state 41
-    function_call                  shift and go to state 17
+    expression                     shift and go to state 53
+    function_call                  shift and go to state 21
 
 state 30
 
-    (32) if_statement -> IF OPEN_PARENTHESIS . condition CLOSE_PARENTHESIS body_statement_list
-    (33) condition -> . expression
-    (34) condition -> . expression comparison expression
-    (35) condition -> . NOT condition
-    (36) condition -> . condition AND condition
-    (37) condition -> . condition OR condition
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (33) expression -> expression DIVIDE . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    NOT             shift and go to state 44
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    condition                      shift and go to state 42
-    expression                     shift and go to state 43
-    function_call                  shift and go to state 17
+    expression                     shift and go to state 54
+    function_call                  shift and go to state 21
 
 state 31
 
-    (24) expression -> expression PLUS expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (34) expression -> expression MODULO . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    SEMICOLON       reduce using rule 24 (expression -> expression PLUS expression .)
-    PLUS            reduce using rule 24 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 24 (expression -> expression PLUS expression .)
-    CONCATENATION   reduce using rule 24 (expression -> expression PLUS expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> expression PLUS expression .)
-    DOUBLE_EQUALS   reduce using rule 24 (expression -> expression PLUS expression .)
-    NOT_EQUALS      reduce using rule 24 (expression -> expression PLUS expression .)
-    GREATER_THAN    reduce using rule 24 (expression -> expression PLUS expression .)
-    LESS_THAN       reduce using rule 24 (expression -> expression PLUS expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 24 (expression -> expression PLUS expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 24 (expression -> expression PLUS expression .)
-    CLOSE_PARENTHESIS reduce using rule 24 (expression -> expression PLUS expression .)
-    AND             reduce using rule 24 (expression -> expression PLUS expression .)
-    OR              reduce using rule 24 (expression -> expression PLUS expression .)
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-  ! MULTIPLY        [ reduce using rule 24 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 24 (expression -> expression PLUS expression .) ]
-  ! MODULO          [ reduce using rule 24 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 20 ]
-  ! MINUS           [ shift and go to state 21 ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
-
+    expression                     shift and go to state 55
+    function_call                  shift and go to state 21
 
 state 32
 
-    (18) expression -> VARIABLE .
+    (35) expression -> expression CONCATENATION . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    PLUS            reduce using rule 18 (expression -> VARIABLE .)
-    MINUS           reduce using rule 18 (expression -> VARIABLE .)
-    MULTIPLY        reduce using rule 18 (expression -> VARIABLE .)
-    DIVIDE          reduce using rule 18 (expression -> VARIABLE .)
-    MODULO          reduce using rule 18 (expression -> VARIABLE .)
-    CONCATENATION   reduce using rule 18 (expression -> VARIABLE .)
-    CONCATENATION_ASSIGNMENT reduce using rule 18 (expression -> VARIABLE .)
-    SEMICOLON       reduce using rule 18 (expression -> VARIABLE .)
-    DOUBLE_EQUALS   reduce using rule 18 (expression -> VARIABLE .)
-    NOT_EQUALS      reduce using rule 18 (expression -> VARIABLE .)
-    GREATER_THAN    reduce using rule 18 (expression -> VARIABLE .)
-    LESS_THAN       reduce using rule 18 (expression -> VARIABLE .)
-    GREATER_THAN_OR_EQUALS reduce using rule 18 (expression -> VARIABLE .)
-    LESS_THAN_OR_EQUALS reduce using rule 18 (expression -> VARIABLE .)
-    CLOSE_PARENTHESIS reduce using rule 18 (expression -> VARIABLE .)
-    AND             reduce using rule 18 (expression -> VARIABLE .)
-    OR              reduce using rule 18 (expression -> VARIABLE .)
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
+    expression                     shift and go to state 56
+    function_call                  shift and go to state 21
 
 state 33
 
-    (25) expression -> expression MINUS expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (36) expression -> expression CONCATENATION_ASSIGNMENT . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    SEMICOLON       reduce using rule 25 (expression -> expression MINUS expression .)
-    PLUS            reduce using rule 25 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 25 (expression -> expression MINUS expression .)
-    CONCATENATION   reduce using rule 25 (expression -> expression MINUS expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 25 (expression -> expression MINUS expression .)
-    DOUBLE_EQUALS   reduce using rule 25 (expression -> expression MINUS expression .)
-    NOT_EQUALS      reduce using rule 25 (expression -> expression MINUS expression .)
-    GREATER_THAN    reduce using rule 25 (expression -> expression MINUS expression .)
-    LESS_THAN       reduce using rule 25 (expression -> expression MINUS expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 25 (expression -> expression MINUS expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 25 (expression -> expression MINUS expression .)
-    CLOSE_PARENTHESIS reduce using rule 25 (expression -> expression MINUS expression .)
-    AND             reduce using rule 25 (expression -> expression MINUS expression .)
-    OR              reduce using rule 25 (expression -> expression MINUS expression .)
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-  ! MULTIPLY        [ reduce using rule 25 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 25 (expression -> expression MINUS expression .) ]
-  ! MODULO          [ reduce using rule 25 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 20 ]
-  ! MINUS           [ shift and go to state 21 ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
-
+    expression                     shift and go to state 57
+    function_call                  shift and go to state 21
 
 state 34
 
-    (26) expression -> expression MULTIPLY expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (45) comparison -> DOUBLE_EQUALS .
 
-    SEMICOLON       reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    PLUS            reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    MINUS           reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    MULTIPLY        reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    DIVIDE          reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    MODULO          reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    CONCATENATION   reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    DOUBLE_EQUALS   reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    NOT_EQUALS      reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    GREATER_THAN    reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    LESS_THAN       reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    CLOSE_PARENTHESIS reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    AND             reduce using rule 26 (expression -> expression MULTIPLY expression .)
-    OR              reduce using rule 26 (expression -> expression MULTIPLY expression .)
-
-  ! PLUS            [ shift and go to state 20 ]
-  ! MINUS           [ shift and go to state 21 ]
-  ! MULTIPLY        [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULO          [ shift and go to state 24 ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+    VARIABLE        reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
+    NUMBER          reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
+    STRING          reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
+    BOOLEAN         reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
+    NULL            reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
+    IDENTIFIER      reduce using rule 45 (comparison -> DOUBLE_EQUALS .)
 
 
 state 35
 
-    (27) expression -> expression DIVIDE expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (46) comparison -> NOT_EQUALS .
 
-    SEMICOLON       reduce using rule 27 (expression -> expression DIVIDE expression .)
-    PLUS            reduce using rule 27 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 27 (expression -> expression DIVIDE expression .)
-    MULTIPLY        reduce using rule 27 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 27 (expression -> expression DIVIDE expression .)
-    MODULO          reduce using rule 27 (expression -> expression DIVIDE expression .)
-    CONCATENATION   reduce using rule 27 (expression -> expression DIVIDE expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 27 (expression -> expression DIVIDE expression .)
-    DOUBLE_EQUALS   reduce using rule 27 (expression -> expression DIVIDE expression .)
-    NOT_EQUALS      reduce using rule 27 (expression -> expression DIVIDE expression .)
-    GREATER_THAN    reduce using rule 27 (expression -> expression DIVIDE expression .)
-    LESS_THAN       reduce using rule 27 (expression -> expression DIVIDE expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 27 (expression -> expression DIVIDE expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 27 (expression -> expression DIVIDE expression .)
-    CLOSE_PARENTHESIS reduce using rule 27 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 27 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 27 (expression -> expression DIVIDE expression .)
-
-  ! PLUS            [ shift and go to state 20 ]
-  ! MINUS           [ shift and go to state 21 ]
-  ! MULTIPLY        [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULO          [ shift and go to state 24 ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+    VARIABLE        reduce using rule 46 (comparison -> NOT_EQUALS .)
+    NUMBER          reduce using rule 46 (comparison -> NOT_EQUALS .)
+    STRING          reduce using rule 46 (comparison -> NOT_EQUALS .)
+    BOOLEAN         reduce using rule 46 (comparison -> NOT_EQUALS .)
+    NULL            reduce using rule 46 (comparison -> NOT_EQUALS .)
+    IDENTIFIER      reduce using rule 46 (comparison -> NOT_EQUALS .)
 
 
 state 36
 
-    (28) expression -> expression MODULO expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (47) comparison -> GREATER_THAN .
 
-    SEMICOLON       reduce using rule 28 (expression -> expression MODULO expression .)
-    PLUS            reduce using rule 28 (expression -> expression MODULO expression .)
-    MINUS           reduce using rule 28 (expression -> expression MODULO expression .)
-    MULTIPLY        reduce using rule 28 (expression -> expression MODULO expression .)
-    DIVIDE          reduce using rule 28 (expression -> expression MODULO expression .)
-    MODULO          reduce using rule 28 (expression -> expression MODULO expression .)
-    CONCATENATION   reduce using rule 28 (expression -> expression MODULO expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 28 (expression -> expression MODULO expression .)
-    DOUBLE_EQUALS   reduce using rule 28 (expression -> expression MODULO expression .)
-    NOT_EQUALS      reduce using rule 28 (expression -> expression MODULO expression .)
-    GREATER_THAN    reduce using rule 28 (expression -> expression MODULO expression .)
-    LESS_THAN       reduce using rule 28 (expression -> expression MODULO expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 28 (expression -> expression MODULO expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 28 (expression -> expression MODULO expression .)
-    CLOSE_PARENTHESIS reduce using rule 28 (expression -> expression MODULO expression .)
-    AND             reduce using rule 28 (expression -> expression MODULO expression .)
-    OR              reduce using rule 28 (expression -> expression MODULO expression .)
-
-  ! PLUS            [ shift and go to state 20 ]
-  ! MINUS           [ shift and go to state 21 ]
-  ! MULTIPLY        [ shift and go to state 22 ]
-  ! DIVIDE          [ shift and go to state 23 ]
-  ! MODULO          [ shift and go to state 24 ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+    VARIABLE        reduce using rule 47 (comparison -> GREATER_THAN .)
+    NUMBER          reduce using rule 47 (comparison -> GREATER_THAN .)
+    STRING          reduce using rule 47 (comparison -> GREATER_THAN .)
+    BOOLEAN         reduce using rule 47 (comparison -> GREATER_THAN .)
+    NULL            reduce using rule 47 (comparison -> GREATER_THAN .)
+    IDENTIFIER      reduce using rule 47 (comparison -> GREATER_THAN .)
 
 
 state 37
 
-    (29) expression -> expression CONCATENATION expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (48) comparison -> LESS_THAN .
 
-    SEMICOLON       reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    CONCATENATION   reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    DOUBLE_EQUALS   reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    NOT_EQUALS      reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    GREATER_THAN    reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    LESS_THAN       reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    CLOSE_PARENTHESIS reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    AND             reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    OR              reduce using rule 29 (expression -> expression CONCATENATION expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-
-  ! PLUS            [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
-  ! MINUS           [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
-  ! MULTIPLY        [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
-  ! DIVIDE          [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
-  ! MODULO          [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+    VARIABLE        reduce using rule 48 (comparison -> LESS_THAN .)
+    NUMBER          reduce using rule 48 (comparison -> LESS_THAN .)
+    STRING          reduce using rule 48 (comparison -> LESS_THAN .)
+    BOOLEAN         reduce using rule 48 (comparison -> LESS_THAN .)
+    NULL            reduce using rule 48 (comparison -> LESS_THAN .)
+    IDENTIFIER      reduce using rule 48 (comparison -> LESS_THAN .)
 
 
 state 38
 
-    (30) expression -> expression CONCATENATION_ASSIGNMENT expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (49) comparison -> GREATER_THAN_OR_EQUALS .
 
-    SEMICOLON       reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    CONCATENATION   reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    CONCATENATION_ASSIGNMENT reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    DOUBLE_EQUALS   reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    NOT_EQUALS      reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    GREATER_THAN    reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    LESS_THAN       reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    GREATER_THAN_OR_EQUALS reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    LESS_THAN_OR_EQUALS reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    CLOSE_PARENTHESIS reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    AND             reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    OR              reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-
-  ! PLUS            [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
-  ! MINUS           [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
-  ! MULTIPLY        [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
-  ! DIVIDE          [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
-  ! MODULO          [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
-  ! CONCATENATION   [ shift and go to state 25 ]
-  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+    VARIABLE        reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
+    NUMBER          reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
+    STRING          reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
+    BOOLEAN         reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
+    NULL            reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
+    IDENTIFIER      reduce using rule 49 (comparison -> GREATER_THAN_OR_EQUALS .)
 
 
 state 39
 
-    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS . parameter_list CLOSE_PARENTHESIS body_statement_list
-    (13) parameter_list -> . parameter
-    (14) parameter_list -> . parameter_list COMMA parameter
-    (15) parameter_list -> . empty
-    (16) parameter -> . VARIABLE
-    (17) empty -> .
+    (50) comparison -> LESS_THAN_OR_EQUALS .
 
-    VARIABLE        shift and go to state 48
-    CLOSE_PARENTHESIS reduce using rule 17 (empty -> .)
-    COMMA           reduce using rule 17 (empty -> .)
+    VARIABLE        reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
+    NUMBER          reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
+    STRING          reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
+    BOOLEAN         reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
+    NULL            reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
+    IDENTIFIER      reduce using rule 50 (comparison -> LESS_THAN_OR_EQUALS .)
 
-    parameter_list                 shift and go to state 45
-    parameter                      shift and go to state 46
-    empty                          shift and go to state 47
 
 state 40
 
-    (31) function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .
+    (12) function_declaration -> FUNCTION IDENTIFIER . OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
 
-    SEMICOLON       reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    PLUS            reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    MINUS           reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    MULTIPLY        reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    DIVIDE          reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    MODULO          reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    CONCATENATION   reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    CONCATENATION_ASSIGNMENT reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    DOUBLE_EQUALS   reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    NOT_EQUALS      reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    GREATER_THAN    reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    LESS_THAN       reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    GREATER_THAN_OR_EQUALS reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    LESS_THAN_OR_EQUALS reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    CLOSE_PARENTHESIS reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    AND             reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    OR              reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    OPEN_PARENTHESIS shift and go to state 58
 
 
 state 41
 
-    (8) assignment -> VARIABLE EQUALS expression . SEMICOLON
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> IDENTIFIER OPEN_PARENTHESIS . CLOSE_PARENTHESIS
 
-    SEMICOLON       shift and go to state 49
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-    CONCATENATION   shift and go to state 25
-    CONCATENATION_ASSIGNMENT shift and go to state 26
+    CLOSE_PARENTHESIS shift and go to state 59
 
 
 state 42
 
-    (32) if_statement -> IF OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
-    (36) condition -> condition . AND condition
-    (37) condition -> condition . OR condition
+    (10) assignment -> VARIABLE EQUALS . expression SEMICOLON
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_PARENTHESIS shift and go to state 50
-    AND             shift and go to state 51
-    OR              shift and go to state 52
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
+    expression                     shift and go to state 60
+    function_call                  shift and go to state 21
 
 state 43
 
-    (33) condition -> expression .
-    (34) condition -> expression . comparison expression
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
-    (38) comparison -> . DOUBLE_EQUALS
-    (39) comparison -> . NOT_EQUALS
-    (40) comparison -> . GREATER_THAN
-    (41) comparison -> . LESS_THAN
-    (42) comparison -> . GREATER_THAN_OR_EQUALS
-    (43) comparison -> . LESS_THAN_OR_EQUALS
+    (38) if_statement -> IF OPEN_PARENTHESIS . condition CLOSE_PARENTHESIS body_statement_list
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_PARENTHESIS reduce using rule 33 (condition -> expression .)
-    AND             reduce using rule 33 (condition -> expression .)
-    OR              reduce using rule 33 (condition -> expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-    CONCATENATION   shift and go to state 25
-    CONCATENATION_ASSIGNMENT shift and go to state 26
-    DOUBLE_EQUALS   shift and go to state 54
-    NOT_EQUALS      shift and go to state 55
-    GREATER_THAN    shift and go to state 56
-    LESS_THAN       shift and go to state 57
-    GREATER_THAN_OR_EQUALS shift and go to state 58
-    LESS_THAN_OR_EQUALS shift and go to state 59
+    NOT             shift and go to state 16
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    comparison                     shift and go to state 53
+    condition                      shift and go to state 61
+    expression                     shift and go to state 46
+    function_call                  shift and go to state 21
 
 state 44
 
-    (35) condition -> NOT . condition
-    (33) condition -> . expression
-    (34) condition -> . expression comparison expression
-    (35) condition -> . NOT condition
-    (36) condition -> . condition AND condition
-    (37) condition -> . condition OR condition
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (39) impresion -> ECHO OPEN_PARENTHESIS . value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (19) value_parameter_list -> . value_parameter
+    (20) value_parameter_list -> . value_parameter_list COMMA value_parameter
+    (21) value_parameter_list -> . empty
+    (22) value_parameter -> . expression
+    (23) empty -> .
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    NOT             shift and go to state 44
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    CLOSE_PARENTHESIS reduce using rule 23 (empty -> .)
+    COMMA           reduce using rule 23 (empty -> .)
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    condition                      shift and go to state 60
-    expression                     shift and go to state 43
-    function_call                  shift and go to state 17
+    value_parameter_list           shift and go to state 62
+    value_parameter                shift and go to state 63
+    empty                          shift and go to state 64
+    expression                     shift and go to state 65
+    function_call                  shift and go to state 21
 
 state 45
 
-    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS body_statement_list
-    (14) parameter_list -> parameter_list . COMMA parameter
+    (42) condition -> NOT condition .
+    (43) condition -> condition . AND condition
+    (44) condition -> condition . OR condition
 
-    CLOSE_PARENTHESIS shift and go to state 61
-    COMMA           shift and go to state 62
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    FUNCTION        reduce using rule 42 (condition -> NOT condition .)
+    VARIABLE        reduce using rule 42 (condition -> NOT condition .)
+    IF              reduce using rule 42 (condition -> NOT condition .)
+    ECHO            reduce using rule 42 (condition -> NOT condition .)
+    NOT             reduce using rule 42 (condition -> NOT condition .)
+    NUMBER          reduce using rule 42 (condition -> NOT condition .)
+    STRING          reduce using rule 42 (condition -> NOT condition .)
+    BOOLEAN         reduce using rule 42 (condition -> NOT condition .)
+    NULL            reduce using rule 42 (condition -> NOT condition .)
+    IDENTIFIER      reduce using rule 42 (condition -> NOT condition .)
+    $end            reduce using rule 42 (condition -> NOT condition .)
+    CLOSE_PARENTHESIS reduce using rule 42 (condition -> NOT condition .)
+    CLOSE_CURLY_BRACKET reduce using rule 42 (condition -> NOT condition .)
+    AND             shift and go to state 23
+    OR              shift and go to state 24
+
+  ! AND             [ reduce using rule 42 (condition -> NOT condition .) ]
+  ! OR              [ reduce using rule 42 (condition -> NOT condition .) ]
 
 
 state 46
 
-    (13) parameter_list -> parameter .
+    (40) condition -> expression .
+    (41) condition -> expression . comparison expression
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (45) comparison -> . DOUBLE_EQUALS
+    (46) comparison -> . NOT_EQUALS
+    (47) comparison -> . GREATER_THAN
+    (48) comparison -> . LESS_THAN
+    (49) comparison -> . GREATER_THAN_OR_EQUALS
+    (50) comparison -> . LESS_THAN_OR_EQUALS
 
-    CLOSE_PARENTHESIS reduce using rule 13 (parameter_list -> parameter .)
-    COMMA           reduce using rule 13 (parameter_list -> parameter .)
+    AND             reduce using rule 40 (condition -> expression .)
+    OR              reduce using rule 40 (condition -> expression .)
+    FUNCTION        reduce using rule 40 (condition -> expression .)
+    VARIABLE        reduce using rule 40 (condition -> expression .)
+    IF              reduce using rule 40 (condition -> expression .)
+    ECHO            reduce using rule 40 (condition -> expression .)
+    NOT             reduce using rule 40 (condition -> expression .)
+    NUMBER          reduce using rule 40 (condition -> expression .)
+    STRING          reduce using rule 40 (condition -> expression .)
+    BOOLEAN         reduce using rule 40 (condition -> expression .)
+    NULL            reduce using rule 40 (condition -> expression .)
+    IDENTIFIER      reduce using rule 40 (condition -> expression .)
+    $end            reduce using rule 40 (condition -> expression .)
+    CLOSE_PARENTHESIS reduce using rule 40 (condition -> expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 40 (condition -> expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+    CONCATENATION   shift and go to state 32
+    CONCATENATION_ASSIGNMENT shift and go to state 33
+    DOUBLE_EQUALS   shift and go to state 34
+    NOT_EQUALS      shift and go to state 35
+    GREATER_THAN    shift and go to state 36
+    LESS_THAN       shift and go to state 37
+    GREATER_THAN_OR_EQUALS shift and go to state 38
+    LESS_THAN_OR_EQUALS shift and go to state 39
 
+    comparison                     shift and go to state 26
 
 state 47
 
-    (15) parameter_list -> empty .
+    (24) expression -> VARIABLE .
 
-    CLOSE_PARENTHESIS reduce using rule 15 (parameter_list -> empty .)
-    COMMA           reduce using rule 15 (parameter_list -> empty .)
+    PLUS            reduce using rule 24 (expression -> VARIABLE .)
+    MINUS           reduce using rule 24 (expression -> VARIABLE .)
+    MULTIPLY        reduce using rule 24 (expression -> VARIABLE .)
+    DIVIDE          reduce using rule 24 (expression -> VARIABLE .)
+    MODULO          reduce using rule 24 (expression -> VARIABLE .)
+    CONCATENATION   reduce using rule 24 (expression -> VARIABLE .)
+    CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> VARIABLE .)
+    DOUBLE_EQUALS   reduce using rule 24 (expression -> VARIABLE .)
+    NOT_EQUALS      reduce using rule 24 (expression -> VARIABLE .)
+    GREATER_THAN    reduce using rule 24 (expression -> VARIABLE .)
+    LESS_THAN       reduce using rule 24 (expression -> VARIABLE .)
+    GREATER_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    LESS_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    AND             reduce using rule 24 (expression -> VARIABLE .)
+    OR              reduce using rule 24 (expression -> VARIABLE .)
+    FUNCTION        reduce using rule 24 (expression -> VARIABLE .)
+    VARIABLE        reduce using rule 24 (expression -> VARIABLE .)
+    IF              reduce using rule 24 (expression -> VARIABLE .)
+    ECHO            reduce using rule 24 (expression -> VARIABLE .)
+    NOT             reduce using rule 24 (expression -> VARIABLE .)
+    NUMBER          reduce using rule 24 (expression -> VARIABLE .)
+    STRING          reduce using rule 24 (expression -> VARIABLE .)
+    BOOLEAN         reduce using rule 24 (expression -> VARIABLE .)
+    NULL            reduce using rule 24 (expression -> VARIABLE .)
+    IDENTIFIER      reduce using rule 24 (expression -> VARIABLE .)
+    $end            reduce using rule 24 (expression -> VARIABLE .)
+    CLOSE_PARENTHESIS reduce using rule 24 (expression -> VARIABLE .)
+    CLOSE_CURLY_BRACKET reduce using rule 24 (expression -> VARIABLE .)
+    SEMICOLON       reduce using rule 24 (expression -> VARIABLE .)
+    COMMA           reduce using rule 24 (expression -> VARIABLE .)
 
 
 state 48
 
-    (16) parameter -> VARIABLE .
+    (43) condition -> condition AND condition .
+    (43) condition -> condition . AND condition
+    (44) condition -> condition . OR condition
 
-    CLOSE_PARENTHESIS reduce using rule 16 (parameter -> VARIABLE .)
-    COMMA           reduce using rule 16 (parameter -> VARIABLE .)
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    FUNCTION        reduce using rule 43 (condition -> condition AND condition .)
+    VARIABLE        reduce using rule 43 (condition -> condition AND condition .)
+    IF              reduce using rule 43 (condition -> condition AND condition .)
+    ECHO            reduce using rule 43 (condition -> condition AND condition .)
+    NOT             reduce using rule 43 (condition -> condition AND condition .)
+    NUMBER          reduce using rule 43 (condition -> condition AND condition .)
+    STRING          reduce using rule 43 (condition -> condition AND condition .)
+    BOOLEAN         reduce using rule 43 (condition -> condition AND condition .)
+    NULL            reduce using rule 43 (condition -> condition AND condition .)
+    IDENTIFIER      reduce using rule 43 (condition -> condition AND condition .)
+    $end            reduce using rule 43 (condition -> condition AND condition .)
+    CLOSE_PARENTHESIS reduce using rule 43 (condition -> condition AND condition .)
+    CLOSE_CURLY_BRACKET reduce using rule 43 (condition -> condition AND condition .)
+    AND             shift and go to state 23
+    OR              shift and go to state 24
+
+  ! AND             [ reduce using rule 43 (condition -> condition AND condition .) ]
+  ! OR              [ reduce using rule 43 (condition -> condition AND condition .) ]
 
 
 state 49
 
-    (8) assignment -> VARIABLE EQUALS expression SEMICOLON .
+    (44) condition -> condition OR condition .
+    (43) condition -> condition . AND condition
+    (44) condition -> condition . OR condition
 
-    FUNCTION        reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    VARIABLE        reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    IF              reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    NUMBER          reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    STRING          reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    BOOLEAN         reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    NULL            reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    IDENTIFIER      reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    $end            reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
-    CLOSE_CURLY_BRACKET reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    FUNCTION        reduce using rule 44 (condition -> condition OR condition .)
+    VARIABLE        reduce using rule 44 (condition -> condition OR condition .)
+    IF              reduce using rule 44 (condition -> condition OR condition .)
+    ECHO            reduce using rule 44 (condition -> condition OR condition .)
+    NOT             reduce using rule 44 (condition -> condition OR condition .)
+    NUMBER          reduce using rule 44 (condition -> condition OR condition .)
+    STRING          reduce using rule 44 (condition -> condition OR condition .)
+    BOOLEAN         reduce using rule 44 (condition -> condition OR condition .)
+    NULL            reduce using rule 44 (condition -> condition OR condition .)
+    IDENTIFIER      reduce using rule 44 (condition -> condition OR condition .)
+    $end            reduce using rule 44 (condition -> condition OR condition .)
+    CLOSE_PARENTHESIS reduce using rule 44 (condition -> condition OR condition .)
+    CLOSE_CURLY_BRACKET reduce using rule 44 (condition -> condition OR condition .)
+    AND             shift and go to state 23
+    OR              shift and go to state 24
+
+  ! AND             [ reduce using rule 44 (condition -> condition OR condition .) ]
+  ! OR              [ reduce using rule 44 (condition -> condition OR condition .) ]
 
 
 state 50
 
-    (32) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . body_statement_list
-    (11) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
-    (12) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+    (41) condition -> expression comparison expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    OPEN_CURLY_BRACKET shift and go to state 64
+    AND             reduce using rule 41 (condition -> expression comparison expression .)
+    OR              reduce using rule 41 (condition -> expression comparison expression .)
+    FUNCTION        reduce using rule 41 (condition -> expression comparison expression .)
+    VARIABLE        reduce using rule 41 (condition -> expression comparison expression .)
+    IF              reduce using rule 41 (condition -> expression comparison expression .)
+    ECHO            reduce using rule 41 (condition -> expression comparison expression .)
+    NOT             reduce using rule 41 (condition -> expression comparison expression .)
+    NUMBER          reduce using rule 41 (condition -> expression comparison expression .)
+    STRING          reduce using rule 41 (condition -> expression comparison expression .)
+    BOOLEAN         reduce using rule 41 (condition -> expression comparison expression .)
+    NULL            reduce using rule 41 (condition -> expression comparison expression .)
+    IDENTIFIER      reduce using rule 41 (condition -> expression comparison expression .)
+    $end            reduce using rule 41 (condition -> expression comparison expression .)
+    CLOSE_PARENTHESIS reduce using rule 41 (condition -> expression comparison expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 41 (condition -> expression comparison expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+    CONCATENATION   shift and go to state 32
+    CONCATENATION_ASSIGNMENT shift and go to state 33
 
-    body_statement_list            shift and go to state 63
 
 state 51
 
-    (36) condition -> condition AND . condition
-    (33) condition -> . expression
-    (34) condition -> . expression comparison expression
-    (35) condition -> . NOT condition
-    (36) condition -> . condition AND condition
-    (37) condition -> . condition OR condition
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (30) expression -> expression PLUS expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    NOT             shift and go to state 44
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    SEMICOLON       reduce using rule 30 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 30 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 30 (expression -> expression PLUS expression .)
+    CONCATENATION   reduce using rule 30 (expression -> expression PLUS expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 30 (expression -> expression PLUS expression .)
+    DOUBLE_EQUALS   reduce using rule 30 (expression -> expression PLUS expression .)
+    NOT_EQUALS      reduce using rule 30 (expression -> expression PLUS expression .)
+    GREATER_THAN    reduce using rule 30 (expression -> expression PLUS expression .)
+    LESS_THAN       reduce using rule 30 (expression -> expression PLUS expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 30 (expression -> expression PLUS expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 30 (expression -> expression PLUS expression .)
+    AND             reduce using rule 30 (expression -> expression PLUS expression .)
+    OR              reduce using rule 30 (expression -> expression PLUS expression .)
+    FUNCTION        reduce using rule 30 (expression -> expression PLUS expression .)
+    VARIABLE        reduce using rule 30 (expression -> expression PLUS expression .)
+    IF              reduce using rule 30 (expression -> expression PLUS expression .)
+    ECHO            reduce using rule 30 (expression -> expression PLUS expression .)
+    NOT             reduce using rule 30 (expression -> expression PLUS expression .)
+    NUMBER          reduce using rule 30 (expression -> expression PLUS expression .)
+    STRING          reduce using rule 30 (expression -> expression PLUS expression .)
+    BOOLEAN         reduce using rule 30 (expression -> expression PLUS expression .)
+    NULL            reduce using rule 30 (expression -> expression PLUS expression .)
+    IDENTIFIER      reduce using rule 30 (expression -> expression PLUS expression .)
+    $end            reduce using rule 30 (expression -> expression PLUS expression .)
+    CLOSE_PARENTHESIS reduce using rule 30 (expression -> expression PLUS expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 30 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 30 (expression -> expression PLUS expression .)
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
 
-    condition                      shift and go to state 65
-    expression                     shift and go to state 43
-    function_call                  shift and go to state 17
+  ! MULTIPLY        [ reduce using rule 30 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 30 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 30 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
+
 
 state 52
 
-    (37) condition -> condition OR . condition
-    (33) condition -> . expression
-    (34) condition -> . expression comparison expression
-    (35) condition -> . NOT condition
-    (36) condition -> . condition AND condition
-    (37) condition -> . condition OR condition
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (31) expression -> expression MINUS expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    NOT             shift and go to state 44
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    SEMICOLON       reduce using rule 31 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 31 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 31 (expression -> expression MINUS expression .)
+    CONCATENATION   reduce using rule 31 (expression -> expression MINUS expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 31 (expression -> expression MINUS expression .)
+    DOUBLE_EQUALS   reduce using rule 31 (expression -> expression MINUS expression .)
+    NOT_EQUALS      reduce using rule 31 (expression -> expression MINUS expression .)
+    GREATER_THAN    reduce using rule 31 (expression -> expression MINUS expression .)
+    LESS_THAN       reduce using rule 31 (expression -> expression MINUS expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 31 (expression -> expression MINUS expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 31 (expression -> expression MINUS expression .)
+    AND             reduce using rule 31 (expression -> expression MINUS expression .)
+    OR              reduce using rule 31 (expression -> expression MINUS expression .)
+    FUNCTION        reduce using rule 31 (expression -> expression MINUS expression .)
+    VARIABLE        reduce using rule 31 (expression -> expression MINUS expression .)
+    IF              reduce using rule 31 (expression -> expression MINUS expression .)
+    ECHO            reduce using rule 31 (expression -> expression MINUS expression .)
+    NOT             reduce using rule 31 (expression -> expression MINUS expression .)
+    NUMBER          reduce using rule 31 (expression -> expression MINUS expression .)
+    STRING          reduce using rule 31 (expression -> expression MINUS expression .)
+    BOOLEAN         reduce using rule 31 (expression -> expression MINUS expression .)
+    NULL            reduce using rule 31 (expression -> expression MINUS expression .)
+    IDENTIFIER      reduce using rule 31 (expression -> expression MINUS expression .)
+    $end            reduce using rule 31 (expression -> expression MINUS expression .)
+    CLOSE_PARENTHESIS reduce using rule 31 (expression -> expression MINUS expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 31 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 31 (expression -> expression MINUS expression .)
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
 
-    condition                      shift and go to state 66
-    expression                     shift and go to state 43
-    function_call                  shift and go to state 17
+  ! MULTIPLY        [ reduce using rule 31 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 31 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 31 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
+
 
 state 53
 
-    (34) condition -> expression comparison . expression
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (32) expression -> expression MULTIPLY expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    VARIABLE        shift and go to state 32
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    SEMICOLON       reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    PLUS            reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    MINUS           reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    MULTIPLY        reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    DIVIDE          reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    MODULO          reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    CONCATENATION   reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    DOUBLE_EQUALS   reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    NOT_EQUALS      reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    GREATER_THAN    reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    LESS_THAN       reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    AND             reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    OR              reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    FUNCTION        reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    VARIABLE        reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    IF              reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    ECHO            reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    NOT             reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    NUMBER          reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    STRING          reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    BOOLEAN         reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    NULL            reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    IDENTIFIER      reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    $end            reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    CLOSE_PARENTHESIS reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    COMMA           reduce using rule 32 (expression -> expression MULTIPLY expression .)
 
-    expression                     shift and go to state 67
-    function_call                  shift and go to state 17
+  ! PLUS            [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! MULTIPLY        [ shift and go to state 29 ]
+  ! DIVIDE          [ shift and go to state 30 ]
+  ! MODULO          [ shift and go to state 31 ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
+
 
 state 54
 
-    (38) comparison -> DOUBLE_EQUALS .
+    (33) expression -> expression DIVIDE expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    VARIABLE        reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
-    NUMBER          reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
-    STRING          reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
-    BOOLEAN         reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
-    NULL            reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
-    IDENTIFIER      reduce using rule 38 (comparison -> DOUBLE_EQUALS .)
+    SEMICOLON       reduce using rule 33 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 33 (expression -> expression DIVIDE expression .)
+    MULTIPLY        reduce using rule 33 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    MODULO          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    CONCATENATION   reduce using rule 33 (expression -> expression DIVIDE expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 33 (expression -> expression DIVIDE expression .)
+    DOUBLE_EQUALS   reduce using rule 33 (expression -> expression DIVIDE expression .)
+    NOT_EQUALS      reduce using rule 33 (expression -> expression DIVIDE expression .)
+    GREATER_THAN    reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LESS_THAN       reduce using rule 33 (expression -> expression DIVIDE expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 33 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 33 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    FUNCTION        reduce using rule 33 (expression -> expression DIVIDE expression .)
+    VARIABLE        reduce using rule 33 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    ECHO            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    NOT             reduce using rule 33 (expression -> expression DIVIDE expression .)
+    NUMBER          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    STRING          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    BOOLEAN         reduce using rule 33 (expression -> expression DIVIDE expression .)
+    NULL            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    IDENTIFIER      reduce using rule 33 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    CLOSE_PARENTHESIS reduce using rule 33 (expression -> expression DIVIDE expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 33 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 33 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! MULTIPLY        [ shift and go to state 29 ]
+  ! DIVIDE          [ shift and go to state 30 ]
+  ! MODULO          [ shift and go to state 31 ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
 
 
 state 55
 
-    (39) comparison -> NOT_EQUALS .
+    (34) expression -> expression MODULO expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    VARIABLE        reduce using rule 39 (comparison -> NOT_EQUALS .)
-    NUMBER          reduce using rule 39 (comparison -> NOT_EQUALS .)
-    STRING          reduce using rule 39 (comparison -> NOT_EQUALS .)
-    BOOLEAN         reduce using rule 39 (comparison -> NOT_EQUALS .)
-    NULL            reduce using rule 39 (comparison -> NOT_EQUALS .)
-    IDENTIFIER      reduce using rule 39 (comparison -> NOT_EQUALS .)
+    SEMICOLON       reduce using rule 34 (expression -> expression MODULO expression .)
+    PLUS            reduce using rule 34 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 34 (expression -> expression MODULO expression .)
+    MULTIPLY        reduce using rule 34 (expression -> expression MODULO expression .)
+    DIVIDE          reduce using rule 34 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 34 (expression -> expression MODULO expression .)
+    CONCATENATION   reduce using rule 34 (expression -> expression MODULO expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 34 (expression -> expression MODULO expression .)
+    DOUBLE_EQUALS   reduce using rule 34 (expression -> expression MODULO expression .)
+    NOT_EQUALS      reduce using rule 34 (expression -> expression MODULO expression .)
+    GREATER_THAN    reduce using rule 34 (expression -> expression MODULO expression .)
+    LESS_THAN       reduce using rule 34 (expression -> expression MODULO expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 34 (expression -> expression MODULO expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 34 (expression -> expression MODULO expression .)
+    AND             reduce using rule 34 (expression -> expression MODULO expression .)
+    OR              reduce using rule 34 (expression -> expression MODULO expression .)
+    FUNCTION        reduce using rule 34 (expression -> expression MODULO expression .)
+    VARIABLE        reduce using rule 34 (expression -> expression MODULO expression .)
+    IF              reduce using rule 34 (expression -> expression MODULO expression .)
+    ECHO            reduce using rule 34 (expression -> expression MODULO expression .)
+    NOT             reduce using rule 34 (expression -> expression MODULO expression .)
+    NUMBER          reduce using rule 34 (expression -> expression MODULO expression .)
+    STRING          reduce using rule 34 (expression -> expression MODULO expression .)
+    BOOLEAN         reduce using rule 34 (expression -> expression MODULO expression .)
+    NULL            reduce using rule 34 (expression -> expression MODULO expression .)
+    IDENTIFIER      reduce using rule 34 (expression -> expression MODULO expression .)
+    $end            reduce using rule 34 (expression -> expression MODULO expression .)
+    CLOSE_PARENTHESIS reduce using rule 34 (expression -> expression MODULO expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 34 (expression -> expression MODULO expression .)
+    COMMA           reduce using rule 34 (expression -> expression MODULO expression .)
+
+  ! PLUS            [ shift and go to state 27 ]
+  ! MINUS           [ shift and go to state 28 ]
+  ! MULTIPLY        [ shift and go to state 29 ]
+  ! DIVIDE          [ shift and go to state 30 ]
+  ! MODULO          [ shift and go to state 31 ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
 
 
 state 56
 
-    (40) comparison -> GREATER_THAN .
+    (35) expression -> expression CONCATENATION expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    VARIABLE        reduce using rule 40 (comparison -> GREATER_THAN .)
-    NUMBER          reduce using rule 40 (comparison -> GREATER_THAN .)
-    STRING          reduce using rule 40 (comparison -> GREATER_THAN .)
-    BOOLEAN         reduce using rule 40 (comparison -> GREATER_THAN .)
-    NULL            reduce using rule 40 (comparison -> GREATER_THAN .)
-    IDENTIFIER      reduce using rule 40 (comparison -> GREATER_THAN .)
+    SEMICOLON       reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    CONCATENATION   reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    DOUBLE_EQUALS   reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    NOT_EQUALS      reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    GREATER_THAN    reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    LESS_THAN       reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    AND             reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    OR              reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    FUNCTION        reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    VARIABLE        reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    IF              reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    ECHO            reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    NOT             reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    NUMBER          reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    STRING          reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    BOOLEAN         reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    NULL            reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    IDENTIFIER      reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    $end            reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    CLOSE_PARENTHESIS reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    COMMA           reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 35 (expression -> expression CONCATENATION expression .) ]
+  ! MINUS           [ reduce using rule 35 (expression -> expression CONCATENATION expression .) ]
+  ! MULTIPLY        [ reduce using rule 35 (expression -> expression CONCATENATION expression .) ]
+  ! DIVIDE          [ reduce using rule 35 (expression -> expression CONCATENATION expression .) ]
+  ! MODULO          [ reduce using rule 35 (expression -> expression CONCATENATION expression .) ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
 
 
 state 57
 
-    (41) comparison -> LESS_THAN .
+    (36) expression -> expression CONCATENATION_ASSIGNMENT expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    VARIABLE        reduce using rule 41 (comparison -> LESS_THAN .)
-    NUMBER          reduce using rule 41 (comparison -> LESS_THAN .)
-    STRING          reduce using rule 41 (comparison -> LESS_THAN .)
-    BOOLEAN         reduce using rule 41 (comparison -> LESS_THAN .)
-    NULL            reduce using rule 41 (comparison -> LESS_THAN .)
-    IDENTIFIER      reduce using rule 41 (comparison -> LESS_THAN .)
+    SEMICOLON       reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CONCATENATION   reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    DOUBLE_EQUALS   reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    NOT_EQUALS      reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    GREATER_THAN    reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    LESS_THAN       reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    GREATER_THAN_OR_EQUALS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    LESS_THAN_OR_EQUALS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    AND             reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    OR              reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    FUNCTION        reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    VARIABLE        reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    IF              reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    ECHO            reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    NOT             reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    NUMBER          reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    STRING          reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    BOOLEAN         reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    NULL            reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    IDENTIFIER      reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    $end            reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CLOSE_PARENTHESIS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CLOSE_CURLY_BRACKET reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    COMMA           reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+
+  ! PLUS            [ reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MINUS           [ reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MULTIPLY        [ reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! DIVIDE          [ reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MODULO          [ reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! CONCATENATION   [ shift and go to state 32 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 33 ]
 
 
 state 58
 
-    (42) comparison -> GREATER_THAN_OR_EQUALS .
+    (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS . parameter_list CLOSE_PARENTHESIS body_statement_list
+    (15) parameter_list -> . parameter
+    (16) parameter_list -> . parameter_list COMMA parameter
+    (17) parameter_list -> . empty
+    (18) parameter -> . VARIABLE
+    (23) empty -> .
 
-    VARIABLE        reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
-    NUMBER          reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
-    STRING          reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
-    BOOLEAN         reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
-    NULL            reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
-    IDENTIFIER      reduce using rule 42 (comparison -> GREATER_THAN_OR_EQUALS .)
+    VARIABLE        shift and go to state 69
+    CLOSE_PARENTHESIS reduce using rule 23 (empty -> .)
+    COMMA           reduce using rule 23 (empty -> .)
 
+    parameter_list                 shift and go to state 66
+    parameter                      shift and go to state 67
+    empty                          shift and go to state 68
 
 state 59
 
-    (43) comparison -> LESS_THAN_OR_EQUALS .
+    (37) function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .
 
-    VARIABLE        reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
-    NUMBER          reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
-    STRING          reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
-    BOOLEAN         reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
-    NULL            reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
-    IDENTIFIER      reduce using rule 43 (comparison -> LESS_THAN_OR_EQUALS .)
+    SEMICOLON       reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    PLUS            reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MINUS           reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MULTIPLY        reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    DIVIDE          reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MODULO          reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CONCATENATION   reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CONCATENATION_ASSIGNMENT reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    DOUBLE_EQUALS   reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    NOT_EQUALS      reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    GREATER_THAN    reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    LESS_THAN       reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    GREATER_THAN_OR_EQUALS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    LESS_THAN_OR_EQUALS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    AND             reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    OR              reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    FUNCTION        reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    VARIABLE        reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    IF              reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    ECHO            reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    NOT             reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    NUMBER          reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    STRING          reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    BOOLEAN         reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    NULL            reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    IDENTIFIER      reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    $end            reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CLOSE_PARENTHESIS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CLOSE_CURLY_BRACKET reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    COMMA           reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
 
 
 state 60
 
-    (35) condition -> NOT condition .
-    (36) condition -> condition . AND condition
-    (37) condition -> condition . OR condition
+    (10) assignment -> VARIABLE EQUALS expression . SEMICOLON
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-    CLOSE_PARENTHESIS reduce using rule 35 (condition -> NOT condition .)
-    AND             shift and go to state 51
-    OR              shift and go to state 52
-
-  ! AND             [ reduce using rule 35 (condition -> NOT condition .) ]
-  ! OR              [ reduce using rule 35 (condition -> NOT condition .) ]
+    SEMICOLON       shift and go to state 70
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+    CONCATENATION   shift and go to state 32
+    CONCATENATION_ASSIGNMENT shift and go to state 33
 
 
 state 61
 
-    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS . body_statement_list
-    (11) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
-    (12) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+    (38) if_statement -> IF OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
+    (43) condition -> condition . AND condition
+    (44) condition -> condition . OR condition
 
-    OPEN_CURLY_BRACKET shift and go to state 64
+    CLOSE_PARENTHESIS shift and go to state 71
+    AND             shift and go to state 23
+    OR              shift and go to state 24
 
-    body_statement_list            shift and go to state 68
 
 state 62
 
-    (14) parameter_list -> parameter_list COMMA . parameter
-    (16) parameter -> . VARIABLE
+    (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list . CLOSE_PARENTHESIS SEMICOLON
+    (20) value_parameter_list -> value_parameter_list . COMMA value_parameter
 
-    VARIABLE        shift and go to state 48
+    CLOSE_PARENTHESIS shift and go to state 72
+    COMMA           shift and go to state 73
 
-    parameter                      shift and go to state 69
 
 state 63
 
-    (32) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .
+    (19) value_parameter_list -> value_parameter .
 
-    FUNCTION        reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    VARIABLE        reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    IF              reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    NUMBER          reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    STRING          reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    BOOLEAN         reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    NULL            reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    IDENTIFIER      reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    $end            reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
-    CLOSE_CURLY_BRACKET reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    CLOSE_PARENTHESIS reduce using rule 19 (value_parameter_list -> value_parameter .)
+    COMMA           reduce using rule 19 (value_parameter_list -> value_parameter .)
 
 
 state 64
 
-    (11) body_statement_list -> OPEN_CURLY_BRACKET . statement_list CLOSE_CURLY_BRACKET
-    (12) body_statement_list -> OPEN_CURLY_BRACKET . empty CLOSE_CURLY_BRACKET
+    (21) value_parameter_list -> empty .
+
+    CLOSE_PARENTHESIS reduce using rule 21 (value_parameter_list -> empty .)
+    COMMA           reduce using rule 21 (value_parameter_list -> empty .)
+
+
+state 65
+
+    (22) value_parameter -> expression .
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . MULTIPLY expression
+    (33) expression -> expression . DIVIDE expression
+    (34) expression -> expression . MODULO expression
+    (35) expression -> expression . CONCATENATION expression
+    (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    CLOSE_PARENTHESIS reduce using rule 22 (value_parameter -> expression .)
+    COMMA           reduce using rule 22 (value_parameter -> expression .)
+    PLUS            shift and go to state 27
+    MINUS           shift and go to state 28
+    MULTIPLY        shift and go to state 29
+    DIVIDE          shift and go to state 30
+    MODULO          shift and go to state 31
+    CONCATENATION   shift and go to state 32
+    CONCATENATION_ASSIGNMENT shift and go to state 33
+
+
+state 66
+
+    (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS body_statement_list
+    (16) parameter_list -> parameter_list . COMMA parameter
+
+    CLOSE_PARENTHESIS shift and go to state 74
+    COMMA           shift and go to state 75
+
+
+state 67
+
+    (15) parameter_list -> parameter .
+
+    CLOSE_PARENTHESIS reduce using rule 15 (parameter_list -> parameter .)
+    COMMA           reduce using rule 15 (parameter_list -> parameter .)
+
+
+state 68
+
+    (17) parameter_list -> empty .
+
+    CLOSE_PARENTHESIS reduce using rule 17 (parameter_list -> empty .)
+    COMMA           reduce using rule 17 (parameter_list -> empty .)
+
+
+state 69
+
+    (18) parameter -> VARIABLE .
+
+    CLOSE_PARENTHESIS reduce using rule 18 (parameter -> VARIABLE .)
+    COMMA           reduce using rule 18 (parameter -> VARIABLE .)
+
+
+state 70
+
+    (10) assignment -> VARIABLE EQUALS expression SEMICOLON .
+
+    FUNCTION        reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    VARIABLE        reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    IF              reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    ECHO            reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    NOT             reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    NUMBER          reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    STRING          reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    BOOLEAN         reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    NULL            reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    $end            reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+
+
+state 71
+
+    (38) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . body_statement_list
+    (13) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+    (14) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+
+    OPEN_CURLY_BRACKET shift and go to state 77
+
+    body_statement_list            shift and go to state 76
+
+state 72
+
+    (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS . SEMICOLON
+
+    SEMICOLON       shift and go to state 78
+
+
+state 73
+
+    (20) value_parameter_list -> value_parameter_list COMMA . value_parameter
+    (22) value_parameter -> . expression
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 47
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
+
+    value_parameter                shift and go to state 79
+    expression                     shift and go to state 65
+    function_call                  shift and go to state 21
+
+state 74
+
+    (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS . body_statement_list
+    (13) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+    (14) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+
+    OPEN_CURLY_BRACKET shift and go to state 77
+
+    body_statement_list            shift and go to state 80
+
+state 75
+
+    (16) parameter_list -> parameter_list COMMA . parameter
+    (18) parameter -> . VARIABLE
+
+    VARIABLE        shift and go to state 69
+
+    parameter                      shift and go to state 81
+
+state 76
+
+    (38) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .
+
+    FUNCTION        reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    VARIABLE        reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    IF              reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    ECHO            reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    NOT             reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    NUMBER          reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    STRING          reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    BOOLEAN         reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    NULL            reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    IDENTIFIER      reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    $end            reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+    CLOSE_CURLY_BRACKET reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
+
+
+state 77
+
+    (13) body_statement_list -> OPEN_CURLY_BRACKET . statement_list CLOSE_CURLY_BRACKET
+    (14) body_statement_list -> OPEN_CURLY_BRACKET . empty CLOSE_CURLY_BRACKET
     (2) statement_list -> . statement
     (3) statement_list -> . statement_list statement
-    (17) empty -> .
+    (23) empty -> .
     (4) statement -> . expression_statement
     (5) statement -> . function_declaration
     (6) statement -> . assignment
     (7) statement -> . if_statement
-    (9) expression_statement -> . expression SEMICOLON
-    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
-    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
-    (32) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (8) statement -> . impresion
+    (9) statement -> . condition
+    (11) expression_statement -> . expression SEMICOLON
+    (12) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (10) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (38) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    (39) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_CURLY_BRACKET reduce using rule 17 (empty -> .)
-    FUNCTION        shift and go to state 9
-    VARIABLE        shift and go to state 11
-    IF              shift and go to state 12
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    CLOSE_CURLY_BRACKET reduce using rule 23 (empty -> .)
+    FUNCTION        shift and go to state 11
+    VARIABLE        shift and go to state 13
+    IF              shift and go to state 14
+    ECHO            shift and go to state 15
+    NOT             shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    statement_list                 shift and go to state 70
-    empty                          shift and go to state 71
+    statement_list                 shift and go to state 82
+    empty                          shift and go to state 83
     statement                      shift and go to state 3
     expression_statement           shift and go to state 4
     function_declaration           shift and go to state 5
     assignment                     shift and go to state 6
     if_statement                   shift and go to state 7
-    expression                     shift and go to state 8
-    function_call                  shift and go to state 17
+    impresion                      shift and go to state 8
+    condition                      shift and go to state 9
+    expression                     shift and go to state 10
+    function_call                  shift and go to state 21
 
-state 65
+state 78
 
-    (36) condition -> condition AND condition .
-    (36) condition -> condition . AND condition
-    (37) condition -> condition . OR condition
+    (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-    CLOSE_PARENTHESIS reduce using rule 36 (condition -> condition AND condition .)
-    AND             shift and go to state 51
-    OR              shift and go to state 52
-
-  ! AND             [ reduce using rule 36 (condition -> condition AND condition .) ]
-  ! OR              [ reduce using rule 36 (condition -> condition AND condition .) ]
-
-
-state 66
-
-    (37) condition -> condition OR condition .
-    (36) condition -> condition . AND condition
-    (37) condition -> condition . OR condition
-
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-    CLOSE_PARENTHESIS reduce using rule 37 (condition -> condition OR condition .)
-    AND             shift and go to state 51
-    OR              shift and go to state 52
-
-  ! AND             [ reduce using rule 37 (condition -> condition OR condition .) ]
-  ! OR              [ reduce using rule 37 (condition -> condition OR condition .) ]
+    FUNCTION        reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    VARIABLE        reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    IF              reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    ECHO            reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    NOT             reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    NUMBER          reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    STRING          reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    BOOLEAN         reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    NULL            reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    IDENTIFIER      reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    $end            reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
 
 
-state 67
+state 79
 
-    (34) condition -> expression comparison expression .
-    (24) expression -> expression . PLUS expression
-    (25) expression -> expression . MINUS expression
-    (26) expression -> expression . MULTIPLY expression
-    (27) expression -> expression . DIVIDE expression
-    (28) expression -> expression . MODULO expression
-    (29) expression -> expression . CONCATENATION expression
-    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+    (20) value_parameter_list -> value_parameter_list COMMA value_parameter .
 
-    CLOSE_PARENTHESIS reduce using rule 34 (condition -> expression comparison expression .)
-    AND             reduce using rule 34 (condition -> expression comparison expression .)
-    OR              reduce using rule 34 (condition -> expression comparison expression .)
-    PLUS            shift and go to state 20
-    MINUS           shift and go to state 21
-    MULTIPLY        shift and go to state 22
-    DIVIDE          shift and go to state 23
-    MODULO          shift and go to state 24
-    CONCATENATION   shift and go to state 25
-    CONCATENATION_ASSIGNMENT shift and go to state 26
+    CLOSE_PARENTHESIS reduce using rule 20 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
+    COMMA           reduce using rule 20 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
 
 
-state 68
+state 80
 
-    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .
+    (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .
 
-    FUNCTION        reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    VARIABLE        reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    IF              reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    NUMBER          reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    STRING          reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    BOOLEAN         reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    NULL            reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    IDENTIFIER      reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    $end            reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-    CLOSE_CURLY_BRACKET reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
-
-
-state 69
-
-    (14) parameter_list -> parameter_list COMMA parameter .
-
-    CLOSE_PARENTHESIS reduce using rule 14 (parameter_list -> parameter_list COMMA parameter .)
-    COMMA           reduce using rule 14 (parameter_list -> parameter_list COMMA parameter .)
+    FUNCTION        reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    VARIABLE        reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    IF              reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    ECHO            reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    NOT             reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    NUMBER          reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    STRING          reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    BOOLEAN         reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    NULL            reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    IDENTIFIER      reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    $end            reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    CLOSE_CURLY_BRACKET reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
 
 
-state 70
+state 81
 
-    (11) body_statement_list -> OPEN_CURLY_BRACKET statement_list . CLOSE_CURLY_BRACKET
+    (16) parameter_list -> parameter_list COMMA parameter .
+
+    CLOSE_PARENTHESIS reduce using rule 16 (parameter_list -> parameter_list COMMA parameter .)
+    COMMA           reduce using rule 16 (parameter_list -> parameter_list COMMA parameter .)
+
+
+state 82
+
+    (13) body_statement_list -> OPEN_CURLY_BRACKET statement_list . CLOSE_CURLY_BRACKET
     (3) statement_list -> statement_list . statement
     (4) statement -> . expression_statement
     (5) statement -> . function_declaration
     (6) statement -> . assignment
     (7) statement -> . if_statement
-    (9) expression_statement -> . expression SEMICOLON
-    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
-    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
-    (32) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-    (18) expression -> . VARIABLE
-    (19) expression -> . NUMBER
-    (20) expression -> . STRING
-    (21) expression -> . BOOLEAN
-    (22) expression -> . NULL
-    (23) expression -> . function_call
-    (24) expression -> . expression PLUS expression
-    (25) expression -> . expression MINUS expression
-    (26) expression -> . expression MULTIPLY expression
-    (27) expression -> . expression DIVIDE expression
-    (28) expression -> . expression MODULO expression
-    (29) expression -> . expression CONCATENATION expression
-    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (8) statement -> . impresion
+    (9) statement -> . condition
+    (11) expression_statement -> . expression SEMICOLON
+    (12) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (10) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (38) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    (39) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (40) condition -> . expression
+    (41) condition -> . expression comparison expression
+    (42) condition -> . NOT condition
+    (43) condition -> . condition AND condition
+    (44) condition -> . condition OR condition
+    (24) expression -> . VARIABLE
+    (25) expression -> . NUMBER
+    (26) expression -> . STRING
+    (27) expression -> . BOOLEAN
+    (28) expression -> . NULL
+    (29) expression -> . function_call
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression MULTIPLY expression
+    (33) expression -> . expression DIVIDE expression
+    (34) expression -> . expression MODULO expression
+    (35) expression -> . expression CONCATENATION expression
+    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_CURLY_BRACKET shift and go to state 72
-    FUNCTION        shift and go to state 9
-    VARIABLE        shift and go to state 11
-    IF              shift and go to state 12
-    NUMBER          shift and go to state 13
-    STRING          shift and go to state 14
-    BOOLEAN         shift and go to state 15
-    NULL            shift and go to state 16
-    IDENTIFIER      shift and go to state 10
+    CLOSE_CURLY_BRACKET shift and go to state 84
+    FUNCTION        shift and go to state 11
+    VARIABLE        shift and go to state 13
+    IF              shift and go to state 14
+    ECHO            shift and go to state 15
+    NOT             shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+    BOOLEAN         shift and go to state 19
+    NULL            shift and go to state 20
+    IDENTIFIER      shift and go to state 12
 
-    statement                      shift and go to state 18
+    statement                      shift and go to state 22
     expression_statement           shift and go to state 4
     function_declaration           shift and go to state 5
     assignment                     shift and go to state 6
     if_statement                   shift and go to state 7
-    expression                     shift and go to state 8
-    function_call                  shift and go to state 17
+    impresion                      shift and go to state 8
+    condition                      shift and go to state 9
+    expression                     shift and go to state 10
+    function_call                  shift and go to state 21
 
-state 71
+state 83
 
-    (12) body_statement_list -> OPEN_CURLY_BRACKET empty . CLOSE_CURLY_BRACKET
+    (14) body_statement_list -> OPEN_CURLY_BRACKET empty . CLOSE_CURLY_BRACKET
 
-    CLOSE_CURLY_BRACKET shift and go to state 73
-
-
-state 72
-
-    (11) body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .
-
-    FUNCTION        reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    VARIABLE        reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    IF              reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    NUMBER          reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    STRING          reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    BOOLEAN         reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    NULL            reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    IDENTIFIER      reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    $end            reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
-    CLOSE_CURLY_BRACKET reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    CLOSE_CURLY_BRACKET shift and go to state 85
 
 
-state 73
+state 84
 
-    (12) body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .
+    (13) body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .
 
-    FUNCTION        reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    VARIABLE        reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    IF              reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    NUMBER          reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    STRING          reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    BOOLEAN         reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    NULL            reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    IDENTIFIER      reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    $end            reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
-    CLOSE_CURLY_BRACKET reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    FUNCTION        reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    VARIABLE        reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    IF              reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    ECHO            reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    NOT             reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    NUMBER          reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    STRING          reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    BOOLEAN         reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    NULL            reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    IDENTIFIER      reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    $end            reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    CLOSE_CURLY_BRACKET reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+
+
+state 85
+
+    (14) body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .
+
+    FUNCTION        reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    VARIABLE        reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    IF              reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    ECHO            reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    NOT             reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    NUMBER          reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    STRING          reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    BOOLEAN         reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    NULL            reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    IDENTIFIER      reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    $end            reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    CLOSE_CURLY_BRACKET reduce using rule 14 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for AND in state 60 resolved as shift
-WARNING: shift/reduce conflict for OR in state 60 resolved as shift
-WARNING: shift/reduce conflict for AND in state 65 resolved as shift
-WARNING: shift/reduce conflict for OR in state 65 resolved as shift
-WARNING: shift/reduce conflict for AND in state 66 resolved as shift
-WARNING: shift/reduce conflict for OR in state 66 resolved as shift
+WARNING: shift/reduce conflict for AND in state 45 resolved as shift
+WARNING: shift/reduce conflict for OR in state 45 resolved as shift
+WARNING: shift/reduce conflict for AND in state 48 resolved as shift
+WARNING: shift/reduce conflict for OR in state 48 resolved as shift
+WARNING: shift/reduce conflict for AND in state 49 resolved as shift
+WARNING: shift/reduce conflict for OR in state 49 resolved as shift
