@@ -14,6 +14,7 @@ Soporte actual para:
 """
 
 import ply.yacc as yacc
+import datetime
 from lexico import tokens, lexer
 
 # Reglas de precedencia para los operadores (de menor a mayor prioridad)
@@ -192,14 +193,22 @@ def p_error(p):
     else:
         print("Error de sintaxis: unexpected end of file")
 
-# Construir el parser
 parser = yacc.yacc()
 
-while True:
-   try:
-       s = input('PHPSemantics -> ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
+nombre_usuario = input("Por favor, introduce tu nombre de usuario: ")
+
+fecha_hora = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+nombre_archivo = f"log/sintáctico-{nombre_usuario}-{fecha_hora}.txt"
+
+with open(nombre_archivo, "w") as archivo_salida:
+    while True:
+        try:
+            s = input('PHPSemantics -> ')
+        except EOFError:
+            break
+        if not s:
+            continue
+        result = parser.parse(s)
+        print(result) 
+
+        archivo_salida.write(str(result) + "\n") 
