@@ -14,6 +14,7 @@ def p_program(p):
     '''
     program : statement_list
             | condition
+            | math_expression
     '''
 
 def p_statement_list(p):
@@ -34,6 +35,7 @@ def p_statement(p):
 def p_assignment(p):
     '''
     assignment : VARIABLE EQUALS expression SEMICOLON
+              | VARIABLE EQUALS math_expression SEMICOLON
     '''
 
 def p_expression_statement(p):
@@ -85,7 +87,6 @@ def p_empty(p):
 def p_expression(p):
     '''
     expression : VARIABLE
-               | NUMBER
                | STRING
                | BOOLEAN
                | NULL
@@ -134,6 +135,24 @@ def p_comparison(p):
                | LESS_THAN_OR_EQUALS
                | AND
                | OR
+    '''
+
+def p_math_operator(p): 
+    '''
+    math_operator : PLUS
+                  | DIVIDE
+                  | MINUS
+                  | MULTIPLY
+                  | MODULO
+    '''
+
+def p_math_expression(p): 
+    '''
+    math_expression : NUMBER
+                    | math_expression math_operator math_expression
+                    | OPEN_PARENTHESIS math_expression math_operator math_expression CLOSE_PARENTHESIS
+                    | OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
+                    | math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
     '''
 
 # Manejo de errores sintácticos
