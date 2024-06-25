@@ -1,3 +1,18 @@
+"""
+SOFG1009
+Avance 2 - Analizador semántico
+
+Integrantes:
+- José Baidal (Paralelo 1)
+- Christopher Díaz (Paralelo 2)
+
+Soporte actual para:
+- Functions, ej: function ade() { echo($add, 'de', ''); }
+- If, ej: if ($a == $b and ($c)) { }
+- Estructura array, ej: $arr = [ 'dd' => '2', 'ff' => 'dd' ]; 
+- Operaciones matematicas, ej: 5 / 6 + (4 * 12) / 4
+"""
+
 import ply.yacc as yacc
 from lexico import tokens, lexer
 
@@ -37,6 +52,8 @@ def p_assignment(p):
     assignment : VARIABLE EQUALS expression SEMICOLON
               | VARIABLE EQUALS math_expression SEMICOLON
               | VARIABLE EQUALS array_structure SEMICOLON
+              | VARIABLE EQUALS condition SEMICOLON
+
     '''
 
 def p_expression_statement(p):
@@ -158,7 +175,7 @@ def p_math_expression(p):
 
 def p_array_structure(p):
     '''
-    array_structure : OPEN_SQUARE_BRACKET key_declaration CLOSE_SQUARE_BRACKET SEMICOLON
+    array_structure : OPEN_SQUARE_BRACKET key_declaration CLOSE_SQUARE_BRACKET
     '''
 
 def p_key_declaration(p):
