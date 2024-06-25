@@ -43,6 +43,8 @@ palabras_reservadas = {
     'extends': 'EXTENDS',
     'final': 'FINAL',
     'finally': 'FINALLY',
+    'return': 'RETURN',
+    'function': 'FUNCTION'
 }
 
 # Lista de tokens - Christopher Díaz
@@ -137,8 +139,8 @@ def t_VARIABLE(t):
     return t
 
 def t_IDENTIFIER(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER')
+    r'[a-zA-Z_ñÑ][a-zA-Z0-9_ñÑ]*'
+    t.type = palabras_reservadas.get(t.value, 'IDENTIFIER') 
     return t
 
 def t_OPEN_TAG(t):
@@ -151,6 +153,14 @@ def t_CLOSE_TAG(t):
 
 def t_OPEN_TAG_WITH_ECHO(t):
     r'<\?='
+    return t
+
+def t_RETURN(t):
+    r'return'
+    return t
+
+def t_FUNCTION(t):
+    r'function'
     return t
 
 def t_COMMENT(t):
