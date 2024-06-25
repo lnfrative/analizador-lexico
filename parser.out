@@ -1,0 +1,1341 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ABSTRACT
+    AND
+    ARRAY
+    AS
+    BREAK
+    CALLABLE
+    CASE
+    CATCH
+    CLASS
+    CLONE
+    CLOSE_SQUARE_BRACKET
+    CLOSE_TAG
+    COLON
+    COMMENT
+    CONST
+    CONTINUE
+    DECLARE
+    DEFAULT
+    DIE
+    DO
+    DOUBLE_COLON
+    DOUBLE_EQUALS
+    ECHO
+    ELSE
+    ELSEIF
+    EMPTY
+    ENDDECLARE
+    ENDFOR
+    ENDFOREACH
+    ENDIF
+    ENDSWITCH
+    ENDWHILE
+    EVAL
+    EXIT
+    EXTENDS
+    FINAL
+    FINALLY
+    FOR
+    GREATER_THAN
+    GREATER_THAN_OR_EQUALS
+    LESS_THAN
+    LESS_THAN_OR_EQUALS
+    NOT_EQUALS
+    OPEN_SQUARE_BRACKET
+    OPEN_TAG
+    OPEN_TAG_WITH_ECHO
+    RETURN
+    WHITESPACE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement_list statement
+Rule 4     statement -> expression_statement
+Rule 5     statement -> function_declaration
+Rule 6     statement -> assignment
+Rule 7     statement -> if_statement
+Rule 8     assignment -> VARIABLE EQUALS expression SEMICOLON
+Rule 9     expression_statement -> expression SEMICOLON
+Rule 10    function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+Rule 11    body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+Rule 12    body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+Rule 13    parameter_list -> parameter
+Rule 14    parameter_list -> parameter_list COMMA parameter
+Rule 15    parameter_list -> empty
+Rule 16    parameter -> VARIABLE
+Rule 17    empty -> <empty>
+Rule 18    expression -> VARIABLE
+Rule 19    expression -> NUMBER
+Rule 20    expression -> STRING
+Rule 21    expression -> BOOLEAN
+Rule 22    expression -> NULL
+Rule 23    expression -> function_call
+Rule 24    expression -> expression PLUS expression
+Rule 25    expression -> expression MINUS expression
+Rule 26    expression -> expression MULTIPLY expression
+Rule 27    expression -> expression DIVIDE expression
+Rule 28    expression -> expression MODULO expression
+Rule 29    expression -> expression CONCATENATION expression
+Rule 30    expression -> expression CONCATENATION_ASSIGNMENT expression
+Rule 31    function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+Rule 32    if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+
+Terminals, with rules where they appear
+
+ABSTRACT             : 
+AND                  : 
+ARRAY                : 
+AS                   : 
+BOOLEAN              : 21
+BREAK                : 
+CALLABLE             : 
+CASE                 : 
+CATCH                : 
+CLASS                : 
+CLONE                : 
+CLOSE_CURLY_BRACKET  : 11 12
+CLOSE_PARENTHESIS    : 10 31 32
+CLOSE_SQUARE_BRACKET : 
+CLOSE_TAG            : 
+COLON                : 
+COMMA                : 14
+COMMENT              : 
+CONCATENATION        : 29
+CONCATENATION_ASSIGNMENT : 30
+CONST                : 
+CONTINUE             : 
+DECLARE              : 
+DEFAULT              : 
+DIE                  : 
+DIVIDE               : 27
+DO                   : 
+DOUBLE_COLON         : 
+DOUBLE_EQUALS        : 
+ECHO                 : 
+ELSE                 : 
+ELSEIF               : 
+EMPTY                : 
+ENDDECLARE           : 
+ENDFOR               : 
+ENDFOREACH           : 
+ENDIF                : 
+ENDSWITCH            : 
+ENDWHILE             : 
+EQUALS               : 8
+EVAL                 : 
+EXIT                 : 
+EXTENDS              : 
+FINAL                : 
+FINALLY              : 
+FOR                  : 
+FUNCTION             : 10
+GREATER_THAN         : 
+GREATER_THAN_OR_EQUALS : 
+IDENTIFIER           : 10 31
+IF                   : 32
+LESS_THAN            : 
+LESS_THAN_OR_EQUALS  : 
+MINUS                : 25
+MODULO               : 28
+MULTIPLY             : 26
+NOT_EQUALS           : 
+NULL                 : 22
+NUMBER               : 19
+OPEN_CURLY_BRACKET   : 11 12
+OPEN_PARENTHESIS     : 10 31 32
+OPEN_SQUARE_BRACKET  : 
+OPEN_TAG             : 
+OPEN_TAG_WITH_ECHO   : 
+PLUS                 : 24
+RETURN               : 
+SEMICOLON            : 8 9
+STRING               : 20
+VARIABLE             : 8 16 18
+WHITESPACE           : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 6
+body_statement_list  : 10 32
+empty                : 12 15
+expression           : 8 9 24 24 25 25 26 26 27 27 28 28 29 29 30 30 32
+expression_statement : 4
+function_call        : 23
+function_declaration : 5
+if_statement         : 7
+parameter            : 13 14
+parameter_list       : 10 14
+program              : 0
+statement            : 2 3
+statement_list       : 1 3 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . expression_statement
+    (5) statement -> . function_declaration
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (9) expression_statement -> . expression SEMICOLON
+    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (32) if_statement -> . IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    FUNCTION        shift and go to state 9
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    expression_statement           shift and go to state 4
+    function_declaration           shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    expression                     shift and go to state 8
+    function_call                  shift and go to state 17
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . expression_statement
+    (5) statement -> . function_declaration
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (9) expression_statement -> . expression SEMICOLON
+    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (32) if_statement -> . IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    FUNCTION        shift and go to state 9
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    statement                      shift and go to state 18
+    expression_statement           shift and go to state 4
+    function_declaration           shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    expression                     shift and go to state 8
+    function_call                  shift and go to state 17
+
+state 3
+
+    (2) statement_list -> statement .
+
+    FUNCTION        reduce using rule 2 (statement_list -> statement .)
+    VARIABLE        reduce using rule 2 (statement_list -> statement .)
+    IF              reduce using rule 2 (statement_list -> statement .)
+    NUMBER          reduce using rule 2 (statement_list -> statement .)
+    STRING          reduce using rule 2 (statement_list -> statement .)
+    BOOLEAN         reduce using rule 2 (statement_list -> statement .)
+    NULL            reduce using rule 2 (statement_list -> statement .)
+    IDENTIFIER      reduce using rule 2 (statement_list -> statement .)
+    $end            reduce using rule 2 (statement_list -> statement .)
+    CLOSE_CURLY_BRACKET reduce using rule 2 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> expression_statement .
+
+    FUNCTION        reduce using rule 4 (statement -> expression_statement .)
+    VARIABLE        reduce using rule 4 (statement -> expression_statement .)
+    IF              reduce using rule 4 (statement -> expression_statement .)
+    NUMBER          reduce using rule 4 (statement -> expression_statement .)
+    STRING          reduce using rule 4 (statement -> expression_statement .)
+    BOOLEAN         reduce using rule 4 (statement -> expression_statement .)
+    NULL            reduce using rule 4 (statement -> expression_statement .)
+    IDENTIFIER      reduce using rule 4 (statement -> expression_statement .)
+    $end            reduce using rule 4 (statement -> expression_statement .)
+    CLOSE_CURLY_BRACKET reduce using rule 4 (statement -> expression_statement .)
+
+
+state 5
+
+    (5) statement -> function_declaration .
+
+    FUNCTION        reduce using rule 5 (statement -> function_declaration .)
+    VARIABLE        reduce using rule 5 (statement -> function_declaration .)
+    IF              reduce using rule 5 (statement -> function_declaration .)
+    NUMBER          reduce using rule 5 (statement -> function_declaration .)
+    STRING          reduce using rule 5 (statement -> function_declaration .)
+    BOOLEAN         reduce using rule 5 (statement -> function_declaration .)
+    NULL            reduce using rule 5 (statement -> function_declaration .)
+    IDENTIFIER      reduce using rule 5 (statement -> function_declaration .)
+    $end            reduce using rule 5 (statement -> function_declaration .)
+    CLOSE_CURLY_BRACKET reduce using rule 5 (statement -> function_declaration .)
+
+
+state 6
+
+    (6) statement -> assignment .
+
+    FUNCTION        reduce using rule 6 (statement -> assignment .)
+    VARIABLE        reduce using rule 6 (statement -> assignment .)
+    IF              reduce using rule 6 (statement -> assignment .)
+    NUMBER          reduce using rule 6 (statement -> assignment .)
+    STRING          reduce using rule 6 (statement -> assignment .)
+    BOOLEAN         reduce using rule 6 (statement -> assignment .)
+    NULL            reduce using rule 6 (statement -> assignment .)
+    IDENTIFIER      reduce using rule 6 (statement -> assignment .)
+    $end            reduce using rule 6 (statement -> assignment .)
+    CLOSE_CURLY_BRACKET reduce using rule 6 (statement -> assignment .)
+
+
+state 7
+
+    (7) statement -> if_statement .
+
+    FUNCTION        reduce using rule 7 (statement -> if_statement .)
+    VARIABLE        reduce using rule 7 (statement -> if_statement .)
+    IF              reduce using rule 7 (statement -> if_statement .)
+    NUMBER          reduce using rule 7 (statement -> if_statement .)
+    STRING          reduce using rule 7 (statement -> if_statement .)
+    BOOLEAN         reduce using rule 7 (statement -> if_statement .)
+    NULL            reduce using rule 7 (statement -> if_statement .)
+    IDENTIFIER      reduce using rule 7 (statement -> if_statement .)
+    $end            reduce using rule 7 (statement -> if_statement .)
+    CLOSE_CURLY_BRACKET reduce using rule 7 (statement -> if_statement .)
+
+
+state 8
+
+    (9) expression_statement -> expression . SEMICOLON
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       shift and go to state 19
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+    CONCATENATION   shift and go to state 25
+    CONCATENATION_ASSIGNMENT shift and go to state 26
+
+
+state 9
+
+    (10) function_declaration -> FUNCTION . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+
+    IDENTIFIER      shift and go to state 27
+
+
+state 10
+
+    (31) function_call -> IDENTIFIER . OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    OPEN_PARENTHESIS shift and go to state 28
+
+
+state 11
+
+    (8) assignment -> VARIABLE . EQUALS expression SEMICOLON
+    (18) expression -> VARIABLE .
+
+    EQUALS          shift and go to state 29
+    SEMICOLON       reduce using rule 18 (expression -> VARIABLE .)
+    PLUS            reduce using rule 18 (expression -> VARIABLE .)
+    MINUS           reduce using rule 18 (expression -> VARIABLE .)
+    MULTIPLY        reduce using rule 18 (expression -> VARIABLE .)
+    DIVIDE          reduce using rule 18 (expression -> VARIABLE .)
+    MODULO          reduce using rule 18 (expression -> VARIABLE .)
+    CONCATENATION   reduce using rule 18 (expression -> VARIABLE .)
+    CONCATENATION_ASSIGNMENT reduce using rule 18 (expression -> VARIABLE .)
+
+
+state 12
+
+    (32) if_statement -> IF . OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+
+    OPEN_PARENTHESIS shift and go to state 30
+
+
+state 13
+
+    (19) expression -> NUMBER .
+
+    SEMICOLON       reduce using rule 19 (expression -> NUMBER .)
+    PLUS            reduce using rule 19 (expression -> NUMBER .)
+    MINUS           reduce using rule 19 (expression -> NUMBER .)
+    MULTIPLY        reduce using rule 19 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 19 (expression -> NUMBER .)
+    MODULO          reduce using rule 19 (expression -> NUMBER .)
+    CONCATENATION   reduce using rule 19 (expression -> NUMBER .)
+    CONCATENATION_ASSIGNMENT reduce using rule 19 (expression -> NUMBER .)
+    CLOSE_PARENTHESIS reduce using rule 19 (expression -> NUMBER .)
+
+
+state 14
+
+    (20) expression -> STRING .
+
+    SEMICOLON       reduce using rule 20 (expression -> STRING .)
+    PLUS            reduce using rule 20 (expression -> STRING .)
+    MINUS           reduce using rule 20 (expression -> STRING .)
+    MULTIPLY        reduce using rule 20 (expression -> STRING .)
+    DIVIDE          reduce using rule 20 (expression -> STRING .)
+    MODULO          reduce using rule 20 (expression -> STRING .)
+    CONCATENATION   reduce using rule 20 (expression -> STRING .)
+    CONCATENATION_ASSIGNMENT reduce using rule 20 (expression -> STRING .)
+    CLOSE_PARENTHESIS reduce using rule 20 (expression -> STRING .)
+
+
+state 15
+
+    (21) expression -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 21 (expression -> BOOLEAN .)
+    PLUS            reduce using rule 21 (expression -> BOOLEAN .)
+    MINUS           reduce using rule 21 (expression -> BOOLEAN .)
+    MULTIPLY        reduce using rule 21 (expression -> BOOLEAN .)
+    DIVIDE          reduce using rule 21 (expression -> BOOLEAN .)
+    MODULO          reduce using rule 21 (expression -> BOOLEAN .)
+    CONCATENATION   reduce using rule 21 (expression -> BOOLEAN .)
+    CONCATENATION_ASSIGNMENT reduce using rule 21 (expression -> BOOLEAN .)
+    CLOSE_PARENTHESIS reduce using rule 21 (expression -> BOOLEAN .)
+
+
+state 16
+
+    (22) expression -> NULL .
+
+    SEMICOLON       reduce using rule 22 (expression -> NULL .)
+    PLUS            reduce using rule 22 (expression -> NULL .)
+    MINUS           reduce using rule 22 (expression -> NULL .)
+    MULTIPLY        reduce using rule 22 (expression -> NULL .)
+    DIVIDE          reduce using rule 22 (expression -> NULL .)
+    MODULO          reduce using rule 22 (expression -> NULL .)
+    CONCATENATION   reduce using rule 22 (expression -> NULL .)
+    CONCATENATION_ASSIGNMENT reduce using rule 22 (expression -> NULL .)
+    CLOSE_PARENTHESIS reduce using rule 22 (expression -> NULL .)
+
+
+state 17
+
+    (23) expression -> function_call .
+
+    SEMICOLON       reduce using rule 23 (expression -> function_call .)
+    PLUS            reduce using rule 23 (expression -> function_call .)
+    MINUS           reduce using rule 23 (expression -> function_call .)
+    MULTIPLY        reduce using rule 23 (expression -> function_call .)
+    DIVIDE          reduce using rule 23 (expression -> function_call .)
+    MODULO          reduce using rule 23 (expression -> function_call .)
+    CONCATENATION   reduce using rule 23 (expression -> function_call .)
+    CONCATENATION_ASSIGNMENT reduce using rule 23 (expression -> function_call .)
+    CLOSE_PARENTHESIS reduce using rule 23 (expression -> function_call .)
+
+
+state 18
+
+    (3) statement_list -> statement_list statement .
+
+    FUNCTION        reduce using rule 3 (statement_list -> statement_list statement .)
+    VARIABLE        reduce using rule 3 (statement_list -> statement_list statement .)
+    IF              reduce using rule 3 (statement_list -> statement_list statement .)
+    NUMBER          reduce using rule 3 (statement_list -> statement_list statement .)
+    STRING          reduce using rule 3 (statement_list -> statement_list statement .)
+    BOOLEAN         reduce using rule 3 (statement_list -> statement_list statement .)
+    NULL            reduce using rule 3 (statement_list -> statement_list statement .)
+    IDENTIFIER      reduce using rule 3 (statement_list -> statement_list statement .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement .)
+    CLOSE_CURLY_BRACKET reduce using rule 3 (statement_list -> statement_list statement .)
+
+
+state 19
+
+    (9) expression_statement -> expression SEMICOLON .
+
+    FUNCTION        reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    VARIABLE        reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    IF              reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    NUMBER          reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    STRING          reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    BOOLEAN         reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    NULL            reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    $end            reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 9 (expression_statement -> expression SEMICOLON .)
+
+
+state 20
+
+    (24) expression -> expression PLUS . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 31
+    function_call                  shift and go to state 17
+
+state 21
+
+    (25) expression -> expression MINUS . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 33
+    function_call                  shift and go to state 17
+
+state 22
+
+    (26) expression -> expression MULTIPLY . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 34
+    function_call                  shift and go to state 17
+
+state 23
+
+    (27) expression -> expression DIVIDE . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 35
+    function_call                  shift and go to state 17
+
+state 24
+
+    (28) expression -> expression MODULO . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 36
+    function_call                  shift and go to state 17
+
+state 25
+
+    (29) expression -> expression CONCATENATION . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 37
+    function_call                  shift and go to state 17
+
+state 26
+
+    (30) expression -> expression CONCATENATION_ASSIGNMENT . expression
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 38
+    function_call                  shift and go to state 17
+
+state 27
+
+    (10) function_declaration -> FUNCTION IDENTIFIER . OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+
+    OPEN_PARENTHESIS shift and go to state 39
+
+
+state 28
+
+    (31) function_call -> IDENTIFIER OPEN_PARENTHESIS . CLOSE_PARENTHESIS
+
+    CLOSE_PARENTHESIS shift and go to state 40
+
+
+state 29
+
+    (8) assignment -> VARIABLE EQUALS . expression SEMICOLON
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 41
+    function_call                  shift and go to state 17
+
+state 30
+
+    (32) if_statement -> IF OPEN_PARENTHESIS . expression CLOSE_PARENTHESIS body_statement_list
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 32
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    expression                     shift and go to state 42
+    function_call                  shift and go to state 17
+
+state 31
+
+    (24) expression -> expression PLUS expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 24 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 24 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 24 (expression -> expression PLUS expression .)
+    CONCATENATION   reduce using rule 24 (expression -> expression PLUS expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> expression PLUS expression .)
+    CLOSE_PARENTHESIS reduce using rule 24 (expression -> expression PLUS expression .)
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+  ! MULTIPLY        [ reduce using rule 24 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 24 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 24 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 32
+
+    (18) expression -> VARIABLE .
+
+    PLUS            reduce using rule 18 (expression -> VARIABLE .)
+    MINUS           reduce using rule 18 (expression -> VARIABLE .)
+    MULTIPLY        reduce using rule 18 (expression -> VARIABLE .)
+    DIVIDE          reduce using rule 18 (expression -> VARIABLE .)
+    MODULO          reduce using rule 18 (expression -> VARIABLE .)
+    CONCATENATION   reduce using rule 18 (expression -> VARIABLE .)
+    CONCATENATION_ASSIGNMENT reduce using rule 18 (expression -> VARIABLE .)
+    SEMICOLON       reduce using rule 18 (expression -> VARIABLE .)
+    CLOSE_PARENTHESIS reduce using rule 18 (expression -> VARIABLE .)
+
+
+state 33
+
+    (25) expression -> expression MINUS expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 25 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 25 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 25 (expression -> expression MINUS expression .)
+    CONCATENATION   reduce using rule 25 (expression -> expression MINUS expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 25 (expression -> expression MINUS expression .)
+    CLOSE_PARENTHESIS reduce using rule 25 (expression -> expression MINUS expression .)
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+  ! MULTIPLY        [ reduce using rule 25 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 25 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 25 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 34
+
+    (26) expression -> expression MULTIPLY expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    PLUS            reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    MINUS           reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    MULTIPLY        reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    DIVIDE          reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    MODULO          reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    CONCATENATION   reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 26 (expression -> expression MULTIPLY expression .)
+    CLOSE_PARENTHESIS reduce using rule 26 (expression -> expression MULTIPLY expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! MULTIPLY        [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+  ! MODULO          [ shift and go to state 24 ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 35
+
+    (27) expression -> expression DIVIDE expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 27 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 27 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 27 (expression -> expression DIVIDE expression .)
+    MULTIPLY        reduce using rule 27 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 27 (expression -> expression DIVIDE expression .)
+    MODULO          reduce using rule 27 (expression -> expression DIVIDE expression .)
+    CONCATENATION   reduce using rule 27 (expression -> expression DIVIDE expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 27 (expression -> expression DIVIDE expression .)
+    CLOSE_PARENTHESIS reduce using rule 27 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! MULTIPLY        [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+  ! MODULO          [ shift and go to state 24 ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 36
+
+    (28) expression -> expression MODULO expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 28 (expression -> expression MODULO expression .)
+    PLUS            reduce using rule 28 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 28 (expression -> expression MODULO expression .)
+    MULTIPLY        reduce using rule 28 (expression -> expression MODULO expression .)
+    DIVIDE          reduce using rule 28 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 28 (expression -> expression MODULO expression .)
+    CONCATENATION   reduce using rule 28 (expression -> expression MODULO expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 28 (expression -> expression MODULO expression .)
+    CLOSE_PARENTHESIS reduce using rule 28 (expression -> expression MODULO expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! MULTIPLY        [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+  ! MODULO          [ shift and go to state 24 ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 37
+
+    (29) expression -> expression CONCATENATION expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 29 (expression -> expression CONCATENATION expression .)
+    CONCATENATION   reduce using rule 29 (expression -> expression CONCATENATION expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 29 (expression -> expression CONCATENATION expression .)
+    CLOSE_PARENTHESIS reduce using rule 29 (expression -> expression CONCATENATION expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+  ! PLUS            [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
+  ! MINUS           [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
+  ! MULTIPLY        [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
+  ! DIVIDE          [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
+  ! MODULO          [ reduce using rule 29 (expression -> expression CONCATENATION expression .) ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 38
+
+    (30) expression -> expression CONCATENATION_ASSIGNMENT expression .
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CONCATENATION   reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CONCATENATION_ASSIGNMENT reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    CLOSE_PARENTHESIS reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+  ! PLUS            [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MINUS           [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MULTIPLY        [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! DIVIDE          [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! MODULO          [ reduce using rule 30 (expression -> expression CONCATENATION_ASSIGNMENT expression .) ]
+  ! CONCATENATION   [ shift and go to state 25 ]
+  ! CONCATENATION_ASSIGNMENT [ shift and go to state 26 ]
+
+
+state 39
+
+    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS . parameter_list CLOSE_PARENTHESIS body_statement_list
+    (13) parameter_list -> . parameter
+    (14) parameter_list -> . parameter_list COMMA parameter
+    (15) parameter_list -> . empty
+    (16) parameter -> . VARIABLE
+    (17) empty -> .
+
+    VARIABLE        shift and go to state 46
+    CLOSE_PARENTHESIS reduce using rule 17 (empty -> .)
+    COMMA           reduce using rule 17 (empty -> .)
+
+    parameter_list                 shift and go to state 43
+    parameter                      shift and go to state 44
+    empty                          shift and go to state 45
+
+state 40
+
+    (31) function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .
+
+    SEMICOLON       reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    PLUS            reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MINUS           reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MULTIPLY        reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    DIVIDE          reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    MODULO          reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CONCATENATION   reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CONCATENATION_ASSIGNMENT reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    CLOSE_PARENTHESIS reduce using rule 31 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+
+
+state 41
+
+    (8) assignment -> VARIABLE EQUALS expression . SEMICOLON
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    SEMICOLON       shift and go to state 47
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+    CONCATENATION   shift and go to state 25
+    CONCATENATION_ASSIGNMENT shift and go to state 26
+
+
+state 42
+
+    (32) if_statement -> IF OPEN_PARENTHESIS expression . CLOSE_PARENTHESIS body_statement_list
+    (24) expression -> expression . PLUS expression
+    (25) expression -> expression . MINUS expression
+    (26) expression -> expression . MULTIPLY expression
+    (27) expression -> expression . DIVIDE expression
+    (28) expression -> expression . MODULO expression
+    (29) expression -> expression . CONCATENATION expression
+    (30) expression -> expression . CONCATENATION_ASSIGNMENT expression
+
+    CLOSE_PARENTHESIS shift and go to state 48
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    MULTIPLY        shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+    CONCATENATION   shift and go to state 25
+    CONCATENATION_ASSIGNMENT shift and go to state 26
+
+
+state 43
+
+    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS body_statement_list
+    (14) parameter_list -> parameter_list . COMMA parameter
+
+    CLOSE_PARENTHESIS shift and go to state 49
+    COMMA           shift and go to state 50
+
+
+state 44
+
+    (13) parameter_list -> parameter .
+
+    CLOSE_PARENTHESIS reduce using rule 13 (parameter_list -> parameter .)
+    COMMA           reduce using rule 13 (parameter_list -> parameter .)
+
+
+state 45
+
+    (15) parameter_list -> empty .
+
+    CLOSE_PARENTHESIS reduce using rule 15 (parameter_list -> empty .)
+    COMMA           reduce using rule 15 (parameter_list -> empty .)
+
+
+state 46
+
+    (16) parameter -> VARIABLE .
+
+    CLOSE_PARENTHESIS reduce using rule 16 (parameter -> VARIABLE .)
+    COMMA           reduce using rule 16 (parameter -> VARIABLE .)
+
+
+state 47
+
+    (8) assignment -> VARIABLE EQUALS expression SEMICOLON .
+
+    FUNCTION        reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    VARIABLE        reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    IF              reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    NUMBER          reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    STRING          reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    BOOLEAN         reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    NULL            reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    $end            reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 8 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
+
+
+state 48
+
+    (32) if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS . body_statement_list
+    (11) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+    (12) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+
+    OPEN_CURLY_BRACKET shift and go to state 52
+
+    body_statement_list            shift and go to state 51
+
+state 49
+
+    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS . body_statement_list
+    (11) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+    (12) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
+
+    OPEN_CURLY_BRACKET shift and go to state 52
+
+    body_statement_list            shift and go to state 53
+
+state 50
+
+    (14) parameter_list -> parameter_list COMMA . parameter
+    (16) parameter -> . VARIABLE
+
+    VARIABLE        shift and go to state 46
+
+    parameter                      shift and go to state 54
+
+state 51
+
+    (32) if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .
+
+    FUNCTION        reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    VARIABLE        reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    IF              reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    NUMBER          reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    STRING          reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    BOOLEAN         reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    NULL            reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    IDENTIFIER      reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    $end            reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+    CLOSE_CURLY_BRACKET reduce using rule 32 (if_statement -> IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list .)
+
+
+state 52
+
+    (11) body_statement_list -> OPEN_CURLY_BRACKET . statement_list CLOSE_CURLY_BRACKET
+    (12) body_statement_list -> OPEN_CURLY_BRACKET . empty CLOSE_CURLY_BRACKET
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (17) empty -> .
+    (4) statement -> . expression_statement
+    (5) statement -> . function_declaration
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (9) expression_statement -> . expression SEMICOLON
+    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (32) if_statement -> . IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    CLOSE_CURLY_BRACKET reduce using rule 17 (empty -> .)
+    FUNCTION        shift and go to state 9
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    statement_list                 shift and go to state 55
+    empty                          shift and go to state 56
+    statement                      shift and go to state 3
+    expression_statement           shift and go to state 4
+    function_declaration           shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    expression                     shift and go to state 8
+    function_call                  shift and go to state 17
+
+state 53
+
+    (10) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .
+
+    FUNCTION        reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    VARIABLE        reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    IF              reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    NUMBER          reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    STRING          reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    BOOLEAN         reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    NULL            reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    IDENTIFIER      reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    $end            reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+    CLOSE_CURLY_BRACKET reduce using rule 10 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
+
+
+state 54
+
+    (14) parameter_list -> parameter_list COMMA parameter .
+
+    CLOSE_PARENTHESIS reduce using rule 14 (parameter_list -> parameter_list COMMA parameter .)
+    COMMA           reduce using rule 14 (parameter_list -> parameter_list COMMA parameter .)
+
+
+state 55
+
+    (11) body_statement_list -> OPEN_CURLY_BRACKET statement_list . CLOSE_CURLY_BRACKET
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . expression_statement
+    (5) statement -> . function_declaration
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (9) expression_statement -> . expression SEMICOLON
+    (10) function_declaration -> . FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
+    (8) assignment -> . VARIABLE EQUALS expression SEMICOLON
+    (32) if_statement -> . IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    (18) expression -> . VARIABLE
+    (19) expression -> . NUMBER
+    (20) expression -> . STRING
+    (21) expression -> . BOOLEAN
+    (22) expression -> . NULL
+    (23) expression -> . function_call
+    (24) expression -> . expression PLUS expression
+    (25) expression -> . expression MINUS expression
+    (26) expression -> . expression MULTIPLY expression
+    (27) expression -> . expression DIVIDE expression
+    (28) expression -> . expression MODULO expression
+    (29) expression -> . expression CONCATENATION expression
+    (30) expression -> . expression CONCATENATION_ASSIGNMENT expression
+    (31) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+
+    CLOSE_CURLY_BRACKET shift and go to state 57
+    FUNCTION        shift and go to state 9
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    NUMBER          shift and go to state 13
+    STRING          shift and go to state 14
+    BOOLEAN         shift and go to state 15
+    NULL            shift and go to state 16
+    IDENTIFIER      shift and go to state 10
+
+    statement                      shift and go to state 18
+    expression_statement           shift and go to state 4
+    function_declaration           shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    expression                     shift and go to state 8
+    function_call                  shift and go to state 17
+
+state 56
+
+    (12) body_statement_list -> OPEN_CURLY_BRACKET empty . CLOSE_CURLY_BRACKET
+
+    CLOSE_CURLY_BRACKET shift and go to state 58
+
+
+state 57
+
+    (11) body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .
+
+    FUNCTION        reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    VARIABLE        reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    IF              reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    NUMBER          reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    STRING          reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    BOOLEAN         reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    NULL            reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    IDENTIFIER      reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    $end            reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+    CLOSE_CURLY_BRACKET reduce using rule 11 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
+
+
+state 58
+
+    (12) body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .
+
+    FUNCTION        reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    VARIABLE        reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    IF              reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    NUMBER          reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    STRING          reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    BOOLEAN         reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    NULL            reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    IDENTIFIER      reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    $end            reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+    CLOSE_CURLY_BRACKET reduce using rule 12 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
+

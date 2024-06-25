@@ -44,7 +44,10 @@ palabras_reservadas = {
     'final': 'FINAL',
     'finally': 'FINALLY',
     'return': 'RETURN',
-    'function': 'FUNCTION'
+    'function': 'FUNCTION',
+    'if': 'IF',
+    'else': 'ELSE',
+    'for': 'FOR'
 }
 
 # Lista de tokens - Christopher Díaz
@@ -254,7 +257,7 @@ echo "Contraseña generada: " . $contraseña;
 
 '''
 
-lexer.input(data)
+# lexer.input(data)
 
-# Ejecutar el lexer y mostrar los tokens
-logger(lexer)
+# # Ejecutar el lexer y mostrar los tokens
+# logger(lexer)

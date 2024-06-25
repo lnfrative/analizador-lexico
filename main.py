@@ -30,8 +30,16 @@ def p_statement(p):
     '''
     statement : expression_statement
               | function_declaration
+              | assignment
+              | if_statement
     '''
     p[0] = p[1]
+
+def p_assignment(p):
+    '''
+    assignment : VARIABLE EQUALS expression SEMICOLON
+    '''
+    p[0] = ('assignment', p[1], p[3])
 
 def p_expression_statement(p):
     '''
@@ -41,14 +49,14 @@ def p_expression_statement(p):
 
 def p_function_declaration(p):
     '''
-    function_declaration : FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS OPEN_CURLY_BRACKET body_statement_list CLOSE_CURLY_BRACKET
+    function_declaration : FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
     '''
     p[0] = ('function_declaration', p[2], p[4], p[7])  # Nombre de la función, lista de parámetros y cuerpo
 
 def p_body_statement_list(p):
     '''
-    body_statement_list : statement_list
-                        | empty
+    body_statement_list : OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
+                        | OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
     '''
 
 def p_parameter_list(p):
@@ -104,6 +112,15 @@ def p_function_call(p):
     function_call : IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
     '''
     p[0] = ('function_call', p[1])  # Nombre de la función
+
+def p_if_statement(p):
+    '''
+    if_statement : IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    '''
+    if len(p) == 6:
+        p[0] = ('if', p[2], p[4], None)  # if sin else
+    else:
+        p[0] = ('if', p[2], p[4], p[6])  # if con else
 
 # Manejo de errores sintácticos
 def p_error(p):
