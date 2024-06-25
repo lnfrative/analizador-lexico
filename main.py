@@ -122,8 +122,6 @@ def p_condition(p):
               | OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
               | condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
               | NOT condition
-              | condition AND condition
-              | condition OR condition
     '''
 
 def p_comparison(p):
@@ -134,6 +132,8 @@ def p_comparison(p):
                | LESS_THAN
                | GREATER_THAN_OR_EQUALS
                | LESS_THAN_OR_EQUALS
+               | AND
+               | OR
     '''
 
 # Manejo de errores sintácticos

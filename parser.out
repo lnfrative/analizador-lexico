@@ -91,19 +91,19 @@ Rule 42    condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PA
 Rule 43    condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
 Rule 44    condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
 Rule 45    condition -> NOT condition
-Rule 46    condition -> condition AND condition
-Rule 47    condition -> condition OR condition
-Rule 48    comparison -> DOUBLE_EQUALS
-Rule 49    comparison -> NOT_EQUALS
-Rule 50    comparison -> GREATER_THAN
-Rule 51    comparison -> LESS_THAN
-Rule 52    comparison -> GREATER_THAN_OR_EQUALS
-Rule 53    comparison -> LESS_THAN_OR_EQUALS
+Rule 46    comparison -> DOUBLE_EQUALS
+Rule 47    comparison -> NOT_EQUALS
+Rule 48    comparison -> GREATER_THAN
+Rule 49    comparison -> LESS_THAN
+Rule 50    comparison -> GREATER_THAN_OR_EQUALS
+Rule 51    comparison -> LESS_THAN_OR_EQUALS
+Rule 52    comparison -> AND
+Rule 53    comparison -> OR
 
 Terminals, with rules where they appear
 
 ABSTRACT             : 
-AND                  : 46
+AND                  : 52
 ARRAY                : 
 AS                   : 
 BOOLEAN              : 27
@@ -130,7 +130,7 @@ DIE                  :
 DIVIDE               : 33
 DO                   : 
 DOUBLE_COLON         : 
-DOUBLE_EQUALS        : 48
+DOUBLE_EQUALS        : 46
 ECHO                 : 39
 ELSE                 : 
 ELSEIF               : 
@@ -149,17 +149,17 @@ FINAL                :
 FINALLY              : 
 FOR                  : 
 FUNCTION             : 12
-GREATER_THAN         : 50
-GREATER_THAN_OR_EQUALS : 52
+GREATER_THAN         : 48
+GREATER_THAN_OR_EQUALS : 50
 IDENTIFIER           : 12 37
 IF                   : 38
-LESS_THAN            : 51
-LESS_THAN_OR_EQUALS  : 53
+LESS_THAN            : 49
+LESS_THAN_OR_EQUALS  : 51
 MINUS                : 31
 MODULO               : 34
 MULTIPLY             : 32
 NOT                  : 45
-NOT_EQUALS           : 49
+NOT_EQUALS           : 47
 NULL                 : 28
 NUMBER               : 25
 OPEN_CURLY_BRACKET   : 13 14
@@ -167,7 +167,7 @@ OPEN_PARENTHESIS     : 12 37 38 39 42 43 44
 OPEN_SQUARE_BRACKET  : 
 OPEN_TAG             : 
 OPEN_TAG_WITH_ECHO   : 
-OR                   : 47
+OR                   : 53
 PLUS                 : 30
 RETURN               : 
 SEMICOLON            : 10 11 39
@@ -181,7 +181,7 @@ Nonterminals, with rules where they appear
 assignment           : 7
 body_statement_list  : 12 38
 comparison           : 41 42 43 44
-condition            : 2 38 41 41 42 42 43 43 44 44 45 46 46 47 47
+condition            : 2 38 41 41 42 42 43 43 44 44 45
 empty                : 14 17 21
 expression           : 10 11 22 30 30 31 31 32 32 33 33 34 34 35 35 36 36 40
 expression_statement : 5
@@ -212,8 +212,6 @@ state 0
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (5) statement -> . expression_statement
     (6) statement -> . function_declaration
     (7) statement -> . assignment
@@ -323,24 +321,24 @@ state 3
     (2) program -> condition .
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
     $end            reduce using rule 2 (program -> condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
     comparison                     shift and go to state 26
 
@@ -373,14 +371,14 @@ state 5
     (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
     (11) expression_statement -> expression . SEMICOLON
 
-    AND             reduce using rule 40 (condition -> expression .)
-    OR              reduce using rule 40 (condition -> expression .)
     DOUBLE_EQUALS   reduce using rule 40 (condition -> expression .)
     NOT_EQUALS      reduce using rule 40 (condition -> expression .)
     GREATER_THAN    reduce using rule 40 (condition -> expression .)
     LESS_THAN       reduce using rule 40 (condition -> expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 40 (condition -> expression .)
     LESS_THAN_OR_EQUALS reduce using rule 40 (condition -> expression .)
+    AND             reduce using rule 40 (condition -> expression .)
+    OR              reduce using rule 40 (condition -> expression .)
     $end            reduce using rule 40 (condition -> expression .)
     PLUS            shift and go to state 35
     MINUS           shift and go to state 36
@@ -402,8 +400,6 @@ state 6
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -441,8 +437,6 @@ state 7
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -569,14 +563,14 @@ state 13
     CONCATENATION   reduce using rule 24 (expression -> VARIABLE .)
     CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> VARIABLE .)
     SEMICOLON       reduce using rule 24 (expression -> VARIABLE .)
-    AND             reduce using rule 24 (expression -> VARIABLE .)
-    OR              reduce using rule 24 (expression -> VARIABLE .)
     DOUBLE_EQUALS   reduce using rule 24 (expression -> VARIABLE .)
     NOT_EQUALS      reduce using rule 24 (expression -> VARIABLE .)
     GREATER_THAN    reduce using rule 24 (expression -> VARIABLE .)
     LESS_THAN       reduce using rule 24 (expression -> VARIABLE .)
     GREATER_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
     LESS_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    AND             reduce using rule 24 (expression -> VARIABLE .)
+    OR              reduce using rule 24 (expression -> VARIABLE .)
     $end            reduce using rule 24 (expression -> VARIABLE .)
     EQUALS          shift and go to state 47
 
@@ -593,14 +587,14 @@ state 14
     CONCATENATION   reduce using rule 25 (expression -> NUMBER .)
     CONCATENATION_ASSIGNMENT reduce using rule 25 (expression -> NUMBER .)
     SEMICOLON       reduce using rule 25 (expression -> NUMBER .)
-    AND             reduce using rule 25 (expression -> NUMBER .)
-    OR              reduce using rule 25 (expression -> NUMBER .)
     DOUBLE_EQUALS   reduce using rule 25 (expression -> NUMBER .)
     NOT_EQUALS      reduce using rule 25 (expression -> NUMBER .)
     GREATER_THAN    reduce using rule 25 (expression -> NUMBER .)
     LESS_THAN       reduce using rule 25 (expression -> NUMBER .)
     GREATER_THAN_OR_EQUALS reduce using rule 25 (expression -> NUMBER .)
     LESS_THAN_OR_EQUALS reduce using rule 25 (expression -> NUMBER .)
+    AND             reduce using rule 25 (expression -> NUMBER .)
+    OR              reduce using rule 25 (expression -> NUMBER .)
     $end            reduce using rule 25 (expression -> NUMBER .)
     CLOSE_PARENTHESIS reduce using rule 25 (expression -> NUMBER .)
     COMMA           reduce using rule 25 (expression -> NUMBER .)
@@ -618,14 +612,14 @@ state 15
     CONCATENATION   reduce using rule 26 (expression -> STRING .)
     CONCATENATION_ASSIGNMENT reduce using rule 26 (expression -> STRING .)
     SEMICOLON       reduce using rule 26 (expression -> STRING .)
-    AND             reduce using rule 26 (expression -> STRING .)
-    OR              reduce using rule 26 (expression -> STRING .)
     DOUBLE_EQUALS   reduce using rule 26 (expression -> STRING .)
     NOT_EQUALS      reduce using rule 26 (expression -> STRING .)
     GREATER_THAN    reduce using rule 26 (expression -> STRING .)
     LESS_THAN       reduce using rule 26 (expression -> STRING .)
     GREATER_THAN_OR_EQUALS reduce using rule 26 (expression -> STRING .)
     LESS_THAN_OR_EQUALS reduce using rule 26 (expression -> STRING .)
+    AND             reduce using rule 26 (expression -> STRING .)
+    OR              reduce using rule 26 (expression -> STRING .)
     $end            reduce using rule 26 (expression -> STRING .)
     CLOSE_PARENTHESIS reduce using rule 26 (expression -> STRING .)
     COMMA           reduce using rule 26 (expression -> STRING .)
@@ -643,14 +637,14 @@ state 16
     CONCATENATION   reduce using rule 27 (expression -> BOOLEAN .)
     CONCATENATION_ASSIGNMENT reduce using rule 27 (expression -> BOOLEAN .)
     SEMICOLON       reduce using rule 27 (expression -> BOOLEAN .)
-    AND             reduce using rule 27 (expression -> BOOLEAN .)
-    OR              reduce using rule 27 (expression -> BOOLEAN .)
     DOUBLE_EQUALS   reduce using rule 27 (expression -> BOOLEAN .)
     NOT_EQUALS      reduce using rule 27 (expression -> BOOLEAN .)
     GREATER_THAN    reduce using rule 27 (expression -> BOOLEAN .)
     LESS_THAN       reduce using rule 27 (expression -> BOOLEAN .)
     GREATER_THAN_OR_EQUALS reduce using rule 27 (expression -> BOOLEAN .)
     LESS_THAN_OR_EQUALS reduce using rule 27 (expression -> BOOLEAN .)
+    AND             reduce using rule 27 (expression -> BOOLEAN .)
+    OR              reduce using rule 27 (expression -> BOOLEAN .)
     $end            reduce using rule 27 (expression -> BOOLEAN .)
     CLOSE_PARENTHESIS reduce using rule 27 (expression -> BOOLEAN .)
     COMMA           reduce using rule 27 (expression -> BOOLEAN .)
@@ -668,14 +662,14 @@ state 17
     CONCATENATION   reduce using rule 28 (expression -> NULL .)
     CONCATENATION_ASSIGNMENT reduce using rule 28 (expression -> NULL .)
     SEMICOLON       reduce using rule 28 (expression -> NULL .)
-    AND             reduce using rule 28 (expression -> NULL .)
-    OR              reduce using rule 28 (expression -> NULL .)
     DOUBLE_EQUALS   reduce using rule 28 (expression -> NULL .)
     NOT_EQUALS      reduce using rule 28 (expression -> NULL .)
     GREATER_THAN    reduce using rule 28 (expression -> NULL .)
     LESS_THAN       reduce using rule 28 (expression -> NULL .)
     GREATER_THAN_OR_EQUALS reduce using rule 28 (expression -> NULL .)
     LESS_THAN_OR_EQUALS reduce using rule 28 (expression -> NULL .)
+    AND             reduce using rule 28 (expression -> NULL .)
+    OR              reduce using rule 28 (expression -> NULL .)
     $end            reduce using rule 28 (expression -> NULL .)
     CLOSE_PARENTHESIS reduce using rule 28 (expression -> NULL .)
     COMMA           reduce using rule 28 (expression -> NULL .)
@@ -693,14 +687,14 @@ state 18
     CONCATENATION   reduce using rule 29 (expression -> function_call .)
     CONCATENATION_ASSIGNMENT reduce using rule 29 (expression -> function_call .)
     SEMICOLON       reduce using rule 29 (expression -> function_call .)
-    AND             reduce using rule 29 (expression -> function_call .)
-    OR              reduce using rule 29 (expression -> function_call .)
     DOUBLE_EQUALS   reduce using rule 29 (expression -> function_call .)
     NOT_EQUALS      reduce using rule 29 (expression -> function_call .)
     GREATER_THAN    reduce using rule 29 (expression -> function_call .)
     LESS_THAN       reduce using rule 29 (expression -> function_call .)
     GREATER_THAN_OR_EQUALS reduce using rule 29 (expression -> function_call .)
     LESS_THAN_OR_EQUALS reduce using rule 29 (expression -> function_call .)
+    AND             reduce using rule 29 (expression -> function_call .)
+    OR              reduce using rule 29 (expression -> function_call .)
     $end            reduce using rule 29 (expression -> function_call .)
     CLOSE_PARENTHESIS reduce using rule 29 (expression -> function_call .)
     COMMA           reduce using rule 29 (expression -> function_call .)
@@ -798,8 +792,6 @@ state 26
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -830,164 +822,114 @@ state 26
 
 state 27
 
-    (46) condition -> condition AND . condition
-    (40) condition -> . expression
-    (41) condition -> . condition comparison condition
-    (42) condition -> . OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS
-    (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
-    (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
-    (24) expression -> . VARIABLE
-    (25) expression -> . NUMBER
-    (26) expression -> . STRING
-    (27) expression -> . BOOLEAN
-    (28) expression -> . NULL
-    (29) expression -> . function_call
-    (30) expression -> . expression PLUS expression
-    (31) expression -> . expression MINUS expression
-    (32) expression -> . expression MULTIPLY expression
-    (33) expression -> . expression DIVIDE expression
-    (34) expression -> . expression MODULO expression
-    (35) expression -> . expression CONCATENATION expression
-    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (46) comparison -> DOUBLE_EQUALS .
 
-    OPEN_PARENTHESIS shift and go to state 6
-    NOT             shift and go to state 7
-    VARIABLE        shift and go to state 45
-    NUMBER          shift and go to state 14
-    STRING          shift and go to state 15
-    BOOLEAN         shift and go to state 16
-    NULL            shift and go to state 17
-    IDENTIFIER      shift and go to state 20
+    OPEN_PARENTHESIS reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    NOT             reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    VARIABLE        reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    NUMBER          reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    STRING          reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    BOOLEAN         reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    NULL            reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
+    IDENTIFIER      reduce using rule 46 (comparison -> DOUBLE_EQUALS .)
 
-    condition                      shift and go to state 54
-    expression                     shift and go to state 44
-    function_call                  shift and go to state 18
 
 state 28
 
-    (47) condition -> condition OR . condition
-    (40) condition -> . expression
-    (41) condition -> . condition comparison condition
-    (42) condition -> . OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS
-    (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
-    (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
-    (24) expression -> . VARIABLE
-    (25) expression -> . NUMBER
-    (26) expression -> . STRING
-    (27) expression -> . BOOLEAN
-    (28) expression -> . NULL
-    (29) expression -> . function_call
-    (30) expression -> . expression PLUS expression
-    (31) expression -> . expression MINUS expression
-    (32) expression -> . expression MULTIPLY expression
-    (33) expression -> . expression DIVIDE expression
-    (34) expression -> . expression MODULO expression
-    (35) expression -> . expression CONCATENATION expression
-    (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
-    (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
+    (47) comparison -> NOT_EQUALS .
 
-    OPEN_PARENTHESIS shift and go to state 6
-    NOT             shift and go to state 7
-    VARIABLE        shift and go to state 45
-    NUMBER          shift and go to state 14
-    STRING          shift and go to state 15
-    BOOLEAN         shift and go to state 16
-    NULL            shift and go to state 17
-    IDENTIFIER      shift and go to state 20
+    OPEN_PARENTHESIS reduce using rule 47 (comparison -> NOT_EQUALS .)
+    NOT             reduce using rule 47 (comparison -> NOT_EQUALS .)
+    VARIABLE        reduce using rule 47 (comparison -> NOT_EQUALS .)
+    NUMBER          reduce using rule 47 (comparison -> NOT_EQUALS .)
+    STRING          reduce using rule 47 (comparison -> NOT_EQUALS .)
+    BOOLEAN         reduce using rule 47 (comparison -> NOT_EQUALS .)
+    NULL            reduce using rule 47 (comparison -> NOT_EQUALS .)
+    IDENTIFIER      reduce using rule 47 (comparison -> NOT_EQUALS .)
 
-    condition                      shift and go to state 55
-    expression                     shift and go to state 44
-    function_call                  shift and go to state 18
 
 state 29
 
-    (48) comparison -> DOUBLE_EQUALS .
+    (48) comparison -> GREATER_THAN .
 
-    OPEN_PARENTHESIS reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    NOT             reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    VARIABLE        reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    NUMBER          reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    STRING          reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    BOOLEAN         reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    NULL            reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
-    IDENTIFIER      reduce using rule 48 (comparison -> DOUBLE_EQUALS .)
+    OPEN_PARENTHESIS reduce using rule 48 (comparison -> GREATER_THAN .)
+    NOT             reduce using rule 48 (comparison -> GREATER_THAN .)
+    VARIABLE        reduce using rule 48 (comparison -> GREATER_THAN .)
+    NUMBER          reduce using rule 48 (comparison -> GREATER_THAN .)
+    STRING          reduce using rule 48 (comparison -> GREATER_THAN .)
+    BOOLEAN         reduce using rule 48 (comparison -> GREATER_THAN .)
+    NULL            reduce using rule 48 (comparison -> GREATER_THAN .)
+    IDENTIFIER      reduce using rule 48 (comparison -> GREATER_THAN .)
 
 
 state 30
 
-    (49) comparison -> NOT_EQUALS .
+    (49) comparison -> LESS_THAN .
 
-    OPEN_PARENTHESIS reduce using rule 49 (comparison -> NOT_EQUALS .)
-    NOT             reduce using rule 49 (comparison -> NOT_EQUALS .)
-    VARIABLE        reduce using rule 49 (comparison -> NOT_EQUALS .)
-    NUMBER          reduce using rule 49 (comparison -> NOT_EQUALS .)
-    STRING          reduce using rule 49 (comparison -> NOT_EQUALS .)
-    BOOLEAN         reduce using rule 49 (comparison -> NOT_EQUALS .)
-    NULL            reduce using rule 49 (comparison -> NOT_EQUALS .)
-    IDENTIFIER      reduce using rule 49 (comparison -> NOT_EQUALS .)
+    OPEN_PARENTHESIS reduce using rule 49 (comparison -> LESS_THAN .)
+    NOT             reduce using rule 49 (comparison -> LESS_THAN .)
+    VARIABLE        reduce using rule 49 (comparison -> LESS_THAN .)
+    NUMBER          reduce using rule 49 (comparison -> LESS_THAN .)
+    STRING          reduce using rule 49 (comparison -> LESS_THAN .)
+    BOOLEAN         reduce using rule 49 (comparison -> LESS_THAN .)
+    NULL            reduce using rule 49 (comparison -> LESS_THAN .)
+    IDENTIFIER      reduce using rule 49 (comparison -> LESS_THAN .)
 
 
 state 31
 
-    (50) comparison -> GREATER_THAN .
+    (50) comparison -> GREATER_THAN_OR_EQUALS .
 
-    OPEN_PARENTHESIS reduce using rule 50 (comparison -> GREATER_THAN .)
-    NOT             reduce using rule 50 (comparison -> GREATER_THAN .)
-    VARIABLE        reduce using rule 50 (comparison -> GREATER_THAN .)
-    NUMBER          reduce using rule 50 (comparison -> GREATER_THAN .)
-    STRING          reduce using rule 50 (comparison -> GREATER_THAN .)
-    BOOLEAN         reduce using rule 50 (comparison -> GREATER_THAN .)
-    NULL            reduce using rule 50 (comparison -> GREATER_THAN .)
-    IDENTIFIER      reduce using rule 50 (comparison -> GREATER_THAN .)
+    OPEN_PARENTHESIS reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    NOT             reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    VARIABLE        reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    NUMBER          reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    STRING          reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    BOOLEAN         reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    NULL            reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
+    IDENTIFIER      reduce using rule 50 (comparison -> GREATER_THAN_OR_EQUALS .)
 
 
 state 32
 
-    (51) comparison -> LESS_THAN .
+    (51) comparison -> LESS_THAN_OR_EQUALS .
 
-    OPEN_PARENTHESIS reduce using rule 51 (comparison -> LESS_THAN .)
-    NOT             reduce using rule 51 (comparison -> LESS_THAN .)
-    VARIABLE        reduce using rule 51 (comparison -> LESS_THAN .)
-    NUMBER          reduce using rule 51 (comparison -> LESS_THAN .)
-    STRING          reduce using rule 51 (comparison -> LESS_THAN .)
-    BOOLEAN         reduce using rule 51 (comparison -> LESS_THAN .)
-    NULL            reduce using rule 51 (comparison -> LESS_THAN .)
-    IDENTIFIER      reduce using rule 51 (comparison -> LESS_THAN .)
+    OPEN_PARENTHESIS reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    NOT             reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    VARIABLE        reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    NUMBER          reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    STRING          reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    BOOLEAN         reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    NULL            reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
+    IDENTIFIER      reduce using rule 51 (comparison -> LESS_THAN_OR_EQUALS .)
 
 
 state 33
 
-    (52) comparison -> GREATER_THAN_OR_EQUALS .
+    (52) comparison -> AND .
 
-    OPEN_PARENTHESIS reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    NOT             reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    VARIABLE        reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    NUMBER          reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    STRING          reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    BOOLEAN         reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    NULL            reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
-    IDENTIFIER      reduce using rule 52 (comparison -> GREATER_THAN_OR_EQUALS .)
+    OPEN_PARENTHESIS reduce using rule 52 (comparison -> AND .)
+    NOT             reduce using rule 52 (comparison -> AND .)
+    VARIABLE        reduce using rule 52 (comparison -> AND .)
+    NUMBER          reduce using rule 52 (comparison -> AND .)
+    STRING          reduce using rule 52 (comparison -> AND .)
+    BOOLEAN         reduce using rule 52 (comparison -> AND .)
+    NULL            reduce using rule 52 (comparison -> AND .)
+    IDENTIFIER      reduce using rule 52 (comparison -> AND .)
 
 
 state 34
 
-    (53) comparison -> LESS_THAN_OR_EQUALS .
+    (53) comparison -> OR .
 
-    OPEN_PARENTHESIS reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    NOT             reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    VARIABLE        reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    NUMBER          reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    STRING          reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    BOOLEAN         reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    NULL            reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
-    IDENTIFIER      reduce using rule 53 (comparison -> LESS_THAN_OR_EQUALS .)
+    OPEN_PARENTHESIS reduce using rule 53 (comparison -> OR .)
+    NOT             reduce using rule 53 (comparison -> OR .)
+    VARIABLE        reduce using rule 53 (comparison -> OR .)
+    NUMBER          reduce using rule 53 (comparison -> OR .)
+    STRING          reduce using rule 53 (comparison -> OR .)
+    BOOLEAN         reduce using rule 53 (comparison -> OR .)
+    NULL            reduce using rule 53 (comparison -> OR .)
+    IDENTIFIER      reduce using rule 53 (comparison -> OR .)
 
 
 state 35
@@ -1015,7 +957,7 @@ state 35
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 56
+    expression                     shift and go to state 54
     function_call                  shift and go to state 18
 
 state 36
@@ -1043,7 +985,7 @@ state 36
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 57
+    expression                     shift and go to state 55
     function_call                  shift and go to state 18
 
 state 37
@@ -1071,7 +1013,7 @@ state 37
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 58
+    expression                     shift and go to state 56
     function_call                  shift and go to state 18
 
 state 38
@@ -1099,7 +1041,7 @@ state 38
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 59
+    expression                     shift and go to state 57
     function_call                  shift and go to state 18
 
 state 39
@@ -1127,7 +1069,7 @@ state 39
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 60
+    expression                     shift and go to state 58
     function_call                  shift and go to state 18
 
 state 40
@@ -1155,7 +1097,7 @@ state 40
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 61
+    expression                     shift and go to state 59
     function_call                  shift and go to state 18
 
 state 41
@@ -1183,7 +1125,7 @@ state 41
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 62
+    expression                     shift and go to state 60
     function_call                  shift and go to state 18
 
 state 42
@@ -1209,26 +1151,26 @@ state 43
     (43) condition -> OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS comparison condition
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-    CLOSE_PARENTHESIS shift and go to state 64
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    CLOSE_PARENTHESIS shift and go to state 62
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-    comparison                     shift and go to state 63
+    comparison                     shift and go to state 61
 
 state 44
 
@@ -1242,14 +1184,14 @@ state 44
     (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
     CLOSE_PARENTHESIS reduce using rule 40 (condition -> expression .)
-    AND             reduce using rule 40 (condition -> expression .)
-    OR              reduce using rule 40 (condition -> expression .)
     DOUBLE_EQUALS   reduce using rule 40 (condition -> expression .)
     NOT_EQUALS      reduce using rule 40 (condition -> expression .)
     GREATER_THAN    reduce using rule 40 (condition -> expression .)
     LESS_THAN       reduce using rule 40 (condition -> expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 40 (condition -> expression .)
     LESS_THAN_OR_EQUALS reduce using rule 40 (condition -> expression .)
+    AND             reduce using rule 40 (condition -> expression .)
+    OR              reduce using rule 40 (condition -> expression .)
     $end            reduce using rule 40 (condition -> expression .)
     PLUS            shift and go to state 35
     MINUS           shift and go to state 36
@@ -1272,14 +1214,14 @@ state 45
     CONCATENATION   reduce using rule 24 (expression -> VARIABLE .)
     CONCATENATION_ASSIGNMENT reduce using rule 24 (expression -> VARIABLE .)
     CLOSE_PARENTHESIS reduce using rule 24 (expression -> VARIABLE .)
-    AND             reduce using rule 24 (expression -> VARIABLE .)
-    OR              reduce using rule 24 (expression -> VARIABLE .)
     DOUBLE_EQUALS   reduce using rule 24 (expression -> VARIABLE .)
     NOT_EQUALS      reduce using rule 24 (expression -> VARIABLE .)
     GREATER_THAN    reduce using rule 24 (expression -> VARIABLE .)
     LESS_THAN       reduce using rule 24 (expression -> VARIABLE .)
     GREATER_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
     LESS_THAN_OR_EQUALS reduce using rule 24 (expression -> VARIABLE .)
+    AND             reduce using rule 24 (expression -> VARIABLE .)
+    OR              reduce using rule 24 (expression -> VARIABLE .)
     $end            reduce using rule 24 (expression -> VARIABLE .)
     SEMICOLON       reduce using rule 24 (expression -> VARIABLE .)
     COMMA           reduce using rule 24 (expression -> VARIABLE .)
@@ -1290,42 +1232,42 @@ state 46
     (45) condition -> NOT condition .
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
   ! shift/reduce conflict for GREATER_THAN resolved as shift
   ! shift/reduce conflict for LESS_THAN resolved as shift
   ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
   ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
     $end            reduce using rule 45 (condition -> NOT condition .)
     CLOSE_PARENTHESIS reduce using rule 45 (condition -> NOT condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-  ! AND             [ reduce using rule 45 (condition -> NOT condition .) ]
-  ! OR              [ reduce using rule 45 (condition -> NOT condition .) ]
   ! DOUBLE_EQUALS   [ reduce using rule 45 (condition -> NOT condition .) ]
   ! NOT_EQUALS      [ reduce using rule 45 (condition -> NOT condition .) ]
   ! GREATER_THAN    [ reduce using rule 45 (condition -> NOT condition .) ]
   ! LESS_THAN       [ reduce using rule 45 (condition -> NOT condition .) ]
   ! GREATER_THAN_OR_EQUALS [ reduce using rule 45 (condition -> NOT condition .) ]
   ! LESS_THAN_OR_EQUALS [ reduce using rule 45 (condition -> NOT condition .) ]
+  ! AND             [ reduce using rule 45 (condition -> NOT condition .) ]
+  ! OR              [ reduce using rule 45 (condition -> NOT condition .) ]
 
     comparison                     shift and go to state 26
 
@@ -1354,21 +1296,21 @@ state 47
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    expression                     shift and go to state 65
+    expression                     shift and go to state 63
     function_call                  shift and go to state 18
 
 state 48
 
     (12) function_declaration -> FUNCTION IDENTIFIER . OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
 
-    OPEN_PARENTHESIS shift and go to state 66
+    OPEN_PARENTHESIS shift and go to state 64
 
 
 state 49
 
     (37) function_call -> IDENTIFIER OPEN_PARENTHESIS . CLOSE_PARENTHESIS
 
-    CLOSE_PARENTHESIS shift and go to state 67
+    CLOSE_PARENTHESIS shift and go to state 65
 
 
 state 50
@@ -1380,8 +1322,6 @@ state 50
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -1406,7 +1346,7 @@ state 50
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    condition                      shift and go to state 68
+    condition                      shift and go to state 66
     expression                     shift and go to state 44
     function_call                  shift and go to state 18
 
@@ -1442,10 +1382,10 @@ state 51
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    value_parameter_list           shift and go to state 69
-    value_parameter                shift and go to state 70
-    empty                          shift and go to state 71
-    expression                     shift and go to state 72
+    value_parameter_list           shift and go to state 67
+    value_parameter                shift and go to state 68
+    empty                          shift and go to state 69
+    expression                     shift and go to state 70
     function_call                  shift and go to state 18
 
 state 52
@@ -1453,42 +1393,42 @@ state 52
     (41) condition -> condition comparison condition .
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
   ! shift/reduce conflict for GREATER_THAN resolved as shift
   ! shift/reduce conflict for LESS_THAN resolved as shift
   ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
   ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
     $end            reduce using rule 41 (condition -> condition comparison condition .)
     CLOSE_PARENTHESIS reduce using rule 41 (condition -> condition comparison condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-  ! AND             [ reduce using rule 41 (condition -> condition comparison condition .) ]
-  ! OR              [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! DOUBLE_EQUALS   [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! NOT_EQUALS      [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! GREATER_THAN    [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! LESS_THAN       [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! GREATER_THAN_OR_EQUALS [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! LESS_THAN_OR_EQUALS [ reduce using rule 41 (condition -> condition comparison condition .) ]
+  ! AND             [ reduce using rule 41 (condition -> condition comparison condition .) ]
+  ! OR              [ reduce using rule 41 (condition -> condition comparison condition .) ]
 
     comparison                     shift and go to state 26
 
@@ -1503,8 +1443,6 @@ state 53
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -1529,99 +1467,11 @@ state 53
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    condition                      shift and go to state 73
+    condition                      shift and go to state 71
     expression                     shift and go to state 44
     function_call                  shift and go to state 18
 
 state 54
-
-    (46) condition -> condition AND condition .
-    (41) condition -> condition . comparison condition
-    (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
-
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
-  ! shift/reduce conflict for NOT_EQUALS resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
-  ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
-    $end            reduce using rule 46 (condition -> condition AND condition .)
-    CLOSE_PARENTHESIS reduce using rule 46 (condition -> condition AND condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
-
-  ! AND             [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! OR              [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! DOUBLE_EQUALS   [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! NOT_EQUALS      [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! GREATER_THAN    [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! LESS_THAN       [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! GREATER_THAN_OR_EQUALS [ reduce using rule 46 (condition -> condition AND condition .) ]
-  ! LESS_THAN_OR_EQUALS [ reduce using rule 46 (condition -> condition AND condition .) ]
-
-    comparison                     shift and go to state 26
-
-state 55
-
-    (47) condition -> condition OR condition .
-    (41) condition -> condition . comparison condition
-    (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
-
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
-  ! shift/reduce conflict for NOT_EQUALS resolved as shift
-  ! shift/reduce conflict for GREATER_THAN resolved as shift
-  ! shift/reduce conflict for LESS_THAN resolved as shift
-  ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
-  ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
-    $end            reduce using rule 47 (condition -> condition OR condition .)
-    CLOSE_PARENTHESIS reduce using rule 47 (condition -> condition OR condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
-
-  ! AND             [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! OR              [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! DOUBLE_EQUALS   [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! NOT_EQUALS      [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! GREATER_THAN    [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! LESS_THAN       [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! GREATER_THAN_OR_EQUALS [ reduce using rule 47 (condition -> condition OR condition .) ]
-  ! LESS_THAN_OR_EQUALS [ reduce using rule 47 (condition -> condition OR condition .) ]
-
-    comparison                     shift and go to state 26
-
-state 56
 
     (30) expression -> expression PLUS expression .
     (30) expression -> expression . PLUS expression
@@ -1637,14 +1487,14 @@ state 56
     CONCATENATION   reduce using rule 30 (expression -> expression PLUS expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 30 (expression -> expression PLUS expression .)
     SEMICOLON       reduce using rule 30 (expression -> expression PLUS expression .)
-    AND             reduce using rule 30 (expression -> expression PLUS expression .)
-    OR              reduce using rule 30 (expression -> expression PLUS expression .)
     DOUBLE_EQUALS   reduce using rule 30 (expression -> expression PLUS expression .)
     NOT_EQUALS      reduce using rule 30 (expression -> expression PLUS expression .)
     GREATER_THAN    reduce using rule 30 (expression -> expression PLUS expression .)
     LESS_THAN       reduce using rule 30 (expression -> expression PLUS expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 30 (expression -> expression PLUS expression .)
     LESS_THAN_OR_EQUALS reduce using rule 30 (expression -> expression PLUS expression .)
+    AND             reduce using rule 30 (expression -> expression PLUS expression .)
+    OR              reduce using rule 30 (expression -> expression PLUS expression .)
     $end            reduce using rule 30 (expression -> expression PLUS expression .)
     CLOSE_PARENTHESIS reduce using rule 30 (expression -> expression PLUS expression .)
     COMMA           reduce using rule 30 (expression -> expression PLUS expression .)
@@ -1661,7 +1511,7 @@ state 56
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 57
+state 55
 
     (31) expression -> expression MINUS expression .
     (30) expression -> expression . PLUS expression
@@ -1677,14 +1527,14 @@ state 57
     CONCATENATION   reduce using rule 31 (expression -> expression MINUS expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 31 (expression -> expression MINUS expression .)
     SEMICOLON       reduce using rule 31 (expression -> expression MINUS expression .)
-    AND             reduce using rule 31 (expression -> expression MINUS expression .)
-    OR              reduce using rule 31 (expression -> expression MINUS expression .)
     DOUBLE_EQUALS   reduce using rule 31 (expression -> expression MINUS expression .)
     NOT_EQUALS      reduce using rule 31 (expression -> expression MINUS expression .)
     GREATER_THAN    reduce using rule 31 (expression -> expression MINUS expression .)
     LESS_THAN       reduce using rule 31 (expression -> expression MINUS expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 31 (expression -> expression MINUS expression .)
     LESS_THAN_OR_EQUALS reduce using rule 31 (expression -> expression MINUS expression .)
+    AND             reduce using rule 31 (expression -> expression MINUS expression .)
+    OR              reduce using rule 31 (expression -> expression MINUS expression .)
     $end            reduce using rule 31 (expression -> expression MINUS expression .)
     CLOSE_PARENTHESIS reduce using rule 31 (expression -> expression MINUS expression .)
     COMMA           reduce using rule 31 (expression -> expression MINUS expression .)
@@ -1701,7 +1551,7 @@ state 57
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 58
+state 56
 
     (32) expression -> expression MULTIPLY expression .
     (30) expression -> expression . PLUS expression
@@ -1720,14 +1570,14 @@ state 58
     CONCATENATION   reduce using rule 32 (expression -> expression MULTIPLY expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 32 (expression -> expression MULTIPLY expression .)
     SEMICOLON       reduce using rule 32 (expression -> expression MULTIPLY expression .)
-    AND             reduce using rule 32 (expression -> expression MULTIPLY expression .)
-    OR              reduce using rule 32 (expression -> expression MULTIPLY expression .)
     DOUBLE_EQUALS   reduce using rule 32 (expression -> expression MULTIPLY expression .)
     NOT_EQUALS      reduce using rule 32 (expression -> expression MULTIPLY expression .)
     GREATER_THAN    reduce using rule 32 (expression -> expression MULTIPLY expression .)
     LESS_THAN       reduce using rule 32 (expression -> expression MULTIPLY expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 32 (expression -> expression MULTIPLY expression .)
     LESS_THAN_OR_EQUALS reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    AND             reduce using rule 32 (expression -> expression MULTIPLY expression .)
+    OR              reduce using rule 32 (expression -> expression MULTIPLY expression .)
     $end            reduce using rule 32 (expression -> expression MULTIPLY expression .)
     CLOSE_PARENTHESIS reduce using rule 32 (expression -> expression MULTIPLY expression .)
     COMMA           reduce using rule 32 (expression -> expression MULTIPLY expression .)
@@ -1741,7 +1591,7 @@ state 58
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 59
+state 57
 
     (33) expression -> expression DIVIDE expression .
     (30) expression -> expression . PLUS expression
@@ -1760,14 +1610,14 @@ state 59
     CONCATENATION   reduce using rule 33 (expression -> expression DIVIDE expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 33 (expression -> expression DIVIDE expression .)
     SEMICOLON       reduce using rule 33 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 33 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 33 (expression -> expression DIVIDE expression .)
     DOUBLE_EQUALS   reduce using rule 33 (expression -> expression DIVIDE expression .)
     NOT_EQUALS      reduce using rule 33 (expression -> expression DIVIDE expression .)
     GREATER_THAN    reduce using rule 33 (expression -> expression DIVIDE expression .)
     LESS_THAN       reduce using rule 33 (expression -> expression DIVIDE expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 33 (expression -> expression DIVIDE expression .)
     LESS_THAN_OR_EQUALS reduce using rule 33 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 33 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 33 (expression -> expression DIVIDE expression .)
     $end            reduce using rule 33 (expression -> expression DIVIDE expression .)
     CLOSE_PARENTHESIS reduce using rule 33 (expression -> expression DIVIDE expression .)
     COMMA           reduce using rule 33 (expression -> expression DIVIDE expression .)
@@ -1781,7 +1631,7 @@ state 59
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 60
+state 58
 
     (34) expression -> expression MODULO expression .
     (30) expression -> expression . PLUS expression
@@ -1800,14 +1650,14 @@ state 60
     CONCATENATION   reduce using rule 34 (expression -> expression MODULO expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 34 (expression -> expression MODULO expression .)
     SEMICOLON       reduce using rule 34 (expression -> expression MODULO expression .)
-    AND             reduce using rule 34 (expression -> expression MODULO expression .)
-    OR              reduce using rule 34 (expression -> expression MODULO expression .)
     DOUBLE_EQUALS   reduce using rule 34 (expression -> expression MODULO expression .)
     NOT_EQUALS      reduce using rule 34 (expression -> expression MODULO expression .)
     GREATER_THAN    reduce using rule 34 (expression -> expression MODULO expression .)
     LESS_THAN       reduce using rule 34 (expression -> expression MODULO expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 34 (expression -> expression MODULO expression .)
     LESS_THAN_OR_EQUALS reduce using rule 34 (expression -> expression MODULO expression .)
+    AND             reduce using rule 34 (expression -> expression MODULO expression .)
+    OR              reduce using rule 34 (expression -> expression MODULO expression .)
     $end            reduce using rule 34 (expression -> expression MODULO expression .)
     CLOSE_PARENTHESIS reduce using rule 34 (expression -> expression MODULO expression .)
     COMMA           reduce using rule 34 (expression -> expression MODULO expression .)
@@ -1821,7 +1671,7 @@ state 60
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 61
+state 59
 
     (35) expression -> expression CONCATENATION expression .
     (30) expression -> expression . PLUS expression
@@ -1835,14 +1685,14 @@ state 61
     CONCATENATION   reduce using rule 35 (expression -> expression CONCATENATION expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 35 (expression -> expression CONCATENATION expression .)
     SEMICOLON       reduce using rule 35 (expression -> expression CONCATENATION expression .)
-    AND             reduce using rule 35 (expression -> expression CONCATENATION expression .)
-    OR              reduce using rule 35 (expression -> expression CONCATENATION expression .)
     DOUBLE_EQUALS   reduce using rule 35 (expression -> expression CONCATENATION expression .)
     NOT_EQUALS      reduce using rule 35 (expression -> expression CONCATENATION expression .)
     GREATER_THAN    reduce using rule 35 (expression -> expression CONCATENATION expression .)
     LESS_THAN       reduce using rule 35 (expression -> expression CONCATENATION expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 35 (expression -> expression CONCATENATION expression .)
     LESS_THAN_OR_EQUALS reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    AND             reduce using rule 35 (expression -> expression CONCATENATION expression .)
+    OR              reduce using rule 35 (expression -> expression CONCATENATION expression .)
     $end            reduce using rule 35 (expression -> expression CONCATENATION expression .)
     CLOSE_PARENTHESIS reduce using rule 35 (expression -> expression CONCATENATION expression .)
     COMMA           reduce using rule 35 (expression -> expression CONCATENATION expression .)
@@ -1861,7 +1711,7 @@ state 61
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 62
+state 60
 
     (36) expression -> expression CONCATENATION_ASSIGNMENT expression .
     (30) expression -> expression . PLUS expression
@@ -1875,14 +1725,14 @@ state 62
     CONCATENATION   reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     CONCATENATION_ASSIGNMENT reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     SEMICOLON       reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    AND             reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
-    OR              reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     DOUBLE_EQUALS   reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     NOT_EQUALS      reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     GREATER_THAN    reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     LESS_THAN       reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     GREATER_THAN_OR_EQUALS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     LESS_THAN_OR_EQUALS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    AND             reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
+    OR              reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     $end            reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     CLOSE_PARENTHESIS reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
     COMMA           reduce using rule 36 (expression -> expression CONCATENATION_ASSIGNMENT expression .)
@@ -1901,7 +1751,7 @@ state 62
   ! CONCATENATION_ASSIGNMENT [ shift and go to state 41 ]
 
 
-state 63
+state 61
 
     (42) condition -> OPEN_PARENTHESIS condition comparison . condition CLOSE_PARENTHESIS
     (41) condition -> condition comparison . condition
@@ -1912,8 +1762,6 @@ state 63
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -1938,30 +1786,34 @@ state 63
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    condition                      shift and go to state 74
+    condition                      shift and go to state 72
     expression                     shift and go to state 44
     function_call                  shift and go to state 18
 
-state 64
+state 62
 
     (43) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . comparison condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-    comparison                     shift and go to state 75
+    comparison                     shift and go to state 73
 
-state 65
+state 63
 
     (10) assignment -> VARIABLE EQUALS expression . SEMICOLON
     (30) expression -> expression . PLUS expression
@@ -1972,7 +1824,7 @@ state 65
     (35) expression -> expression . CONCATENATION expression
     (36) expression -> expression . CONCATENATION_ASSIGNMENT expression
 
-    SEMICOLON       shift and go to state 76
+    SEMICOLON       shift and go to state 74
     PLUS            shift and go to state 35
     MINUS           shift and go to state 36
     MULTIPLY        shift and go to state 37
@@ -1982,7 +1834,7 @@ state 65
     CONCATENATION_ASSIGNMENT shift and go to state 41
 
 
-state 66
+state 64
 
     (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS . parameter_list CLOSE_PARENTHESIS body_statement_list
     (15) parameter_list -> . parameter
@@ -1991,15 +1843,15 @@ state 66
     (18) parameter -> . VARIABLE
     (23) empty -> .
 
-    VARIABLE        shift and go to state 80
+    VARIABLE        shift and go to state 78
     CLOSE_PARENTHESIS reduce using rule 23 (empty -> .)
     COMMA           reduce using rule 23 (empty -> .)
 
-    parameter_list                 shift and go to state 77
-    parameter                      shift and go to state 78
-    empty                          shift and go to state 79
+    parameter_list                 shift and go to state 75
+    parameter                      shift and go to state 76
+    empty                          shift and go to state 77
 
-state 67
+state 65
 
     (37) function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .
 
@@ -2011,55 +1863,55 @@ state 67
     CONCATENATION   reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     CONCATENATION_ASSIGNMENT reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     SEMICOLON       reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    AND             reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
-    OR              reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     DOUBLE_EQUALS   reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     NOT_EQUALS      reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     GREATER_THAN    reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     LESS_THAN       reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     GREATER_THAN_OR_EQUALS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     LESS_THAN_OR_EQUALS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    AND             reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
+    OR              reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     $end            reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     CLOSE_PARENTHESIS reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
     COMMA           reduce using rule 37 (function_call -> IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS .)
 
 
-state 68
+state 66
 
     (38) if_statement -> IF OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-    CLOSE_PARENTHESIS shift and go to state 81
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    CLOSE_PARENTHESIS shift and go to state 79
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
     comparison                     shift and go to state 26
 
-state 69
+state 67
 
     (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list . CLOSE_PARENTHESIS SEMICOLON
     (20) value_parameter_list -> value_parameter_list . COMMA value_parameter
 
-    CLOSE_PARENTHESIS shift and go to state 82
-    COMMA           shift and go to state 83
+    CLOSE_PARENTHESIS shift and go to state 80
+    COMMA           shift and go to state 81
 
 
-state 70
+state 68
 
     (19) value_parameter_list -> value_parameter .
 
@@ -2067,7 +1919,7 @@ state 70
     COMMA           reduce using rule 19 (value_parameter_list -> value_parameter .)
 
 
-state 71
+state 69
 
     (21) value_parameter_list -> empty .
 
@@ -2075,7 +1927,7 @@ state 71
     COMMA           reduce using rule 21 (value_parameter_list -> empty .)
 
 
-state 72
+state 70
 
     (22) value_parameter -> expression .
     (30) expression -> expression . PLUS expression
@@ -2097,81 +1949,81 @@ state 72
     CONCATENATION_ASSIGNMENT shift and go to state 41
 
 
-state 73
+state 71
 
     (44) condition -> condition comparison OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS
     (42) condition -> OPEN_PARENTHESIS condition . comparison condition CLOSE_PARENTHESIS
     (43) condition -> OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS comparison condition
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-    CLOSE_PARENTHESIS shift and go to state 84
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    CLOSE_PARENTHESIS shift and go to state 82
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-    comparison                     shift and go to state 63
+    comparison                     shift and go to state 61
 
-state 74
+state 72
 
     (42) condition -> OPEN_PARENTHESIS condition comparison condition . CLOSE_PARENTHESIS
     (41) condition -> condition comparison condition .
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
   ! shift/reduce conflict for CLOSE_PARENTHESIS resolved as shift
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
   ! shift/reduce conflict for GREATER_THAN resolved as shift
   ! shift/reduce conflict for LESS_THAN resolved as shift
   ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
   ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
-    CLOSE_PARENTHESIS shift and go to state 85
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    CLOSE_PARENTHESIS shift and go to state 83
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
   ! CLOSE_PARENTHESIS [ reduce using rule 41 (condition -> condition comparison condition .) ]
-  ! AND             [ reduce using rule 41 (condition -> condition comparison condition .) ]
-  ! OR              [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! DOUBLE_EQUALS   [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! NOT_EQUALS      [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! GREATER_THAN    [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! LESS_THAN       [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! GREATER_THAN_OR_EQUALS [ reduce using rule 41 (condition -> condition comparison condition .) ]
   ! LESS_THAN_OR_EQUALS [ reduce using rule 41 (condition -> condition comparison condition .) ]
+  ! AND             [ reduce using rule 41 (condition -> condition comparison condition .) ]
+  ! OR              [ reduce using rule 41 (condition -> condition comparison condition .) ]
 
     comparison                     shift and go to state 26
 
-state 75
+state 73
 
     (43) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison . condition
     (40) condition -> . expression
@@ -2180,8 +2032,6 @@ state 75
     (43) condition -> . OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
     (44) condition -> . condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (45) condition -> . NOT condition
-    (46) condition -> . condition AND condition
-    (47) condition -> . condition OR condition
     (24) expression -> . VARIABLE
     (25) expression -> . NUMBER
     (26) expression -> . STRING
@@ -2206,11 +2056,11 @@ state 75
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    condition                      shift and go to state 86
+    condition                      shift and go to state 84
     expression                     shift and go to state 44
     function_call                  shift and go to state 18
 
-state 76
+state 74
 
     (10) assignment -> VARIABLE EQUALS expression SEMICOLON .
 
@@ -2227,16 +2077,16 @@ state 76
     CLOSE_CURLY_BRACKET reduce using rule 10 (assignment -> VARIABLE EQUALS expression SEMICOLON .)
 
 
-state 77
+state 75
 
     (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS body_statement_list
     (16) parameter_list -> parameter_list . COMMA parameter
 
-    CLOSE_PARENTHESIS shift and go to state 87
-    COMMA           shift and go to state 88
+    CLOSE_PARENTHESIS shift and go to state 85
+    COMMA           shift and go to state 86
 
 
-state 78
+state 76
 
     (15) parameter_list -> parameter .
 
@@ -2244,7 +2094,7 @@ state 78
     COMMA           reduce using rule 15 (parameter_list -> parameter .)
 
 
-state 79
+state 77
 
     (17) parameter_list -> empty .
 
@@ -2252,7 +2102,7 @@ state 79
     COMMA           reduce using rule 17 (parameter_list -> empty .)
 
 
-state 80
+state 78
 
     (18) parameter -> VARIABLE .
 
@@ -2260,24 +2110,24 @@ state 80
     COMMA           reduce using rule 18 (parameter -> VARIABLE .)
 
 
-state 81
+state 79
 
     (38) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . body_statement_list
     (13) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
     (14) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
 
-    OPEN_CURLY_BRACKET shift and go to state 90
+    OPEN_CURLY_BRACKET shift and go to state 88
 
-    body_statement_list            shift and go to state 89
+    body_statement_list            shift and go to state 87
 
-state 82
+state 80
 
     (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS . SEMICOLON
 
-    SEMICOLON       shift and go to state 91
+    SEMICOLON       shift and go to state 89
 
 
-state 83
+state 81
 
     (20) value_parameter_list -> value_parameter_list COMMA . value_parameter
     (22) value_parameter -> . expression
@@ -2303,20 +2153,22 @@ state 83
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    value_parameter                shift and go to state 92
-    expression                     shift and go to state 72
+    value_parameter                shift and go to state 90
+    expression                     shift and go to state 70
     function_call                  shift and go to state 18
 
-state 84
+state 82
 
     (44) condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .
     (43) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . comparison condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
   ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
@@ -2324,16 +2176,18 @@ state 84
   ! shift/reduce conflict for LESS_THAN resolved as shift
   ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
   ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
-    AND             reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .)
-    OR              reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .)
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
     $end            reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .)
     CLOSE_PARENTHESIS reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .)
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
   ! DOUBLE_EQUALS   [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
   ! NOT_EQUALS      [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
@@ -2341,89 +2195,91 @@ state 84
   ! LESS_THAN       [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
   ! GREATER_THAN_OR_EQUALS [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
   ! LESS_THAN_OR_EQUALS [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
+  ! AND             [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
+  ! OR              [ reduce using rule 44 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
 
-    comparison                     shift and go to state 75
+    comparison                     shift and go to state 73
 
-state 85
+state 83
 
     (42) condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .
 
-    AND             reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
-    OR              reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     DOUBLE_EQUALS   reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     NOT_EQUALS      reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     GREATER_THAN    reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     LESS_THAN       reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     GREATER_THAN_OR_EQUALS reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     LESS_THAN_OR_EQUALS reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
+    AND             reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
+    OR              reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     $end            reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
     CLOSE_PARENTHESIS reduce using rule 42 (condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS .)
 
 
-state 86
+state 84
 
     (43) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .
     (41) condition -> condition . comparison condition
     (44) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (46) condition -> condition . AND condition
-    (47) condition -> condition . OR condition
-    (48) comparison -> . DOUBLE_EQUALS
-    (49) comparison -> . NOT_EQUALS
-    (50) comparison -> . GREATER_THAN
-    (51) comparison -> . LESS_THAN
-    (52) comparison -> . GREATER_THAN_OR_EQUALS
-    (53) comparison -> . LESS_THAN_OR_EQUALS
+    (46) comparison -> . DOUBLE_EQUALS
+    (47) comparison -> . NOT_EQUALS
+    (48) comparison -> . GREATER_THAN
+    (49) comparison -> . LESS_THAN
+    (50) comparison -> . GREATER_THAN_OR_EQUALS
+    (51) comparison -> . LESS_THAN_OR_EQUALS
+    (52) comparison -> . AND
+    (53) comparison -> . OR
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for DOUBLE_EQUALS resolved as shift
   ! shift/reduce conflict for NOT_EQUALS resolved as shift
   ! shift/reduce conflict for GREATER_THAN resolved as shift
   ! shift/reduce conflict for LESS_THAN resolved as shift
   ! shift/reduce conflict for GREATER_THAN_OR_EQUALS resolved as shift
   ! shift/reduce conflict for LESS_THAN_OR_EQUALS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
     $end            reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .)
     CLOSE_PARENTHESIS reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .)
-    AND             shift and go to state 27
-    OR              shift and go to state 28
-    DOUBLE_EQUALS   shift and go to state 29
-    NOT_EQUALS      shift and go to state 30
-    GREATER_THAN    shift and go to state 31
-    LESS_THAN       shift and go to state 32
-    GREATER_THAN_OR_EQUALS shift and go to state 33
-    LESS_THAN_OR_EQUALS shift and go to state 34
+    DOUBLE_EQUALS   shift and go to state 27
+    NOT_EQUALS      shift and go to state 28
+    GREATER_THAN    shift and go to state 29
+    LESS_THAN       shift and go to state 30
+    GREATER_THAN_OR_EQUALS shift and go to state 31
+    LESS_THAN_OR_EQUALS shift and go to state 32
+    AND             shift and go to state 33
+    OR              shift and go to state 34
 
-  ! AND             [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
-  ! OR              [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! DOUBLE_EQUALS   [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! NOT_EQUALS      [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! GREATER_THAN    [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! LESS_THAN       [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! GREATER_THAN_OR_EQUALS [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
   ! LESS_THAN_OR_EQUALS [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
+  ! AND             [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
+  ! OR              [ reduce using rule 43 (condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition .) ]
 
     comparison                     shift and go to state 26
 
-state 87
+state 85
 
     (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS . body_statement_list
     (13) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
     (14) body_statement_list -> . OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
 
-    OPEN_CURLY_BRACKET shift and go to state 90
+    OPEN_CURLY_BRACKET shift and go to state 88
 
-    body_statement_list            shift and go to state 93
+    body_statement_list            shift and go to state 91
 
-state 88
+state 86
 
     (16) parameter_list -> parameter_list COMMA . parameter
     (18) parameter -> . VARIABLE
 
-    VARIABLE        shift and go to state 80
+    VARIABLE        shift and go to state 78
 
-    parameter                      shift and go to state 94
+    parameter                      shift and go to state 92
 
-state 89
+state 87
 
     (38) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .
 
@@ -2440,7 +2296,7 @@ state 89
     CLOSE_CURLY_BRACKET reduce using rule 38 (if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list .)
 
 
-state 90
+state 88
 
     (13) body_statement_list -> OPEN_CURLY_BRACKET . statement_list CLOSE_CURLY_BRACKET
     (14) body_statement_list -> OPEN_CURLY_BRACKET . empty CLOSE_CURLY_BRACKET
@@ -2483,8 +2339,8 @@ state 90
     NULL            shift and go to state 17
     IDENTIFIER      shift and go to state 20
 
-    statement_list                 shift and go to state 95
-    empty                          shift and go to state 96
+    statement_list                 shift and go to state 93
+    empty                          shift and go to state 94
     statement                      shift and go to state 4
     expression_statement           shift and go to state 8
     function_declaration           shift and go to state 9
@@ -2494,7 +2350,7 @@ state 90
     expression                     shift and go to state 24
     function_call                  shift and go to state 18
 
-state 91
+state 89
 
     (39) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .
 
@@ -2511,7 +2367,7 @@ state 91
     CLOSE_CURLY_BRACKET reduce using rule 39 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
 
 
-state 92
+state 90
 
     (20) value_parameter_list -> value_parameter_list COMMA value_parameter .
 
@@ -2519,7 +2375,7 @@ state 92
     COMMA           reduce using rule 20 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
 
 
-state 93
+state 91
 
     (12) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .
 
@@ -2536,7 +2392,7 @@ state 93
     CLOSE_CURLY_BRACKET reduce using rule 12 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
 
 
-state 94
+state 92
 
     (16) parameter_list -> parameter_list COMMA parameter .
 
@@ -2544,7 +2400,7 @@ state 94
     COMMA           reduce using rule 16 (parameter_list -> parameter_list COMMA parameter .)
 
 
-state 95
+state 93
 
     (13) body_statement_list -> OPEN_CURLY_BRACKET statement_list . CLOSE_CURLY_BRACKET
     (4) statement_list -> statement_list . statement
@@ -2573,7 +2429,7 @@ state 95
     (36) expression -> . expression CONCATENATION_ASSIGNMENT expression
     (37) function_call -> . IDENTIFIER OPEN_PARENTHESIS CLOSE_PARENTHESIS
 
-    CLOSE_CURLY_BRACKET shift and go to state 97
+    CLOSE_CURLY_BRACKET shift and go to state 95
     FUNCTION        shift and go to state 19
     VARIABLE        shift and go to state 25
     IF              shift and go to state 21
@@ -2593,14 +2449,14 @@ state 95
     expression                     shift and go to state 24
     function_call                  shift and go to state 18
 
-state 96
+state 94
 
     (14) body_statement_list -> OPEN_CURLY_BRACKET empty . CLOSE_CURLY_BRACKET
 
-    CLOSE_CURLY_BRACKET shift and go to state 98
+    CLOSE_CURLY_BRACKET shift and go to state 96
 
 
-state 97
+state 95
 
     (13) body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .
 
@@ -2617,7 +2473,7 @@ state 97
     CLOSE_CURLY_BRACKET reduce using rule 13 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
 
 
-state 98
+state 96
 
     (14) body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .
 
@@ -2636,58 +2492,44 @@ state 98
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for AND in state 46 resolved as shift
-WARNING: shift/reduce conflict for OR in state 46 resolved as shift
 WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 46 resolved as shift
 WARNING: shift/reduce conflict for NOT_EQUALS in state 46 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN in state 46 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN in state 46 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 46 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 46 resolved as shift
-WARNING: shift/reduce conflict for AND in state 52 resolved as shift
-WARNING: shift/reduce conflict for OR in state 52 resolved as shift
+WARNING: shift/reduce conflict for AND in state 46 resolved as shift
+WARNING: shift/reduce conflict for OR in state 46 resolved as shift
 WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 52 resolved as shift
 WARNING: shift/reduce conflict for NOT_EQUALS in state 52 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN in state 52 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN in state 52 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 52 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 52 resolved as shift
-WARNING: shift/reduce conflict for AND in state 54 resolved as shift
-WARNING: shift/reduce conflict for OR in state 54 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 54 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 54 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 54 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 54 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 54 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 54 resolved as shift
-WARNING: shift/reduce conflict for AND in state 55 resolved as shift
-WARNING: shift/reduce conflict for OR in state 55 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 55 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 55 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 55 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 55 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 55 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 55 resolved as shift
-WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 74 resolved as shift
-WARNING: shift/reduce conflict for AND in state 74 resolved as shift
-WARNING: shift/reduce conflict for OR in state 74 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 74 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 74 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 74 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 74 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 74 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 74 resolved as shift
+WARNING: shift/reduce conflict for AND in state 52 resolved as shift
+WARNING: shift/reduce conflict for OR in state 52 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 72 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 72 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUALS in state 72 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 72 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 72 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 72 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 72 resolved as shift
+WARNING: shift/reduce conflict for AND in state 72 resolved as shift
+WARNING: shift/reduce conflict for OR in state 72 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 82 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUALS in state 82 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 82 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 82 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 82 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 82 resolved as shift
+WARNING: shift/reduce conflict for AND in state 82 resolved as shift
+WARNING: shift/reduce conflict for OR in state 82 resolved as shift
 WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 84 resolved as shift
 WARNING: shift/reduce conflict for NOT_EQUALS in state 84 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN in state 84 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN in state 84 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 84 resolved as shift
 WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 84 resolved as shift
-WARNING: shift/reduce conflict for AND in state 86 resolved as shift
-WARNING: shift/reduce conflict for OR in state 86 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 86 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 86 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 86 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 86 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 86 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 86 resolved as shift
+WARNING: shift/reduce conflict for AND in state 84 resolved as shift
+WARNING: shift/reduce conflict for OR in state 84 resolved as shift
