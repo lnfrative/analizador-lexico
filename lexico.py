@@ -14,6 +14,8 @@ from logger import logger
 palabras_reservadas = {
     'abstract': 'ABSTRACT',
     'and': 'AND',
+    'or': 'OR',
+    'not': 'NOT',
     'array': 'ARRAY',
     'as': 'AS',
     'break': 'BREAK',

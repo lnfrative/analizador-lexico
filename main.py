@@ -115,12 +115,32 @@ def p_function_call(p):
 
 def p_if_statement(p):
     '''
-    if_statement : IF OPEN_PARENTHESIS expression CLOSE_PARENTHESIS body_statement_list
+    if_statement : IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     '''
     if len(p) == 6:
         p[0] = ('if', p[2], p[4], None)  # if sin else
     else:
         p[0] = ('if', p[2], p[4], p[6])  # if con else
+
+def p_condition(p):
+    '''
+    condition : expression
+              | expression comparison expression
+              | NOT condition
+              | condition AND condition
+              | condition OR condition
+    '''
+
+def p_comparison(p):
+    '''
+    comparison : DOUBLE_EQUALS
+               | NOT_EQUALS
+               | GREATER_THAN
+               | LESS_THAN
+               | GREATER_THAN_OR_EQUALS
+               | LESS_THAN_OR_EQUALS
+    '''
+    p[0] = p[1]  # El valor de la comparación es simplemente el token
 
 # Manejo de errores sintácticos
 def p_error(p):
