@@ -13,6 +13,7 @@ precedence = (
 def p_program(p):
     '''
     program : statement_list
+            | condition
     '''
 
 def p_statement_list(p):
@@ -28,7 +29,6 @@ def p_statement(p):
               | assignment
               | if_statement
               | impresion
-              | condition
     '''
 
 def p_assignment(p):
@@ -117,7 +117,10 @@ def p_impresion(p):
 def p_condition(p):
     '''
     condition : expression
-              | expression comparison expression
+              | condition comparison condition
+              | OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS
+              | OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison condition
+              | condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
               | NOT condition
               | condition AND condition
               | condition OR condition
