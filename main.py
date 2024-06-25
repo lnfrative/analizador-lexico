@@ -36,6 +36,7 @@ def p_assignment(p):
     '''
     assignment : VARIABLE EQUALS expression SEMICOLON
               | VARIABLE EQUALS math_expression SEMICOLON
+              | VARIABLE EQUALS array_structure SEMICOLON
     '''
 
 def p_expression_statement(p):
@@ -153,6 +154,18 @@ def p_math_expression(p):
                     | OPEN_PARENTHESIS math_expression math_operator math_expression CLOSE_PARENTHESIS
                     | OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
                     | math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
+    '''
+
+def p_array_structure(p):
+    '''
+    array_structure : OPEN_SQUARE_BRACKET key_declaration CLOSE_SQUARE_BRACKET SEMICOLON
+    '''
+
+def p_key_declaration(p):
+    '''
+    key_declaration : expression EQUALS GREATER_THAN expression
+                    | key_declaration COMMA key_declaration
+                    | empty
     '''
 
 # Manejo de errores sintácticos
