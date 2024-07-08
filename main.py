@@ -13,6 +13,10 @@ Soporte actual para:
 - Operaciones matematicas, ej: 5 / 6 + (4 * 12) / 4
 """
 
+"""
+Observaciones: - Todavía no reconoce operaciones con números y variables: $a = $a+5; - No reconoce comparaciones como estas: 40>30, tampoco $var>1, tampoco con AND, OR - No está reconociendo bien el token float, ejemplo: $var = 4.5; (aparece un error de concatenación por el punto del flotante). Deben corregir eso. - Su estructura de datos, no permite tener como valor un entero. Ejm: $arr = [ 'id' => 20];
+"""
+
 import ply.yacc as yacc
 import datetime
 from lexico import tokens, lexer
@@ -169,6 +173,8 @@ def p_math_expression(p):
     '''
     math_expression : NUMBER
                     | math_expression math_operator math_expression
+                    | math_expression math_operator VARIABLE
+                    | VARIABLE math_operator math_expression 
                     | OPEN_PARENTHESIS math_expression math_operator math_expression CLOSE_PARENTHESIS
                     | OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
                     | math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
@@ -211,4 +217,4 @@ with open(nombre_archivo, "w") as archivo_salida:
         result = parser.parse(s)
         print(result) 
 
-        archivo_salida.write(str(result) + "\n") 
+        archivo_salida.write(str(result) + "\n")
