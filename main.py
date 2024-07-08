@@ -5,6 +5,22 @@ Avance 3 - Analizador semántico
 Integrantes:
 - José Baidal (Paralelo 1)
 - Christopher Díaz (Paralelo 2)
+
+Correcciones:
+1. Reconocimiento de operaciones con números y variables:
+   - Ejemplo: $a = $a + 5;
+
+2. Reconocimiento de comparaciones:
+   - Ejemplos: 40 > 30, $var > 1
+
+3. Reconocimiento del token float:
+   - Ejemplo: $var = 4.5;
+
+4. Estructura de datos que permita valores enteros:
+   - Ejemplo: $arr = ['id' => 20];
+
+Implementación extra if, for, while
+
 """
 
 import ply.yacc as yacc
@@ -50,6 +66,7 @@ def p_assignment(p):
               | VARIABLE EQUALS math_expression SEMICOLON
               | VARIABLE EQUALS array_structure SEMICOLON
               | VARIABLE EQUALS condition SEMICOLON
+              | VARIABLE PLUS PLUS SEMICOLON
 
     '''
 
