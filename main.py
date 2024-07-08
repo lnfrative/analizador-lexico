@@ -1,20 +1,10 @@
 """
 SOFG1009
-Avance 2 - Analizador semántico
+Avance 3 - Analizador semántico
 
 Integrantes:
 - José Baidal (Paralelo 1)
 - Christopher Díaz (Paralelo 2)
-
-Soporte actual para:
-- Functions, ej: function ade() { echo($add, 'de', ''); }
-- If, ej: if ($a == $b and ($c)) { }
-- Estructura array, ej: $arr = [ 'dd' => '2', 'ff' => 'dd' ]; 
-- Operaciones matematicas, ej: 5 / 6 + (4 * 12) / 4
-"""
-
-"""
-Observaciones: No está reconociendo bien el token float, ejemplo: $var = 4.5; (aparece un error de concatenación por el punto del flotante). Deben corregir eso. - Su estructura de datos, no permite tener como valor un entero. Ejm: $arr = [ 'id' => 20];
 """
 
 import ply.yacc as yacc
@@ -218,4 +208,4 @@ with open(nombre_archivo, "w") as archivo_salida:
         result = parser.parse(s)
         print(result) 
 
-        archivo_salida.write(str(result) + "\n")
+        archivo_salida.write(str(result) + "\n") 

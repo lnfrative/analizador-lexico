@@ -13,9 +13,9 @@ from logger import logger
 # Palabras reservadas en PHP - José Baidal
 palabras_reservadas = {
     'abstract': 'ABSTRACT',
-    'and': 'AND',
-    'or': 'OR',
-    'not': 'NOT',
+    'AND': 'AND',
+    'OR': 'OR',
+    'NOT': 'NOT',
     'array': 'ARRAY',
     'as': 'AS',
     'break': 'BREAK',
