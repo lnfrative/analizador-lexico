@@ -39,6 +39,8 @@ def p_statement(p):
               | function_declaration
               | assignment
               | if_statement
+              | while_statement
+              | for_statement
               | impresion
     '''
 
@@ -124,6 +126,28 @@ def p_if_statement(p):
     if_statement : IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     '''
 
+def p_for_statement(p):
+    '''
+    for_statement : FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
+    '''
+
+def p_for_initialization(p):
+    '''
+    for_initialization : assignment
+                       | empty
+    '''
+
+def p_for_update(p):
+    '''
+    for_update : expression
+               | empty
+    '''
+
+def p_while_statement(p):
+    '''
+    while_statement : WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+    '''
+
 def p_impresion(p):
     '''
     impresion : ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
@@ -195,7 +219,7 @@ parser = yacc.yacc()
 nombre_usuario = input("Por favor, introduce tu nombre de usuario: ")
 
 fecha_hora = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-nombre_archivo = f"log/sintáctico-{nombre_usuario}-{fecha_hora}.txt"
+nombre_archivo = f"log/semantico-{nombre_usuario}-{fecha_hora}.txt"
 
 with open(nombre_archivo, "w") as archivo_salida:
     while True:

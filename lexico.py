@@ -21,6 +21,7 @@ palabras_reservadas = {
     'break': 'BREAK',
     'callable': 'CALLABLE',
     'case': 'CASE',
+    'while': 'WHILE',
     'catch': 'CATCH',
     'class': 'CLASS',
     'clone': 'CLONE',
