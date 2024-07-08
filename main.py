@@ -14,7 +14,7 @@ Soporte actual para:
 """
 
 """
-Observaciones: - Todavía no reconoce operaciones con números y variables: $a = $a+5; - No reconoce comparaciones como estas: 40>30, tampoco $var>1, tampoco con AND, OR - No está reconociendo bien el token float, ejemplo: $var = 4.5; (aparece un error de concatenación por el punto del flotante). Deben corregir eso. - Su estructura de datos, no permite tener como valor un entero. Ejm: $arr = [ 'id' => 20];
+Observaciones: No está reconociendo bien el token float, ejemplo: $var = 4.5; (aparece un error de concatenación por el punto del flotante). Deben corregir eso. - Su estructura de datos, no permite tener como valor un entero. Ejm: $arr = [ 'id' => 20];
 """
 
 import ply.yacc as yacc
@@ -110,17 +110,18 @@ def p_empty(p):
 def p_expression(p):
     '''
     expression : VARIABLE
-               | STRING
-               | BOOLEAN
-               | NULL
-               | function_call
-               | expression PLUS expression
-               | expression MINUS expression
-               | expression MULTIPLY expression
-               | expression DIVIDE expression
-               | expression MODULO expression
-               | expression CONCATENATION expression
-               | expression CONCATENATION_ASSIGNMENT expression
+                | NUMBER
+                | STRING
+                | BOOLEAN
+                | NULL
+                | function_call
+                | expression PLUS expression
+                | expression MINUS expression
+                | expression MULTIPLY expression
+                | expression DIVIDE expression
+                | expression MODULO expression
+                | expression CONCATENATION expression
+                | expression CONCATENATION_ASSIGNMENT expression
     '''
 
 def p_function_call(p):
