@@ -53,7 +53,7 @@ def p_statement(p):
     '''
     statement : expression_statement
               | function_declaration
-              | assignment
+              | assignment SEMICOLON
               | if_statement
               | while_statement
               | for_statement
@@ -62,11 +62,11 @@ def p_statement(p):
 
 def p_assignment(p):
     '''
-    assignment : VARIABLE EQUALS expression SEMICOLON
-              | VARIABLE EQUALS math_expression SEMICOLON
-              | VARIABLE EQUALS array_structure SEMICOLON
-              | VARIABLE EQUALS condition SEMICOLON
-              | VARIABLE PLUS PLUS SEMICOLON
+    assignment : VARIABLE EQUALS expression 
+              | VARIABLE EQUALS math_expression 
+              | VARIABLE EQUALS array_structure 
+              | VARIABLE EQUALS condition 
+              | VARIABLE PLUS PLUS 
 
     '''
 
@@ -156,7 +156,7 @@ def p_for_initialization(p):
 
 def p_for_update(p):
     '''
-    for_update : expression
+    for_update : assignment
                | empty
     '''
 
