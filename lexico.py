@@ -88,8 +88,18 @@ tokens = (
     'MULTIPLY',
     'MODULO',
     'COMMENT',
-    'CONCATENATION_ASSIGNMENT',
-    'CONCATENATION'
+    'CONCATENATION',
+    'PLUS_EQUALS',             # +=
+    'MINUS_EQUALS',            # -=
+    'MULTIPLY_EQUALS',         # *=
+    'DIVIDE_EQUALS',           # /=
+    'MODULO_EQUALS',           # %=
+    'CONCATENATION_EQUALS',    # .=
+    'LEFT_SHIFT_EQUALS',       # <<=
+    'RIGHT_SHIFT_EQUALS',      # >>=
+    'AND_EQUALS',              # &=
+    'OR_EQUALS',               # |=
+    'XOR_EQUALS',              # ^=
 ) + tuple(palabras_reservadas.values())
 
 # Expresiones regulares para tokens simples
@@ -116,8 +126,19 @@ t_MINUS = r'-'
 t_MULTIPLY = r'\*'
 t_MODULO = r'%'
 t_ignore_WHITESPACE = r'\s+'
-t_CONCATENATION_ASSIGNMENT = r'\.='
+t_CONCATENATION_EQUALS = r'\.='
 t_CONCATENATION = r'\.'
+
+t_PLUS_EQUALS = r'\+='
+t_MINUS_EQUALS = r'-='
+t_MULTIPLY_EQUALS = r'\*='
+t_DIVIDE_EQUALS = r'/='
+t_MODULO_EQUALS = r'%='
+t_LEFT_SHIFT_EQUALS = r'<<='
+t_RIGHT_SHIFT_EQUALS = r'>>='
+t_AND_EQUALS = r'&='
+t_OR_EQUALS = r'\|='
+t_XOR_EQUALS = r'\^='
 
 # Expresiones regulares para tokens más complejos
 def t_NUMBER(t):
