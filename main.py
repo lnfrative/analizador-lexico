@@ -208,7 +208,7 @@ def p_while_statement(p):
 
 def p_impresion(p):
     '''
-    impresion : ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    impresion : ECHO value_parameter_list SEMICOLON
     '''
 
 def p_condition(p):

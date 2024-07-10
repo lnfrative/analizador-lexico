@@ -118,7 +118,7 @@ Rule 75    for_initialization -> empty
 Rule 76    for_update -> assignment
 Rule 77    for_update -> empty
 Rule 78    while_statement -> WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
-Rule 79    impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+Rule 79    impresion -> ECHO value_parameter_list SEMICOLON
 Rule 80    condition -> expression
 Rule 81    condition -> condition comparison condition
 Rule 82    condition -> OPEN_PARENTHESIS condition comparison condition CLOSE_PARENTHESIS
@@ -168,7 +168,7 @@ CATCH                :
 CLASS                : 
 CLONE                : 
 CLOSE_CURLY_BRACKET  : 44 45 46
-CLOSE_PARENTHESIS    : 21 43 71 72 73 78 79 82 83 84 103 104 105
+CLOSE_PARENTHESIS    : 21 43 71 72 73 78 82 83 84 103 104 105
 CLOSE_SQUARE_BRACKET : 106 110
 CLOSE_TAG            : 1
 COLON                : 
@@ -227,7 +227,7 @@ NULL                 : 62
 NUMBER               : 59 99
 OBJECT_T             : 29
 OPEN_CURLY_BRACKET   : 44 45 46
-OPEN_PARENTHESIS     : 21 43 71 72 73 78 79 82 83 84 103 104 105
+OPEN_PARENTHESIS     : 21 43 71 72 73 78 82 83 84 103 104 105
 OPEN_SQUARE_BRACKET  : 106 110
 OPEN_TAG             : 1
 OPEN_TAG_WITH_ECHO   : 
@@ -363,7 +363,7 @@ state 2
     (72) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (78) while_statement -> . WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (73) for_statement -> . FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
-    (79) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (79) impresion -> . ECHO value_parameter_list SEMICOLON
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -818,7 +818,7 @@ state 15
     (72) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (78) while_statement -> . WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (73) for_statement -> . FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
-    (79) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (79) impresion -> . ECHO value_parameter_list SEMICOLON
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -1124,10 +1124,41 @@ state 30
 
 state 31
 
-    (79) impresion -> ECHO . OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (79) impresion -> ECHO . value_parameter_list SEMICOLON
+    (53) value_parameter_list -> . value_parameter
+    (54) value_parameter_list -> . value_parameter_list COMMA value_parameter
+    (55) value_parameter_list -> . empty
+    (56) value_parameter -> . expression
+    (57) empty -> .
+    (58) expression -> . VARIABLE
+    (59) expression -> . NUMBER
+    (60) expression -> . STRING
+    (61) expression -> . BOOLEAN
+    (62) expression -> . NULL
+    (63) expression -> . function_call
+    (64) expression -> . expression PLUS expression
+    (65) expression -> . expression MINUS expression
+    (66) expression -> . expression MULTIPLY expression
+    (67) expression -> . expression DIVIDE expression
+    (68) expression -> . expression MODULO expression
+    (69) expression -> . expression CONCATENATION expression
+    (70) expression -> . expression CONCATENATION_EQUALS expression
+    (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    OPEN_PARENTHESIS shift and go to state 84
+    SEMICOLON       reduce using rule 57 (empty -> .)
+    COMMA           reduce using rule 57 (empty -> .)
+    VARIABLE        shift and go to state 59
+    NUMBER          shift and go to state 32
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 11
+    NULL            shift and go to state 12
+    IDENTIFIER      shift and go to state 14
 
+    value_parameter_list           shift and go to state 84
+    value_parameter                shift and go to state 85
+    empty                          shift and go to state 86
+    expression                     shift and go to state 87
+    function_call                  shift and go to state 13
 
 state 32
 
@@ -1181,7 +1212,7 @@ state 33
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    OPEN_PARENTHESIS shift and go to state 86
+    OPEN_PARENTHESIS shift and go to state 89
     NOT             shift and go to state 7
     VARIABLE        shift and go to state 59
     NUMBER          shift and go to state 32
@@ -1190,7 +1221,7 @@ state 33
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    condition                      shift and go to state 85
+    condition                      shift and go to state 88
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
@@ -1319,11 +1350,11 @@ state 42
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 88
-    OPEN_PARENTHESIS shift and go to state 89
-    NUMBER          shift and go to state 90
+    VARIABLE        shift and go to state 91
+    OPEN_PARENTHESIS shift and go to state 92
+    NUMBER          shift and go to state 93
 
-    math_expression                shift and go to state 87
+    math_expression                shift and go to state 90
 
 state 43
 
@@ -1395,7 +1426,7 @@ state 48
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 91
+    expression                     shift and go to state 94
     function_call                  shift and go to state 13
 
 state 49
@@ -1423,7 +1454,7 @@ state 49
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 92
+    expression                     shift and go to state 95
     function_call                  shift and go to state 13
 
 state 50
@@ -1451,7 +1482,7 @@ state 50
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 93
+    expression                     shift and go to state 96
     function_call                  shift and go to state 13
 
 state 51
@@ -1479,7 +1510,7 @@ state 51
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 94
+    expression                     shift and go to state 97
     function_call                  shift and go to state 13
 
 state 52
@@ -1507,7 +1538,7 @@ state 52
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 95
+    expression                     shift and go to state 98
     function_call                  shift and go to state 13
 
 state 53
@@ -1535,7 +1566,7 @@ state 53
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 96
+    expression                     shift and go to state 99
     function_call                  shift and go to state 13
 
 state 54
@@ -1563,7 +1594,7 @@ state 54
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 97
+    expression                     shift and go to state 100
     function_call                  shift and go to state 13
 
 state 55
@@ -1581,7 +1612,7 @@ state 55
     (92) comparison -> . AND
     (93) comparison -> . OR
 
-    CLOSE_PARENTHESIS shift and go to state 99
+    CLOSE_PARENTHESIS shift and go to state 102
     DOUBLE_EQUALS   shift and go to state 34
     NOT_EQUALS      shift and go to state 35
     GREATER_THAN    shift and go to state 36
@@ -1591,7 +1622,7 @@ state 55
     AND             shift and go to state 40
     OR              shift and go to state 41
 
-    comparison                     shift and go to state 98
+    comparison                     shift and go to state 101
 
 state 56
 
@@ -1606,14 +1637,14 @@ state 56
     (97) math_operator -> . MULTIPLY
     (98) math_operator -> . MODULO
 
-    CLOSE_PARENTHESIS shift and go to state 101
+    CLOSE_PARENTHESIS shift and go to state 104
     PLUS            shift and go to state 43
     DIVIDE          shift and go to state 44
     MINUS           shift and go to state 45
     MULTIPLY        shift and go to state 46
     MODULO          shift and go to state 47
 
-    math_operator                  shift and go to state 100
+    math_operator                  shift and go to state 103
 
 state 57
 
@@ -1737,11 +1768,11 @@ state 60
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    NUMBER          shift and go to state 90
-    VARIABLE        shift and go to state 102
-    OPEN_PARENTHESIS shift and go to state 104
+    NUMBER          shift and go to state 93
+    VARIABLE        shift and go to state 105
+    OPEN_PARENTHESIS shift and go to state 107
 
-    math_expression                shift and go to state 103
+    math_expression                shift and go to state 106
 
 state 61
 
@@ -1775,7 +1806,7 @@ state 61
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 108
+    VARIABLE        shift and go to state 111
     CLOSE_PARENTHESIS reduce using rule 57 (empty -> .)
     COMMA           reduce using rule 57 (empty -> .)
     NUMBER          shift and go to state 32
@@ -1784,11 +1815,11 @@ state 61
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    parameter_list                 shift and go to state 105
-    parameter                      shift and go to state 106
-    empty                          shift and go to state 107
-    assignment                     shift and go to state 109
-    expression                     shift and go to state 110
+    parameter_list                 shift and go to state 108
+    parameter                      shift and go to state 109
+    empty                          shift and go to state 110
+    assignment                     shift and go to state 112
+    expression                     shift and go to state 113
     function_call                  shift and go to state 13
 
 state 62
@@ -1862,7 +1893,7 @@ state 66
 
     (43) function_declaration -> FUNCTION IDENTIFIER . OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
 
-    OPEN_PARENTHESIS shift and go to state 111
+    OPEN_PARENTHESIS shift and go to state 114
 
 
 state 67
@@ -1885,15 +1916,15 @@ state 67
     (110) list_access -> . VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 112
+    VARIABLE        shift and go to state 115
     NUMBER          shift and go to state 32
     STRING          shift and go to state 10
     BOOLEAN         shift and go to state 11
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 113
-    list_access                    shift and go to state 114
+    expression                     shift and go to state 116
+    list_access                    shift and go to state 117
     function_call                  shift and go to state 13
 
 state 68
@@ -1941,8 +1972,8 @@ state 68
   ! shift/reduce conflict for IDENTIFIER resolved as shift
     NUMBER          shift and go to state 8
     VARIABLE        shift and go to state 9
-    OPEN_PARENTHESIS shift and go to state 119
-    OPEN_SQUARE_BRACKET shift and go to state 120
+    OPEN_PARENTHESIS shift and go to state 122
+    OPEN_SQUARE_BRACKET shift and go to state 123
     NOT             shift and go to state 7
     STRING          shift and go to state 10
     BOOLEAN         shift and go to state 11
@@ -1956,10 +1987,10 @@ state 68
   ! NULL            [ reduce using rule 41 (assignment_operator -> EQUALS .) ]
   ! IDENTIFIER      [ reduce using rule 41 (assignment_operator -> EQUALS .) ]
 
-    math_expression                shift and go to state 115
-    array_structure                shift and go to state 116
-    condition                      shift and go to state 117
-    casting                        shift and go to state 118
+    math_expression                shift and go to state 118
+    array_structure                shift and go to state 119
+    condition                      shift and go to state 120
+    casting                        shift and go to state 121
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
@@ -1967,7 +1998,7 @@ state 69
 
     (18) assignment -> VARIABLE PLUS . PLUS
 
-    PLUS            shift and go to state 121
+    PLUS            shift and go to state 124
 
 
 state 70
@@ -2135,7 +2166,7 @@ state 81
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    condition                      shift and go to state 122
+    condition                      shift and go to state 125
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
@@ -2172,7 +2203,7 @@ state 82
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    condition                      shift and go to state 123
+    condition                      shift and go to state 126
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
@@ -2190,52 +2221,61 @@ state 83
     (20) assignment -> . VARIABLE EQUALS casting math_expression
     (57) empty -> .
 
-    VARIABLE        shift and go to state 127
+    VARIABLE        shift and go to state 130
     SEMICOLON       reduce using rule 57 (empty -> .)
 
-    for_initialization             shift and go to state 124
-    assignment                     shift and go to state 125
-    empty                          shift and go to state 126
+    for_initialization             shift and go to state 127
+    assignment                     shift and go to state 128
+    empty                          shift and go to state 129
 
 state 84
 
-    (79) impresion -> ECHO OPEN_PARENTHESIS . value_parameter_list CLOSE_PARENTHESIS SEMICOLON
-    (53) value_parameter_list -> . value_parameter
-    (54) value_parameter_list -> . value_parameter_list COMMA value_parameter
-    (55) value_parameter_list -> . empty
-    (56) value_parameter -> . expression
-    (57) empty -> .
-    (58) expression -> . VARIABLE
-    (59) expression -> . NUMBER
-    (60) expression -> . STRING
-    (61) expression -> . BOOLEAN
-    (62) expression -> . NULL
-    (63) expression -> . function_call
-    (64) expression -> . expression PLUS expression
-    (65) expression -> . expression MINUS expression
-    (66) expression -> . expression MULTIPLY expression
-    (67) expression -> . expression DIVIDE expression
-    (68) expression -> . expression MODULO expression
-    (69) expression -> . expression CONCATENATION expression
-    (70) expression -> . expression CONCATENATION_EQUALS expression
-    (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
+    (79) impresion -> ECHO value_parameter_list . SEMICOLON
+    (54) value_parameter_list -> value_parameter_list . COMMA value_parameter
 
-    CLOSE_PARENTHESIS reduce using rule 57 (empty -> .)
-    COMMA           reduce using rule 57 (empty -> .)
-    VARIABLE        shift and go to state 59
-    NUMBER          shift and go to state 32
-    STRING          shift and go to state 10
-    BOOLEAN         shift and go to state 11
-    NULL            shift and go to state 12
-    IDENTIFIER      shift and go to state 14
+    SEMICOLON       shift and go to state 131
+    COMMA           shift and go to state 132
 
-    value_parameter_list           shift and go to state 128
-    value_parameter                shift and go to state 129
-    empty                          shift and go to state 130
-    expression                     shift and go to state 131
-    function_call                  shift and go to state 13
 
 state 85
+
+    (53) value_parameter_list -> value_parameter .
+
+    SEMICOLON       reduce using rule 53 (value_parameter_list -> value_parameter .)
+    COMMA           reduce using rule 53 (value_parameter_list -> value_parameter .)
+
+
+state 86
+
+    (55) value_parameter_list -> empty .
+
+    SEMICOLON       reduce using rule 55 (value_parameter_list -> empty .)
+    COMMA           reduce using rule 55 (value_parameter_list -> empty .)
+
+
+state 87
+
+    (56) value_parameter -> expression .
+    (64) expression -> expression . PLUS expression
+    (65) expression -> expression . MINUS expression
+    (66) expression -> expression . MULTIPLY expression
+    (67) expression -> expression . DIVIDE expression
+    (68) expression -> expression . MODULO expression
+    (69) expression -> expression . CONCATENATION expression
+    (70) expression -> expression . CONCATENATION_EQUALS expression
+
+    SEMICOLON       reduce using rule 56 (value_parameter -> expression .)
+    COMMA           reduce using rule 56 (value_parameter -> expression .)
+    PLUS            shift and go to state 48
+    MINUS           shift and go to state 49
+    MULTIPLY        shift and go to state 50
+    DIVIDE          shift and go to state 51
+    MODULO          shift and go to state 52
+    CONCATENATION   shift and go to state 53
+    CONCATENATION_EQUALS shift and go to state 54
+
+
+state 88
 
     (81) condition -> condition comparison condition .
     (81) condition -> condition . comparison condition
@@ -2281,7 +2321,7 @@ state 85
 
     comparison                     shift and go to state 33
 
-state 86
+state 89
 
     (84) condition -> condition comparison OPEN_PARENTHESIS . condition CLOSE_PARENTHESIS
     (82) condition -> OPEN_PARENTHESIS . condition comparison condition CLOSE_PARENTHESIS
@@ -2316,11 +2356,11 @@ state 86
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    condition                      shift and go to state 132
+    condition                      shift and go to state 133
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 87
+state 90
 
     (100) math_expression -> math_expression math_operator math_expression .
     (100) math_expression -> math_expression . math_operator math_expression
@@ -2355,7 +2395,7 @@ state 87
 
     math_operator                  shift and go to state 42
 
-state 88
+state 91
 
     (101) math_expression -> math_expression math_operator VARIABLE .
     (102) math_expression -> VARIABLE . math_operator math_expression
@@ -2388,7 +2428,7 @@ state 88
 
     math_operator                  shift and go to state 60
 
-state 89
+state 92
 
     (105) math_expression -> math_expression math_operator OPEN_PARENTHESIS . math_expression CLOSE_PARENTHESIS
     (103) math_expression -> OPEN_PARENTHESIS . math_expression math_operator math_expression CLOSE_PARENTHESIS
@@ -2401,13 +2441,13 @@ state 89
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    NUMBER          shift and go to state 90
-    VARIABLE        shift and go to state 102
-    OPEN_PARENTHESIS shift and go to state 104
+    NUMBER          shift and go to state 93
+    VARIABLE        shift and go to state 105
+    OPEN_PARENTHESIS shift and go to state 107
 
-    math_expression                shift and go to state 133
+    math_expression                shift and go to state 134
 
-state 90
+state 93
 
     (99) math_expression -> NUMBER .
 
@@ -2422,7 +2462,7 @@ state 90
     COMMA           reduce using rule 99 (math_expression -> NUMBER .)
 
 
-state 91
+state 94
 
     (64) expression -> expression PLUS expression .
     (64) expression -> expression . PLUS expression
@@ -2464,7 +2504,7 @@ state 91
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 92
+state 95
 
     (65) expression -> expression MINUS expression .
     (64) expression -> expression . PLUS expression
@@ -2506,7 +2546,7 @@ state 92
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 93
+state 96
 
     (66) expression -> expression MULTIPLY expression .
     (64) expression -> expression . PLUS expression
@@ -2548,7 +2588,7 @@ state 93
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 94
+state 97
 
     (67) expression -> expression DIVIDE expression .
     (64) expression -> expression . PLUS expression
@@ -2590,7 +2630,7 @@ state 94
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 95
+state 98
 
     (68) expression -> expression MODULO expression .
     (64) expression -> expression . PLUS expression
@@ -2632,7 +2672,7 @@ state 95
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 96
+state 99
 
     (69) expression -> expression CONCATENATION expression .
     (64) expression -> expression . PLUS expression
@@ -2674,7 +2714,7 @@ state 96
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 97
+state 100
 
     (70) expression -> expression CONCATENATION_EQUALS expression .
     (64) expression -> expression . PLUS expression
@@ -2716,7 +2756,7 @@ state 97
   ! CONCATENATION_EQUALS [ shift and go to state 54 ]
 
 
-state 98
+state 101
 
     (82) condition -> OPEN_PARENTHESIS condition comparison . condition CLOSE_PARENTHESIS
     (81) condition -> condition comparison . condition
@@ -2742,7 +2782,7 @@ state 98
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    OPEN_PARENTHESIS shift and go to state 86
+    OPEN_PARENTHESIS shift and go to state 89
     NOT             shift and go to state 7
     VARIABLE        shift and go to state 59
     NUMBER          shift and go to state 32
@@ -2751,11 +2791,11 @@ state 98
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    condition                      shift and go to state 134
+    condition                      shift and go to state 135
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 99
+state 102
 
     (83) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . comparison condition
     (86) comparison -> . DOUBLE_EQUALS
@@ -2776,9 +2816,9 @@ state 99
     AND             shift and go to state 40
     OR              shift and go to state 41
 
-    comparison                     shift and go to state 135
+    comparison                     shift and go to state 136
 
-state 100
+state 103
 
     (103) math_expression -> OPEN_PARENTHESIS math_expression math_operator . math_expression CLOSE_PARENTHESIS
     (100) math_expression -> math_expression math_operator . math_expression
@@ -2792,13 +2832,13 @@ state 100
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 88
-    OPEN_PARENTHESIS shift and go to state 89
-    NUMBER          shift and go to state 90
+    VARIABLE        shift and go to state 91
+    OPEN_PARENTHESIS shift and go to state 92
+    NUMBER          shift and go to state 93
 
-    math_expression                shift and go to state 136
+    math_expression                shift and go to state 137
 
-state 101
+state 104
 
     (104) math_expression -> OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS . math_operator math_expression
     (94) math_operator -> . PLUS
@@ -2813,9 +2853,9 @@ state 101
     MULTIPLY        shift and go to state 46
     MODULO          shift and go to state 47
 
-    math_operator                  shift and go to state 137
+    math_operator                  shift and go to state 138
 
-state 102
+state 105
 
     (102) math_expression -> VARIABLE . math_operator math_expression
     (94) math_operator -> . PLUS
@@ -2832,7 +2872,7 @@ state 102
 
     math_operator                  shift and go to state 60
 
-state 103
+state 106
 
     (102) math_expression -> VARIABLE math_operator math_expression .
     (100) math_expression -> math_expression . math_operator math_expression
@@ -2867,7 +2907,7 @@ state 103
 
     math_operator                  shift and go to state 42
 
-state 104
+state 107
 
     (103) math_expression -> OPEN_PARENTHESIS . math_expression math_operator math_expression CLOSE_PARENTHESIS
     (104) math_expression -> OPEN_PARENTHESIS . math_expression CLOSE_PARENTHESIS math_operator math_expression
@@ -2879,22 +2919,22 @@ state 104
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    NUMBER          shift and go to state 90
-    VARIABLE        shift and go to state 102
-    OPEN_PARENTHESIS shift and go to state 104
+    NUMBER          shift and go to state 93
+    VARIABLE        shift and go to state 105
+    OPEN_PARENTHESIS shift and go to state 107
 
     math_expression                shift and go to state 56
 
-state 105
+state 108
 
     (71) function_call -> IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS
     (48) parameter_list -> parameter_list . COMMA parameter
 
-    CLOSE_PARENTHESIS shift and go to state 138
-    COMMA           shift and go to state 139
+    CLOSE_PARENTHESIS shift and go to state 139
+    COMMA           shift and go to state 140
 
 
-state 106
+state 109
 
     (47) parameter_list -> parameter .
 
@@ -2902,7 +2942,7 @@ state 106
     COMMA           reduce using rule 47 (parameter_list -> parameter .)
 
 
-state 107
+state 110
 
     (49) parameter_list -> empty .
 
@@ -2910,7 +2950,7 @@ state 107
     COMMA           reduce using rule 49 (parameter_list -> empty .)
 
 
-state 108
+state 111
 
     (50) parameter -> VARIABLE .
     (14) assignment -> VARIABLE . assignment_operator expression
@@ -2966,7 +3006,7 @@ state 108
 
     assignment_operator            shift and go to state 67
 
-state 109
+state 112
 
     (51) parameter -> assignment .
 
@@ -2974,7 +3014,7 @@ state 109
     COMMA           reduce using rule 51 (parameter -> assignment .)
 
 
-state 110
+state 113
 
     (52) parameter -> expression .
     (64) expression -> expression . PLUS expression
@@ -2996,7 +3036,7 @@ state 110
     CONCATENATION_EQUALS shift and go to state 54
 
 
-state 111
+state 114
 
     (43) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS . parameter_list CLOSE_PARENTHESIS body_statement_list
     (47) parameter_list -> . parameter
@@ -3028,7 +3068,7 @@ state 111
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 108
+    VARIABLE        shift and go to state 111
     CLOSE_PARENTHESIS reduce using rule 57 (empty -> .)
     COMMA           reduce using rule 57 (empty -> .)
     NUMBER          shift and go to state 32
@@ -3037,14 +3077,14 @@ state 111
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    parameter_list                 shift and go to state 140
-    parameter                      shift and go to state 106
-    empty                          shift and go to state 107
-    assignment                     shift and go to state 109
-    expression                     shift and go to state 110
+    parameter_list                 shift and go to state 141
+    parameter                      shift and go to state 109
+    empty                          shift and go to state 110
+    assignment                     shift and go to state 112
+    expression                     shift and go to state 113
     function_call                  shift and go to state 13
 
-state 112
+state 115
 
     (58) expression -> VARIABLE .
     (110) list_access -> VARIABLE . OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
@@ -3059,10 +3099,10 @@ state 112
     SEMICOLON       reduce using rule 58 (expression -> VARIABLE .)
     CLOSE_PARENTHESIS reduce using rule 58 (expression -> VARIABLE .)
     COMMA           reduce using rule 58 (expression -> VARIABLE .)
-    OPEN_SQUARE_BRACKET shift and go to state 141
+    OPEN_SQUARE_BRACKET shift and go to state 142
 
 
-state 113
+state 116
 
     (14) assignment -> VARIABLE assignment_operator expression .
     (64) expression -> expression . PLUS expression
@@ -3085,7 +3125,7 @@ state 113
     CONCATENATION_EQUALS shift and go to state 54
 
 
-state 114
+state 117
 
     (19) assignment -> VARIABLE assignment_operator list_access .
 
@@ -3094,7 +3134,7 @@ state 114
     COMMA           reduce using rule 19 (assignment -> VARIABLE assignment_operator list_access .)
 
 
-state 115
+state 118
 
     (15) assignment -> VARIABLE EQUALS math_expression .
     (100) math_expression -> math_expression . math_operator math_expression
@@ -3117,7 +3157,7 @@ state 115
 
     math_operator                  shift and go to state 42
 
-state 116
+state 119
 
     (16) assignment -> VARIABLE EQUALS array_structure .
 
@@ -3126,7 +3166,7 @@ state 116
     COMMA           reduce using rule 16 (assignment -> VARIABLE EQUALS array_structure .)
 
 
-state 117
+state 120
 
     (17) assignment -> VARIABLE EQUALS condition .
     (81) condition -> condition . comparison condition
@@ -3154,7 +3194,7 @@ state 117
 
     comparison                     shift and go to state 33
 
-state 118
+state 121
 
     (20) assignment -> VARIABLE EQUALS casting . math_expression
     (99) math_expression -> . NUMBER
@@ -3165,13 +3205,13 @@ state 118
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    NUMBER          shift and go to state 90
-    VARIABLE        shift and go to state 102
-    OPEN_PARENTHESIS shift and go to state 104
+    NUMBER          shift and go to state 93
+    VARIABLE        shift and go to state 105
+    OPEN_PARENTHESIS shift and go to state 107
 
-    math_expression                shift and go to state 142
+    math_expression                shift and go to state 143
 
-state 119
+state 122
 
     (103) math_expression -> OPEN_PARENTHESIS . math_expression math_operator math_expression CLOSE_PARENTHESIS
     (104) math_expression -> OPEN_PARENTHESIS . math_expression CLOSE_PARENTHESIS math_operator math_expression
@@ -3216,16 +3256,16 @@ state 119
 
     NUMBER          shift and go to state 8
     VARIABLE        shift and go to state 9
-    OPEN_PARENTHESIS shift and go to state 143
+    OPEN_PARENTHESIS shift and go to state 144
     NOT             shift and go to state 7
-    INT_T           shift and go to state 145
-    INTEGER_T       shift and go to state 146
-    FLOAT_T         shift and go to state 147
-    DOUBLE_T        shift and go to state 148
-    STRING_T        shift and go to state 149
-    BOOLEAN_T       shift and go to state 150
-    ARRAY_T         shift and go to state 151
-    OBJECT_T        shift and go to state 152
+    INT_T           shift and go to state 146
+    INTEGER_T       shift and go to state 147
+    FLOAT_T         shift and go to state 148
+    DOUBLE_T        shift and go to state 149
+    STRING_T        shift and go to state 150
+    BOOLEAN_T       shift and go to state 151
+    ARRAY_T         shift and go to state 152
+    OBJECT_T        shift and go to state 153
     STRING          shift and go to state 10
     BOOLEAN         shift and go to state 11
     NULL            shift and go to state 12
@@ -3233,11 +3273,11 @@ state 119
 
     math_expression                shift and go to state 56
     condition                      shift and go to state 55
-    data_type                      shift and go to state 144
+    data_type                      shift and go to state 145
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 120
+state 123
 
     (106) array_structure -> OPEN_SQUARE_BRACKET . key_declaration CLOSE_SQUARE_BRACKET
     (107) key_declaration -> . expression EQUALS GREATER_THAN expression
@@ -3268,12 +3308,12 @@ state 120
     COMMA           reduce using rule 57 (empty -> .)
     IDENTIFIER      shift and go to state 14
 
-    key_declaration                shift and go to state 153
-    expression                     shift and go to state 154
-    empty                          shift and go to state 155
+    key_declaration                shift and go to state 154
+    expression                     shift and go to state 155
+    empty                          shift and go to state 156
     function_call                  shift and go to state 13
 
-state 121
+state 124
 
     (18) assignment -> VARIABLE PLUS PLUS .
 
@@ -3282,35 +3322,9 @@ state 121
     COMMA           reduce using rule 18 (assignment -> VARIABLE PLUS PLUS .)
 
 
-state 122
+state 125
 
     (72) if_statement -> IF OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
-    (81) condition -> condition . comparison condition
-    (84) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
-    (86) comparison -> . DOUBLE_EQUALS
-    (87) comparison -> . NOT_EQUALS
-    (88) comparison -> . GREATER_THAN
-    (89) comparison -> . LESS_THAN
-    (90) comparison -> . GREATER_THAN_OR_EQUALS
-    (91) comparison -> . LESS_THAN_OR_EQUALS
-    (92) comparison -> . AND
-    (93) comparison -> . OR
-
-    CLOSE_PARENTHESIS shift and go to state 156
-    DOUBLE_EQUALS   shift and go to state 34
-    NOT_EQUALS      shift and go to state 35
-    GREATER_THAN    shift and go to state 36
-    LESS_THAN       shift and go to state 37
-    GREATER_THAN_OR_EQUALS shift and go to state 38
-    LESS_THAN_OR_EQUALS shift and go to state 39
-    AND             shift and go to state 40
-    OR              shift and go to state 41
-
-    comparison                     shift and go to state 33
-
-state 123
-
-    (78) while_statement -> WHILE OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
     (81) condition -> condition . comparison condition
     (84) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
     (86) comparison -> . DOUBLE_EQUALS
@@ -3334,28 +3348,54 @@ state 123
 
     comparison                     shift and go to state 33
 
-state 124
+state 126
+
+    (78) while_statement -> WHILE OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS body_statement_list
+    (81) condition -> condition . comparison condition
+    (84) condition -> condition . comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
+    (86) comparison -> . DOUBLE_EQUALS
+    (87) comparison -> . NOT_EQUALS
+    (88) comparison -> . GREATER_THAN
+    (89) comparison -> . LESS_THAN
+    (90) comparison -> . GREATER_THAN_OR_EQUALS
+    (91) comparison -> . LESS_THAN_OR_EQUALS
+    (92) comparison -> . AND
+    (93) comparison -> . OR
+
+    CLOSE_PARENTHESIS shift and go to state 158
+    DOUBLE_EQUALS   shift and go to state 34
+    NOT_EQUALS      shift and go to state 35
+    GREATER_THAN    shift and go to state 36
+    LESS_THAN       shift and go to state 37
+    GREATER_THAN_OR_EQUALS shift and go to state 38
+    LESS_THAN_OR_EQUALS shift and go to state 39
+    AND             shift and go to state 40
+    OR              shift and go to state 41
+
+    comparison                     shift and go to state 33
+
+state 127
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization . SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
 
-    SEMICOLON       shift and go to state 158
+    SEMICOLON       shift and go to state 159
 
 
-state 125
+state 128
 
     (74) for_initialization -> assignment .
 
     SEMICOLON       reduce using rule 74 (for_initialization -> assignment .)
 
 
-state 126
+state 129
 
     (75) for_initialization -> empty .
 
     SEMICOLON       reduce using rule 75 (for_initialization -> empty .)
 
 
-state 127
+state 130
 
     (14) assignment -> VARIABLE . assignment_operator expression
     (15) assignment -> VARIABLE . EQUALS math_expression
@@ -3393,54 +3433,57 @@ state 127
 
     assignment_operator            shift and go to state 67
 
-state 128
-
-    (79) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list . CLOSE_PARENTHESIS SEMICOLON
-    (54) value_parameter_list -> value_parameter_list . COMMA value_parameter
-
-    CLOSE_PARENTHESIS shift and go to state 159
-    COMMA           shift and go to state 160
-
-
-state 129
-
-    (53) value_parameter_list -> value_parameter .
-
-    CLOSE_PARENTHESIS reduce using rule 53 (value_parameter_list -> value_parameter .)
-    COMMA           reduce using rule 53 (value_parameter_list -> value_parameter .)
-
-
-state 130
-
-    (55) value_parameter_list -> empty .
-
-    CLOSE_PARENTHESIS reduce using rule 55 (value_parameter_list -> empty .)
-    COMMA           reduce using rule 55 (value_parameter_list -> empty .)
-
-
 state 131
 
-    (56) value_parameter -> expression .
-    (64) expression -> expression . PLUS expression
-    (65) expression -> expression . MINUS expression
-    (66) expression -> expression . MULTIPLY expression
-    (67) expression -> expression . DIVIDE expression
-    (68) expression -> expression . MODULO expression
-    (69) expression -> expression . CONCATENATION expression
-    (70) expression -> expression . CONCATENATION_EQUALS expression
+    (79) impresion -> ECHO value_parameter_list SEMICOLON .
 
-    CLOSE_PARENTHESIS reduce using rule 56 (value_parameter -> expression .)
-    COMMA           reduce using rule 56 (value_parameter -> expression .)
-    PLUS            shift and go to state 48
-    MINUS           shift and go to state 49
-    MULTIPLY        shift and go to state 50
-    DIVIDE          shift and go to state 51
-    MODULO          shift and go to state 52
-    CONCATENATION   shift and go to state 53
-    CONCATENATION_EQUALS shift and go to state 54
+    CLOSE_TAG       reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    FUNCTION        reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    VARIABLE        reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    IF              reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    WHILE           reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    FOR             reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    ECHO            reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    NUMBER          reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    STRING          reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    BOOLEAN         reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    NULL            reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    IDENTIFIER      reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    CLOSE_CURLY_BRACKET reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
+    RETURN          reduce using rule 79 (impresion -> ECHO value_parameter_list SEMICOLON .)
 
 
 state 132
+
+    (54) value_parameter_list -> value_parameter_list COMMA . value_parameter
+    (56) value_parameter -> . expression
+    (58) expression -> . VARIABLE
+    (59) expression -> . NUMBER
+    (60) expression -> . STRING
+    (61) expression -> . BOOLEAN
+    (62) expression -> . NULL
+    (63) expression -> . function_call
+    (64) expression -> . expression PLUS expression
+    (65) expression -> . expression MINUS expression
+    (66) expression -> . expression MULTIPLY expression
+    (67) expression -> . expression DIVIDE expression
+    (68) expression -> . expression MODULO expression
+    (69) expression -> . expression CONCATENATION expression
+    (70) expression -> . expression CONCATENATION_EQUALS expression
+    (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
+
+    VARIABLE        shift and go to state 59
+    NUMBER          shift and go to state 32
+    STRING          shift and go to state 10
+    BOOLEAN         shift and go to state 11
+    NULL            shift and go to state 12
+    IDENTIFIER      shift and go to state 14
+
+    value_parameter                shift and go to state 160
+    expression                     shift and go to state 87
+    function_call                  shift and go to state 13
+
+state 133
 
     (84) condition -> condition comparison OPEN_PARENTHESIS condition . CLOSE_PARENTHESIS
     (82) condition -> OPEN_PARENTHESIS condition . comparison condition CLOSE_PARENTHESIS
@@ -3466,9 +3509,9 @@ state 132
     AND             shift and go to state 40
     OR              shift and go to state 41
 
-    comparison                     shift and go to state 98
+    comparison                     shift and go to state 101
 
-state 133
+state 134
 
     (105) math_expression -> math_expression math_operator OPEN_PARENTHESIS math_expression . CLOSE_PARENTHESIS
     (103) math_expression -> OPEN_PARENTHESIS math_expression . math_operator math_expression CLOSE_PARENTHESIS
@@ -3489,9 +3532,9 @@ state 133
     MULTIPLY        shift and go to state 46
     MODULO          shift and go to state 47
 
-    math_operator                  shift and go to state 100
+    math_operator                  shift and go to state 103
 
-state 134
+state 135
 
     (82) condition -> OPEN_PARENTHESIS condition comparison condition . CLOSE_PARENTHESIS
     (81) condition -> condition comparison condition .
@@ -3537,7 +3580,7 @@ state 134
 
     comparison                     shift and go to state 33
 
-state 135
+state 136
 
     (83) condition -> OPEN_PARENTHESIS condition CLOSE_PARENTHESIS comparison . condition
     (80) condition -> . expression
@@ -3574,7 +3617,7 @@ state 135
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 136
+state 137
 
     (103) math_expression -> OPEN_PARENTHESIS math_expression math_operator math_expression . CLOSE_PARENTHESIS
     (100) math_expression -> math_expression math_operator math_expression .
@@ -3609,7 +3652,7 @@ state 136
 
     math_operator                  shift and go to state 42
 
-state 137
+state 138
 
     (104) math_expression -> OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator . math_expression
     (99) math_expression -> . NUMBER
@@ -3620,13 +3663,13 @@ state 137
     (104) math_expression -> . OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
     (105) math_expression -> . math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 
-    NUMBER          shift and go to state 90
-    VARIABLE        shift and go to state 102
-    OPEN_PARENTHESIS shift and go to state 104
+    NUMBER          shift and go to state 93
+    VARIABLE        shift and go to state 105
+    OPEN_PARENTHESIS shift and go to state 107
 
     math_expression                shift and go to state 166
 
-state 138
+state 139
 
     (71) function_call -> IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS .
 
@@ -3653,7 +3696,7 @@ state 138
     CLOSE_SQUARE_BRACKET reduce using rule 71 (function_call -> IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS .)
 
 
-state 139
+state 140
 
     (48) parameter_list -> parameter_list COMMA . parameter
     (50) parameter -> . VARIABLE
@@ -3681,7 +3724,7 @@ state 139
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    VARIABLE        shift and go to state 108
+    VARIABLE        shift and go to state 111
     NUMBER          shift and go to state 32
     STRING          shift and go to state 10
     BOOLEAN         shift and go to state 11
@@ -3689,20 +3732,20 @@ state 139
     IDENTIFIER      shift and go to state 14
 
     parameter                      shift and go to state 167
-    assignment                     shift and go to state 109
-    expression                     shift and go to state 110
+    assignment                     shift and go to state 112
+    expression                     shift and go to state 113
     function_call                  shift and go to state 13
 
-state 140
+state 141
 
     (43) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list . CLOSE_PARENTHESIS body_statement_list
     (48) parameter_list -> parameter_list . COMMA parameter
 
     CLOSE_PARENTHESIS shift and go to state 168
-    COMMA           shift and go to state 139
+    COMMA           shift and go to state 140
 
 
-state 141
+state 142
 
     (110) list_access -> VARIABLE OPEN_SQUARE_BRACKET . expression CLOSE_SQUARE_BRACKET
     (58) expression -> . VARIABLE
@@ -3730,7 +3773,7 @@ state 141
     expression                     shift and go to state 169
     function_call                  shift and go to state 13
 
-state 142
+state 143
 
     (20) assignment -> VARIABLE EQUALS casting math_expression .
     (100) math_expression -> math_expression . math_operator math_expression
@@ -3753,7 +3796,7 @@ state 142
 
     math_operator                  shift and go to state 42
 
-state 143
+state 144
 
     (103) math_expression -> OPEN_PARENTHESIS . math_expression math_operator math_expression CLOSE_PARENTHESIS
     (104) math_expression -> OPEN_PARENTHESIS . math_expression CLOSE_PARENTHESIS math_operator math_expression
@@ -3789,7 +3832,7 @@ state 143
 
     NUMBER          shift and go to state 8
     VARIABLE        shift and go to state 9
-    OPEN_PARENTHESIS shift and go to state 143
+    OPEN_PARENTHESIS shift and go to state 144
     NOT             shift and go to state 7
     STRING          shift and go to state 10
     BOOLEAN         shift and go to state 11
@@ -3801,70 +3844,70 @@ state 143
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 144
+state 145
 
     (21) casting -> OPEN_PARENTHESIS data_type . CLOSE_PARENTHESIS
 
     CLOSE_PARENTHESIS shift and go to state 170
 
 
-state 145
+state 146
 
     (22) data_type -> INT_T .
 
     CLOSE_PARENTHESIS reduce using rule 22 (data_type -> INT_T .)
 
 
-state 146
+state 147
 
     (23) data_type -> INTEGER_T .
 
     CLOSE_PARENTHESIS reduce using rule 23 (data_type -> INTEGER_T .)
 
 
-state 147
+state 148
 
     (24) data_type -> FLOAT_T .
 
     CLOSE_PARENTHESIS reduce using rule 24 (data_type -> FLOAT_T .)
 
 
-state 148
+state 149
 
     (25) data_type -> DOUBLE_T .
 
     CLOSE_PARENTHESIS reduce using rule 25 (data_type -> DOUBLE_T .)
 
 
-state 149
+state 150
 
     (26) data_type -> STRING_T .
 
     CLOSE_PARENTHESIS reduce using rule 26 (data_type -> STRING_T .)
 
 
-state 150
+state 151
 
     (27) data_type -> BOOLEAN_T .
 
     CLOSE_PARENTHESIS reduce using rule 27 (data_type -> BOOLEAN_T .)
 
 
-state 151
+state 152
 
     (28) data_type -> ARRAY_T .
 
     CLOSE_PARENTHESIS reduce using rule 28 (data_type -> ARRAY_T .)
 
 
-state 152
+state 153
 
     (29) data_type -> OBJECT_T .
 
     CLOSE_PARENTHESIS reduce using rule 29 (data_type -> OBJECT_T .)
 
 
-state 153
+state 154
 
     (106) array_structure -> OPEN_SQUARE_BRACKET key_declaration . CLOSE_SQUARE_BRACKET
     (108) key_declaration -> key_declaration . COMMA key_declaration
@@ -3873,7 +3916,7 @@ state 153
     COMMA           shift and go to state 172
 
 
-state 154
+state 155
 
     (107) key_declaration -> expression . EQUALS GREATER_THAN expression
     (64) expression -> expression . PLUS expression
@@ -3894,7 +3937,7 @@ state 154
     CONCATENATION_EQUALS shift and go to state 54
 
 
-state 155
+state 156
 
     (109) key_declaration -> empty .
 
@@ -3902,7 +3945,7 @@ state 155
     COMMA           reduce using rule 109 (key_declaration -> empty .)
 
 
-state 156
+state 157
 
     (72) if_statement -> IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . body_statement_list
     (44) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
@@ -3913,7 +3956,7 @@ state 156
 
     body_statement_list            shift and go to state 174
 
-state 157
+state 158
 
     (78) while_statement -> WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS . body_statement_list
     (44) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
@@ -3924,7 +3967,7 @@ state 157
 
     body_statement_list            shift and go to state 176
 
-state 158
+state 159
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON . condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
     (80) condition -> . expression
@@ -3961,42 +4004,13 @@ state 158
     expression                     shift and go to state 5
     function_call                  shift and go to state 13
 
-state 159
-
-    (79) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS . SEMICOLON
-
-    SEMICOLON       shift and go to state 178
-
-
 state 160
 
-    (54) value_parameter_list -> value_parameter_list COMMA . value_parameter
-    (56) value_parameter -> . expression
-    (58) expression -> . VARIABLE
-    (59) expression -> . NUMBER
-    (60) expression -> . STRING
-    (61) expression -> . BOOLEAN
-    (62) expression -> . NULL
-    (63) expression -> . function_call
-    (64) expression -> . expression PLUS expression
-    (65) expression -> . expression MINUS expression
-    (66) expression -> . expression MULTIPLY expression
-    (67) expression -> . expression DIVIDE expression
-    (68) expression -> . expression MODULO expression
-    (69) expression -> . expression CONCATENATION expression
-    (70) expression -> . expression CONCATENATION_EQUALS expression
-    (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
+    (54) value_parameter_list -> value_parameter_list COMMA value_parameter .
 
-    VARIABLE        shift and go to state 59
-    NUMBER          shift and go to state 32
-    STRING          shift and go to state 10
-    BOOLEAN         shift and go to state 11
-    NULL            shift and go to state 12
-    IDENTIFIER      shift and go to state 14
+    SEMICOLON       reduce using rule 54 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
+    COMMA           reduce using rule 54 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
 
-    value_parameter                shift and go to state 179
-    expression                     shift and go to state 131
-    function_call                  shift and go to state 13
 
 state 161
 
@@ -4041,7 +4055,7 @@ state 161
   ! AND             [ reduce using rule 84 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
   ! OR              [ reduce using rule 84 (condition -> condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS .) ]
 
-    comparison                     shift and go to state 135
+    comparison                     shift and go to state 136
 
 state 162
 
@@ -4074,7 +4088,7 @@ state 162
   ! MULTIPLY        [ reduce using rule 105 (math_expression -> math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS .) ]
   ! MODULO          [ reduce using rule 105 (math_expression -> math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS .) ]
 
-    math_operator                  shift and go to state 137
+    math_operator                  shift and go to state 138
 
 state 163
 
@@ -4207,7 +4221,7 @@ state 168
 
     OPEN_CURLY_BRACKET shift and go to state 175
 
-    body_statement_list            shift and go to state 180
+    body_statement_list            shift and go to state 178
 
 state 169
 
@@ -4220,7 +4234,7 @@ state 169
     (69) expression -> expression . CONCATENATION expression
     (70) expression -> expression . CONCATENATION_EQUALS expression
 
-    CLOSE_SQUARE_BRACKET shift and go to state 181
+    CLOSE_SQUARE_BRACKET shift and go to state 179
     PLUS            shift and go to state 48
     MINUS           shift and go to state 49
     MULTIPLY        shift and go to state 50
@@ -4279,16 +4293,16 @@ state 172
     CLOSE_SQUARE_BRACKET reduce using rule 57 (empty -> .)
     IDENTIFIER      shift and go to state 14
 
-    key_declaration                shift and go to state 182
-    expression                     shift and go to state 154
-    empty                          shift and go to state 155
+    key_declaration                shift and go to state 180
+    expression                     shift and go to state 155
+    empty                          shift and go to state 156
     function_call                  shift and go to state 13
 
 state 173
 
     (107) key_declaration -> expression EQUALS . GREATER_THAN expression
 
-    GREATER_THAN    shift and go to state 183
+    GREATER_THAN    shift and go to state 181
 
 
 state 174
@@ -4339,7 +4353,7 @@ state 175
     (72) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (78) while_statement -> . WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (73) for_statement -> . FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
-    (79) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (79) impresion -> . ECHO value_parameter_list SEMICOLON
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -4392,8 +4406,8 @@ state 175
   ! NULL            [ reduce using rule 57 (empty -> .) ]
   ! IDENTIFIER      [ reduce using rule 57 (empty -> .) ]
 
-    statement_list                 shift and go to state 184
-    empty                          shift and go to state 185
+    statement_list                 shift and go to state 182
+    empty                          shift and go to state 183
     expression                     shift and go to state 25
     statement                      shift and go to state 16
     expression_statement           shift and go to state 18
@@ -4439,7 +4453,7 @@ state 177
     (92) comparison -> . AND
     (93) comparison -> . OR
 
-    SEMICOLON       shift and go to state 186
+    SEMICOLON       shift and go to state 184
     DOUBLE_EQUALS   shift and go to state 34
     NOT_EQUALS      shift and go to state 35
     GREATER_THAN    shift and go to state 36
@@ -4452,34 +4466,6 @@ state 177
     comparison                     shift and go to state 33
 
 state 178
-
-    (79) impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .
-
-    CLOSE_TAG       reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    FUNCTION        reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    VARIABLE        reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    IF              reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    WHILE           reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    FOR             reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    ECHO            reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    NUMBER          reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    STRING          reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    BOOLEAN         reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    NULL            reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    IDENTIFIER      reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    CLOSE_CURLY_BRACKET reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-    RETURN          reduce using rule 79 (impresion -> ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON .)
-
-
-state 179
-
-    (54) value_parameter_list -> value_parameter_list COMMA value_parameter .
-
-    CLOSE_PARENTHESIS reduce using rule 54 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
-    COMMA           reduce using rule 54 (value_parameter_list -> value_parameter_list COMMA value_parameter .)
-
-
-state 180
 
     (43) function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .
 
@@ -4499,7 +4485,7 @@ state 180
     RETURN          reduce using rule 43 (function_declaration -> FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list .)
 
 
-state 181
+state 179
 
     (110) list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .
 
@@ -4508,7 +4494,7 @@ state 181
     COMMA           reduce using rule 110 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
 
 
-state 182
+state 180
 
     (108) key_declaration -> key_declaration COMMA key_declaration .
     (108) key_declaration -> key_declaration . COMMA key_declaration
@@ -4520,7 +4506,7 @@ state 182
   ! COMMA           [ reduce using rule 108 (key_declaration -> key_declaration COMMA key_declaration .) ]
 
 
-state 183
+state 181
 
     (107) key_declaration -> expression EQUALS GREATER_THAN . expression
     (58) expression -> . VARIABLE
@@ -4545,10 +4531,10 @@ state 183
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 187
+    expression                     shift and go to state 185
     function_call                  shift and go to state 13
 
-state 184
+state 182
 
     (44) body_statement_list -> OPEN_CURLY_BRACKET statement_list . CLOSE_CURLY_BRACKET
     (46) body_statement_list -> OPEN_CURLY_BRACKET statement_list . RETURN expression SEMICOLON CLOSE_CURLY_BRACKET
@@ -4572,7 +4558,7 @@ state 184
     (72) if_statement -> . IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (78) while_statement -> . WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     (73) for_statement -> . FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
-    (79) impresion -> . ECHO OPEN_PARENTHESIS value_parameter_list CLOSE_PARENTHESIS SEMICOLON
+    (79) impresion -> . ECHO value_parameter_list SEMICOLON
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -4588,8 +4574,8 @@ state 184
     (70) expression -> . expression CONCATENATION_EQUALS expression
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
-    CLOSE_CURLY_BRACKET shift and go to state 188
-    RETURN          shift and go to state 189
+    CLOSE_CURLY_BRACKET shift and go to state 186
+    RETURN          shift and go to state 187
     FUNCTION        shift and go to state 26
     VARIABLE        shift and go to state 27
     IF              shift and go to state 28
@@ -4613,13 +4599,13 @@ state 184
     impresion                      shift and go to state 24
     function_call                  shift and go to state 13
 
-state 185
+state 183
 
     (45) body_statement_list -> OPEN_CURLY_BRACKET empty . CLOSE_CURLY_BRACKET
     (6) statement_list -> empty .
 
   ! shift/reduce conflict for CLOSE_CURLY_BRACKET resolved as shift
-    CLOSE_CURLY_BRACKET shift and go to state 190
+    CLOSE_CURLY_BRACKET shift and go to state 188
     RETURN          reduce using rule 6 (statement_list -> empty .)
     FUNCTION        reduce using rule 6 (statement_list -> empty .)
     VARIABLE        reduce using rule 6 (statement_list -> empty .)
@@ -4636,7 +4622,7 @@ state 185
   ! CLOSE_CURLY_BRACKET [ reduce using rule 6 (statement_list -> empty .) ]
 
 
-state 186
+state 184
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON . for_update CLOSE_PARENTHESIS body_statement_list
     (76) for_update -> . assignment
@@ -4650,14 +4636,14 @@ state 186
     (20) assignment -> . VARIABLE EQUALS casting math_expression
     (57) empty -> .
 
-    VARIABLE        shift and go to state 127
+    VARIABLE        shift and go to state 130
     CLOSE_PARENTHESIS reduce using rule 57 (empty -> .)
 
-    for_update                     shift and go to state 191
-    assignment                     shift and go to state 192
-    empty                          shift and go to state 193
+    for_update                     shift and go to state 189
+    assignment                     shift and go to state 190
+    empty                          shift and go to state 191
 
-state 187
+state 185
 
     (107) key_declaration -> expression EQUALS GREATER_THAN expression .
     (64) expression -> expression . PLUS expression
@@ -4679,7 +4665,7 @@ state 187
     CONCATENATION_EQUALS shift and go to state 54
 
 
-state 188
+state 186
 
     (44) body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .
 
@@ -4699,7 +4685,7 @@ state 188
     RETURN          reduce using rule 44 (body_statement_list -> OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET .)
 
 
-state 189
+state 187
 
     (46) body_statement_list -> OPEN_CURLY_BRACKET statement_list RETURN . expression SEMICOLON CLOSE_CURLY_BRACKET
     (58) expression -> . VARIABLE
@@ -4724,10 +4710,10 @@ state 189
     NULL            shift and go to state 12
     IDENTIFIER      shift and go to state 14
 
-    expression                     shift and go to state 194
+    expression                     shift and go to state 192
     function_call                  shift and go to state 13
 
-state 190
+state 188
 
     (45) body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .
 
@@ -4747,28 +4733,28 @@ state 190
     RETURN          reduce using rule 45 (body_statement_list -> OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET .)
 
 
-state 191
+state 189
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update . CLOSE_PARENTHESIS body_statement_list
 
-    CLOSE_PARENTHESIS shift and go to state 195
+    CLOSE_PARENTHESIS shift and go to state 193
 
 
-state 192
+state 190
 
     (76) for_update -> assignment .
 
     CLOSE_PARENTHESIS reduce using rule 76 (for_update -> assignment .)
 
 
-state 193
+state 191
 
     (77) for_update -> empty .
 
     CLOSE_PARENTHESIS reduce using rule 77 (for_update -> empty .)
 
 
-state 194
+state 192
 
     (46) body_statement_list -> OPEN_CURLY_BRACKET statement_list RETURN expression . SEMICOLON CLOSE_CURLY_BRACKET
     (64) expression -> expression . PLUS expression
@@ -4779,7 +4765,7 @@ state 194
     (69) expression -> expression . CONCATENATION expression
     (70) expression -> expression . CONCATENATION_EQUALS expression
 
-    SEMICOLON       shift and go to state 196
+    SEMICOLON       shift and go to state 194
     PLUS            shift and go to state 48
     MINUS           shift and go to state 49
     MULTIPLY        shift and go to state 50
@@ -4789,7 +4775,7 @@ state 194
     CONCATENATION_EQUALS shift and go to state 54
 
 
-state 195
+state 193
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS . body_statement_list
     (44) body_statement_list -> . OPEN_CURLY_BRACKET statement_list CLOSE_CURLY_BRACKET
@@ -4798,16 +4784,16 @@ state 195
 
     OPEN_CURLY_BRACKET shift and go to state 175
 
-    body_statement_list            shift and go to state 197
+    body_statement_list            shift and go to state 195
 
-state 196
+state 194
 
     (46) body_statement_list -> OPEN_CURLY_BRACKET statement_list RETURN expression SEMICOLON . CLOSE_CURLY_BRACKET
 
-    CLOSE_CURLY_BRACKET shift and go to state 198
+    CLOSE_CURLY_BRACKET shift and go to state 196
 
 
-state 197
+state 195
 
     (73) for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list .
 
@@ -4827,7 +4813,7 @@ state 197
     RETURN          reduce using rule 73 (for_statement -> FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list .)
 
 
-state 198
+state 196
 
     (46) body_statement_list -> OPEN_CURLY_BRACKET statement_list RETURN expression SEMICOLON CLOSE_CURLY_BRACKET .
 
@@ -4881,46 +4867,46 @@ WARNING: shift/reduce conflict for STRING in state 68 resolved as shift
 WARNING: shift/reduce conflict for BOOLEAN in state 68 resolved as shift
 WARNING: shift/reduce conflict for NULL in state 68 resolved as shift
 WARNING: shift/reduce conflict for IDENTIFIER in state 68 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 85 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 85 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 85 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 85 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 85 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 85 resolved as shift
-WARNING: shift/reduce conflict for AND in state 85 resolved as shift
-WARNING: shift/reduce conflict for OR in state 85 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 87 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 87 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 87 resolved as shift
-WARNING: shift/reduce conflict for MULTIPLY in state 87 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 87 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 88 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 88 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 88 resolved as shift
-WARNING: shift/reduce conflict for MULTIPLY in state 88 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 88 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 103 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 103 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 103 resolved as shift
-WARNING: shift/reduce conflict for MULTIPLY in state 103 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 103 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 108 resolved as shift
-WARNING: shift/reduce conflict for CONCATENATION_EQUALS in state 108 resolved as shift
-WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 134 resolved as shift
-WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 134 resolved as shift
-WARNING: shift/reduce conflict for NOT_EQUALS in state 134 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN in state 134 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN in state 134 resolved as shift
-WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 134 resolved as shift
-WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 134 resolved as shift
-WARNING: shift/reduce conflict for AND in state 134 resolved as shift
-WARNING: shift/reduce conflict for OR in state 134 resolved as shift
-WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 136 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 136 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 136 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 136 resolved as shift
-WARNING: shift/reduce conflict for MULTIPLY in state 136 resolved as shift
-WARNING: shift/reduce conflict for MODULO in state 136 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 88 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUALS in state 88 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 88 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 88 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 88 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 88 resolved as shift
+WARNING: shift/reduce conflict for AND in state 88 resolved as shift
+WARNING: shift/reduce conflict for OR in state 88 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 90 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 90 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 90 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 90 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 90 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 91 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 91 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 91 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 91 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 91 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 106 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 106 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 106 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 106 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 106 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 111 resolved as shift
+WARNING: shift/reduce conflict for CONCATENATION_EQUALS in state 111 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 135 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 135 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUALS in state 135 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN in state 135 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN in state 135 resolved as shift
+WARNING: shift/reduce conflict for GREATER_THAN_OR_EQUALS in state 135 resolved as shift
+WARNING: shift/reduce conflict for LESS_THAN_OR_EQUALS in state 135 resolved as shift
+WARNING: shift/reduce conflict for AND in state 135 resolved as shift
+WARNING: shift/reduce conflict for OR in state 135 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_PARENTHESIS in state 137 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 137 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 137 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 137 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 137 resolved as shift
+WARNING: shift/reduce conflict for MODULO in state 137 resolved as shift
 WARNING: shift/reduce conflict for DOUBLE_EQUALS in state 161 resolved as shift
 WARNING: shift/reduce conflict for NOT_EQUALS in state 161 resolved as shift
 WARNING: shift/reduce conflict for GREATER_THAN in state 161 resolved as shift
@@ -4958,9 +4944,9 @@ WARNING: shift/reduce conflict for STRING in state 175 resolved as shift
 WARNING: shift/reduce conflict for BOOLEAN in state 175 resolved as shift
 WARNING: shift/reduce conflict for NULL in state 175 resolved as shift
 WARNING: shift/reduce conflict for IDENTIFIER in state 175 resolved as shift
-WARNING: shift/reduce conflict for COMMA in state 182 resolved as shift
-WARNING: shift/reduce conflict for CLOSE_CURLY_BRACKET in state 185 resolved as shift
+WARNING: shift/reduce conflict for COMMA in state 180 resolved as shift
+WARNING: shift/reduce conflict for CLOSE_CURLY_BRACKET in state 183 resolved as shift
 WARNING: reduce/reduce conflict in state 8 resolved using rule (expression -> NUMBER)
 WARNING: rejected rule (math_expression -> NUMBER) in state 8
-WARNING: reduce/reduce conflict in state 108 resolved using rule (parameter -> VARIABLE)
-WARNING: rejected rule (expression -> VARIABLE) in state 108
+WARNING: reduce/reduce conflict in state 111 resolved using rule (parameter -> VARIABLE)
+WARNING: rejected rule (expression -> VARIABLE) in state 111
