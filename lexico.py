@@ -16,7 +16,6 @@ palabras_reservadas = {
     'AND': 'AND',
     'OR': 'OR',
     'NOT': 'NOT',
-    'array': 'ARRAY',
     'as': 'AS',
     'break': 'BREAK',
     'callable': 'CALLABLE',

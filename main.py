@@ -63,13 +63,12 @@ def p_statement(p):
 
 def p_assignment(p):
     '''
-    assignment : VARIABLE EQUALS expression 
+    assignment : VARIABLE assignment_operator expression 
               | VARIABLE EQUALS math_expression 
               | VARIABLE EQUALS array_structure 
               | VARIABLE EQUALS condition 
               | VARIABLE PLUS PLUS 
-              | VARIABLE EQUALS list_access
-              | VARIABLE CONCATENATION_EQUALS list_access
+              | VARIABLE assignment_operator list_access
 
     '''
 
@@ -311,10 +310,6 @@ function esPrimo($numero) {
     return true;
 }
 
-// Función para verificar si un número es primo - José Baidal
-
-
-// Función para obtener la suma de los dígitos de un número
 function sumaDigitos($numero) {
     $suma = 0;
     while ($numero > 0) {
@@ -329,7 +324,6 @@ function sumaDigitos($numero) {
 '''
 
 post_data = '''
-
 
 // Función para verificar si la suma de los dígitos es un número primo
 function sumaDigitosEsPrimo($numero) {
