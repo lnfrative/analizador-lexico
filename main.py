@@ -182,6 +182,7 @@ def p_function_call(p):
 def p_if_statement(p):
     '''
     if_statement : IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
+                    | if_statement ELSE body_statement_list
     '''
 
 def p_for_statement(p):
@@ -351,6 +352,10 @@ if (sumaDigitosEsPrimo($num)) {
 } else {
     echo "La suma de los dígitos de {$num} es {$suma}, que no es un número primo.";
 }
+
+$longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
+$contraseña = generarContrasena($longitudDeseada);
+echo "Contraseña generada: " . $contraseña;
 
 ?>
 
