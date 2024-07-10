@@ -69,8 +69,27 @@ def p_assignment(p):
               | VARIABLE EQUALS condition 
               | VARIABLE PLUS PLUS 
               | VARIABLE assignment_operator list_access
+              | VARIABLE EQUALS casting math_expression
 
     '''
+
+def p_casting(p):
+    '''
+    casting :  OPEN_PARENTHESIS data_type CLOSE_PARENTHESIS
+    '''
+
+def p_data_type(p):
+    '''
+    data_type : INT_T
+            | INTEGER_T
+            | FLOAT_T
+            | DOUBLE_T
+            | STRING_T
+            | BOOLEAN_T
+            | ARRAY_T
+            | OBJECT_T
+    '''
+    p[0] = p[1]
 
 def p_assignment_operator(p):
     '''
@@ -152,6 +171,7 @@ def p_expression(p):
                 | expression MODULO expression
                 | expression CONCATENATION expression
                 | expression CONCATENATION_EQUALS expression
+                
     '''
 
 def p_function_call(p):
@@ -319,19 +339,11 @@ function sumaDigitos($numero) {
     return $suma;
 }
 
-?>
-
-'''
-
-post_data = '''
-
-// Función para verificar si la suma de los dígitos es un número primo
 function sumaDigitosEsPrimo($numero) {
     $suma = sumaDigitos($numero);
     return esPrimo($suma);
 }
 
-// Ejemplo de uso 1
 $num = 12345;
 $suma = sumaDigitos($num);
 if (sumaDigitosEsPrimo($num)) {
@@ -339,6 +351,18 @@ if (sumaDigitosEsPrimo($num)) {
 } else {
     echo "La suma de los dígitos de {$num} es {$suma}, que no es un número primo.";
 }
+
+?>
+
+'''
+
+post_data = '''
+
+// Función para verificar si la suma de los dígitos es un número primo
+
+
+// Ejemplo de uso 1
+
 
 // Ejemplo de uso 2
 $longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí

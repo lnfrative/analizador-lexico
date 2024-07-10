@@ -10,7 +10,6 @@ Integrantes:
 import ply.lex as lex
 from logger import logger
 
-# Palabras reservadas en PHP - José Baidal
 palabras_reservadas = {
     'abstract': 'ABSTRACT',
     'AND': 'AND',
@@ -49,7 +48,17 @@ palabras_reservadas = {
     'function': 'FUNCTION',
     'if': 'IF',
     'else': 'ELSE',
-    'for': 'FOR'
+    'for': 'FOR',
+
+    'int': 'INT_T',
+    'integer': 'INTEGER_T',
+    'float': 'FLOAT_T',
+    'double': 'DOUBLE_T',
+    'string': 'STRING_T',
+    'bool': 'BOOL_T',
+    'boolean': 'BOOLEAN_T',
+    'array': 'ARRAY_T',
+    'object': 'OBJECT_T',
 }
 
 # Lista de tokens - Christopher Díaz
@@ -138,6 +147,7 @@ t_RIGHT_SHIFT_EQUALS = r'>>='
 t_AND_EQUALS = r'&='
 t_OR_EQUALS = r'\|='
 t_XOR_EQUALS = r'\^='
+
 
 # Expresiones regulares para tokens más complejos
 def t_NUMBER(t):
