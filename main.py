@@ -27,6 +27,9 @@ import ply.yacc as yacc
 import datetime
 from lexico import tokens, lexer
 
+# Tabla de símbolos
+symbol_table = {}
+
 # Reglas de precedencia para los operadores (de menor a mayor prioridad)
 precedence = (
     ('left', 'CONCATENATION', 'CONCATENATION_EQUALS'),
@@ -42,6 +45,7 @@ def p_program(p):
             | condition
             | math_expression
     '''
+    p[0] = p[2]
 
 def p_statement_list(p):
     '''
@@ -49,6 +53,10 @@ def p_statement_list(p):
                    | statement_list statement
                    | empty
     '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[2]]
 
 def p_statement(p):
     '''
@@ -60,6 +68,7 @@ def p_statement(p):
               | for_statement
               | impresion
     '''
+    p[0] = p[1]
 
 def p_assignment(p):
     '''
@@ -72,11 +81,20 @@ def p_assignment(p):
               | VARIABLE EQUALS casting math_expression
 
     '''
+    if len(p) == 4:
+        var_name = p[1]
+        symbol_table[var_name] = p[3]
+    elif len(p) == 3:
+        var_name = p[1]
+        if var_name not in symbol_table:
+            raise Exception(f"Variable {var_name} no definida.")
+    p[0] = p[1]
 
 def p_casting(p):
     '''
     casting :  OPEN_PARENTHESIS data_type CLOSE_PARENTHESIS
     '''
+    p[0] = p[2]
 
 def p_data_type(p):
     '''
@@ -106,16 +124,23 @@ def p_assignment_operator(p):
                         | XOR_EQUALS
                         | EQUALS
     '''
+    p[0] = p[1]
 
 def p_expression_statement(p):
     '''
     expression_statement : expression SEMICOLON
     '''
+    p[0] = p[1]
 
 def p_function_declaration(p):
     '''
     function_declaration : FUNCTION IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS body_statement_list
     '''
+    func_name = p[2]
+    if func_name in symbol_table:
+        raise Exception(f"Función {func_name} ya definida.")
+    symbol_table[func_name] = {"parameters": p[4], "body": p[6]}
+    p[0] = func_name
 
 def p_body_statement_list(p):
     '''
@@ -123,6 +148,10 @@ def p_body_statement_list(p):
                         | OPEN_CURLY_BRACKET empty CLOSE_CURLY_BRACKET
                         | OPEN_CURLY_BRACKET statement_list RETURN expression SEMICOLON CLOSE_CURLY_BRACKET
     '''
+    if len(p) == 4:
+        p[0] = p[2]
+    else:
+        p[0] = p[2] + [("RETURN", p[4])]
 
 def p_parameter_list(p):
     '''
@@ -130,6 +159,12 @@ def p_parameter_list(p):
                    | parameter_list COMMA parameter
                    | empty
     '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    elif len(p) == 4:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = []
 
 def p_parameter(p):
     '''
@@ -137,6 +172,7 @@ def p_parameter(p):
                 | assignment
                 | expression
     '''
+    p[0] = p[1]
 
 def p_value_parameter_list(p):
     '''
@@ -144,11 +180,18 @@ def p_value_parameter_list(p):
                    | value_parameter_list COMMA value_parameter
                    | empty
     '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    elif len(p) == 4:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = []
 
 def p_value_parameter(p):
     '''
     value_parameter : expression
     '''
+    p[0] = p[1]
 
 def p_empty(p):
     '''
@@ -359,20 +402,6 @@ echo "Contraseña generada: " . $contraseña;
 
 ?>
 
-'''
-
-post_data = '''
-
-// Función para verificar si la suma de los dígitos es un número primo
-
-
-// Ejemplo de uso 1
-
-
-// Ejemplo de uso 2
-$longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
-$contraseña = generarContrasena($longitudDeseada);
-echo "Contraseña generada: " . $contraseña;
 '''
 
 result = parser.parse(data)
