@@ -242,6 +242,10 @@ function generarContrasena($longitud = 12) {
     return $contraseña;
 }
 
+$longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
+$contraseña = generarContrasena($longitudDeseada);
+echo "Contraseña generada: " . $contraseña;
+
 
 // Función para verificar si un número es primo - José Baidal
 function esPrimo($numero) {
@@ -280,11 +284,6 @@ if (sumaDigitosEsPrimo($num)) {
 } else {
     echo "La suma de los dígitos de {$num} es {$suma}, que no es un número primo.";
 }
-
-// Ejemplo de uso 2
-$longitudDeseada = 12; // Puedes cambiar la longitud de la contraseña aquí
-$contraseña = generarContrasena($longitudDeseada);
-echo "Contraseña generada: " . $contraseña;
 
 ?>
 
