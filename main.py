@@ -561,12 +561,12 @@ echo "Contraseña generada: " . $contraseña;
 
 '''
 
-def analizar_codigo(codigo):
-    result = parser.parse(codigo, lexer=lexer)
-    # messages.append("Análisis completado.")
-    return result
+# def analizar_codigo(codigo):
+#     result = parser.parse(codigo, lexer=lexer)
+#     # messages.append("Análisis completado.")
+#     return result
 
-analizar_codigo(data)
+# analizar_codigo(data)
 
 # with open(nombre_archivo, "w") as archivo_salida:
 #     while True:
