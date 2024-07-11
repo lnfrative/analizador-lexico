@@ -2,37 +2,17 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    ABSTRACT
     AS
     BOOL_T
     BREAK
     CALLABLE
-    CASE
-    CATCH
-    CLASS
-    CLONE
     COLON
     COMMENT
     CONST
     CONTINUE
-    DECLARE
     DEFAULT
-    DIE
-    DO
     DOUBLE_COLON
-    ELSEIF
     EMPTY
-    ENDDECLARE
-    ENDFOR
-    ENDFOREACH
-    ENDIF
-    ENDSWITCH
-    ENDWHILE
-    EVAL
-    EXIT
-    EXTENDS
-    FINAL
-    FINALLY
     OPEN_TAG_WITH_ECHO
     WHITESPACE
 
@@ -153,7 +133,6 @@ Rule 111   list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_B
 
 Terminals, with rules where they appear
 
-ABSTRACT             : 
 AND                  : 93
 AND_EQUALS           : 38
 ARRAY_T              : 28
@@ -163,10 +142,6 @@ BOOLEAN_T            : 27
 BOOL_T               : 
 BREAK                : 
 CALLABLE             : 
-CASE                 : 
-CATCH                : 
-CLASS                : 
-CLONE                : 
 CLOSE_CURLY_BRACKET  : 44 45 46
 CLOSE_PARENTHESIS    : 21 43 71 72 74 79 83 84 85 104 105 106
 CLOSE_SQUARE_BRACKET : 107 111
@@ -178,31 +153,16 @@ CONCATENATION        : 69
 CONCATENATION_EQUALS : 35 70
 CONST                : 
 CONTINUE             : 
-DECLARE              : 
 DEFAULT              : 
-DIE                  : 
 DIVIDE               : 67 96
 DIVIDE_EQUALS        : 33
-DO                   : 
 DOUBLE_COLON         : 
 DOUBLE_EQUALS        : 87
 DOUBLE_T             : 25
 ECHO                 : 80
 ELSE                 : 73
-ELSEIF               : 
 EMPTY                : 
-ENDDECLARE           : 
-ENDFOR               : 
-ENDFOREACH           : 
-ENDIF                : 
-ENDSWITCH            : 
-ENDWHILE             : 
 EQUALS               : 15 16 17 20 41 108
-EVAL                 : 
-EXIT                 : 
-EXTENDS              : 
-FINAL                : 
-FINALLY              : 
 FLOAT_T              : 24
 FOR                  : 74
 FUNCTION             : 43
