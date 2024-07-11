@@ -28,7 +28,29 @@ import datetime
 from lexico import tokens, lexer
 
 # Tabla de símbolos
-symbol_table = {}
+symbol_table = {
+    'strlen': {
+        'parameters': ['string'],
+        'return_type': 'int',
+        'builtin': True
+    },
+    'rand': {
+        'parameters': ['int', 'int'],
+        'return_type': 'int',
+        'builtin': True,
+        'value': 0
+    },
+    'str_shuffle': {
+        'parameters': ['string'],
+        'return_type': 'string',
+        'builtin': True
+    },
+    'sqrt': {
+        'parameters': ['float'],
+        'return_type': 'float',
+        'builtin': True
+    }
+}
 
 # Reglas de precedencia para los operadores (de menor a mayor prioridad)
 precedence = (
@@ -87,7 +109,7 @@ def p_assignment(p):
     elif len(p) == 3:
         var_name = p[1]
         if var_name not in symbol_table:
-            raise Exception(f"Variable {var_name} no definida.")
+            print(f"Variable {var_name} no definida.")
     p[0] = p[1]
 
 def p_casting(p):
@@ -138,7 +160,7 @@ def p_function_declaration(p):
     '''
     func_name = p[2]
     if func_name in symbol_table:
-        raise Exception(f"Función {func_name} ya definida.")
+        print(f"Función {func_name} ya definida.")
     symbol_table[func_name] = {"parameters": p[4], "body": p[6]}
     p[0] = func_name
 
@@ -216,44 +238,80 @@ def p_expression(p):
                 | expression CONCATENATION_EQUALS expression
                 
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        if isinstance(p[1], (int, float)) and isinstance(p[3], (int, float)):
+            if p[2] == '+':
+                p[0] = p[1] + p[3]
+            elif p[2] == '-':
+                p[0] = p[1] - p[3]
+            elif p[2] == '*':
+                p[0] = p[1] * p[3]
+            elif p[2] == '/':
+                p[0] = p[1] / p[3]
+            elif p[2] == '%':
+                p[0] = p[1] % p[3]
+        elif isinstance(p[1], str) and p[2] == '.' and isinstance(p[3], str):
+            p[0] = p[1] + p[3]
+        else:
+            if p[1] in symbol_table and symbol_table[p[1]].get('return_type') == 'int' and isinstance(p[3], (int)):
+                p[1] = p[3]
+            else:
+                p[0] = 0
+    else:
+        p[0] = p[1] 
 
 def p_function_call(p):
     '''
     function_call : IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
     '''
+    func_name = p[1]
+    if func_name not in symbol_table:
+        print(f"Función {func_name} no definida.")
+    func_info = symbol_table[func_name]
+    if len(func_info["parameters"]) != len(p[3]):
+        print(f"Cantidad incorrecta de parámetros para la función {func_name}.")
+    p[0] = func_name
 
 def p_if_statement(p):
     '''
     if_statement : IF OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
                     | if_statement ELSE body_statement_list
     '''
+    p[0] = p[1]
 
 def p_for_statement(p):
     '''
     for_statement : FOR OPEN_PARENTHESIS for_initialization SEMICOLON condition SEMICOLON for_update CLOSE_PARENTHESIS body_statement_list
     '''
+    p[0] = p[1]
 
 def p_for_initialization(p):
     '''
     for_initialization : assignment
                        | empty
     '''
+    p[0] = p[1]
 
 def p_for_update(p):
     '''
     for_update : assignment
                | empty
     '''
+    p[0] = p[1]
 
 def p_while_statement(p):
     '''
     while_statement : WHILE OPEN_PARENTHESIS condition CLOSE_PARENTHESIS body_statement_list
     '''
+    p[0] = p[1]
 
 def p_impresion(p):
     '''
     impresion : ECHO value_parameter_list SEMICOLON
     '''
+    p[0] = p[2]
 
 def p_condition(p):
     '''
@@ -264,6 +322,29 @@ def p_condition(p):
               | condition comparison OPEN_PARENTHESIS condition CLOSE_PARENTHESIS
               | NOT condition
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 3:
+        p[0] = not p[2]
+    elif len(p) == 4:
+        if p[2] == '==':
+            p[0] = p[1] == p[3]
+        elif p[2] == '!=':
+            p[0] = p[1] != p[3]
+        elif p[2] == '>':
+            p[0] = False
+        elif p[2] == '<':
+            p[0] = p[1] < p[3]
+        elif p[2] == '>=':
+            p[0] = p[1] >= p[3]
+        elif p[2] == '<=':
+            p[0] = False
+        elif p[2] == '&&':
+            p[0] = p[1] and p[3]
+        elif p[2] == '||':
+            p[0] = False
+    else:
+        p[0] = p[2]
 
 def p_comparison(p):
     '''
@@ -276,6 +357,7 @@ def p_comparison(p):
                | AND
                | OR
     '''
+    p[0] = p[1]
 
 def p_math_operator(p): 
     '''
@@ -285,6 +367,7 @@ def p_math_operator(p):
                   | MULTIPLY
                   | MODULO
     '''
+    p[0] = p[1]
 
 def p_math_expression(p): 
     '''
@@ -296,11 +379,32 @@ def p_math_expression(p):
                     | OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS math_operator math_expression
                     | math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        if isinstance(p[1], (int, float)) and isinstance(p[3], (int, float)):
+            if p[2] == '+':
+                p[0] = p[1] + p[3]
+            elif p[2] == '-':
+                p[0] = p[1] - p[3]
+            elif p[2] == '*':
+                p[0] = p[1] * p[3]
+            elif p[2] == '/':
+                p[0] = p[1] / p[3]
+            elif p[2] == '%':
+                p[0] = p[1] % p[3]
+        elif isinstance(p[1], str) and p[2] == '.' and isinstance(p[3], str):
+            p[0] = p[1] + p[3]
+        else:
+            p[0] = 0
+    else:
+        p[0] = p[2]
 
 def p_array_structure(p):
     '''
     array_structure : OPEN_SQUARE_BRACKET key_declaration CLOSE_SQUARE_BRACKET
     '''
+    p[0] = p[2]
 
 def p_key_declaration(p):
     '''
@@ -308,11 +412,62 @@ def p_key_declaration(p):
                     | key_declaration COMMA key_declaration
                     | empty
     '''
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        p[0] = {p[1]: p[3]}
+    elif len(p) == 3:
+        p[0] = p[1] + [p[3]]
+    else:
+        p[0] = {}
 
 def p_list_access(p):
     '''
     list_access : VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
     '''
+    var_name = p[1]
+    index_expr = p[3]
+
+    if var_name not in symbol_table:
+        print(f"Error: Variable '{var_name}' no definida.")
+        p[0] = None
+        return
+
+    var_value = symbol_table[var_name]
+
+    # Evaluar la expresión del índice de forma segura
+    if isinstance(index_expr, int):
+        index = index_expr
+    elif isinstance(index_expr, str):
+        if index_expr.isdigit():  
+            index = int(index_expr)
+        elif index_expr in symbol_table:
+            index_value = symbol_table[index_expr]['value']
+            if isinstance(index_value, int):
+                index = index_value
+            else:
+                print(f"Error: Índice '{index_expr}' no es un entero válido.")
+                p[0] = None
+                return
+        else:
+            print(f"Error: Índice '{index_expr}' no es un entero ni una variable válida.")
+            p[0] = None
+            return
+    else:
+        print(f"Error: Índice '{index_expr}' debe ser un entero o una variable que contenga un entero.")
+        p[0] = None
+        return
+
+    # Verificar si la variable es iterable y acceder al elemento
+    try:
+        if isinstance(var_value, (list, str, dict)):
+            p[0] = var_value[index]
+        else:
+            print(f"Error: Variable '{var_name}' no es un tipo iterable (lista, string o diccionario).")
+            p[0] = None
+    except (IndexError, KeyError):
+        print(f"Error: Índice '{index}' fuera de rango para la variable '{var_name}'.")
+        p[0] = None
 
 # Manejo de errores sintácticos
 def p_error(p):
@@ -404,8 +559,12 @@ echo "Contraseña generada: " . $contraseña;
 
 '''
 
-result = parser.parse(data)
-print(result) 
+def analizar_codigo(codigo):
+    result = parser.parse(codigo, lexer=lexer)
+    print("Análisis completado.")
+    return result
+
+analizar_codigo(data)
 
 # with open(nombre_archivo, "w") as archivo_salida:
 #     while True:
@@ -418,4 +577,4 @@ print(result)
 #         result = parser.parse(s)
 #         print(result) 
 
-#         archivo_salida.write(str(result) + "\n") 
+#         archivo_salida.write(str(result) + "\n")
