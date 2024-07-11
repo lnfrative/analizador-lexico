@@ -111,7 +111,7 @@ def p_assignment(p):
     elif len(p) == 3:
         var_name = p[1]
         if var_name not in symbol_table:
-            messages.append(f"Variable {var_name} no definida.")
+            messages.append(f"Error semántico: Variable {var_name} no definida.")
     p[0] = p[1]
 
 def p_casting(p):
@@ -162,7 +162,7 @@ def p_function_declaration(p):
     '''
     func_name = p[2]
     if func_name in symbol_table:
-        messages.append(f"Función {func_name} ya definida.")
+        messages.append(f"Error semántico: Función {func_name} ya definida.")
     symbol_table[func_name] = {"parameters": p[4], "body": p[6]}
     p[0] = func_name
 
@@ -270,10 +270,10 @@ def p_function_call(p):
     '''
     func_name = p[1]
     if func_name not in symbol_table:
-        messages.append(f"Función {func_name} no definida.")
+        messages.append(f"Error semántico: Función {func_name} no definida.")
     func_info = symbol_table[func_name]
     if len(func_info["parameters"]) != len(p[3]):
-        messages.append(f"Cantidad incorrecta de parámetros para la función {func_name}.")
+        messages.append(f"Error semántico: Cantidad incorrecta de parámetros para la función {func_name}.")
     p[0] = func_name
 
 def p_if_statement(p):
@@ -431,7 +431,7 @@ def p_list_access(p):
     index_expr = p[3]
 
     if var_name not in symbol_table:
-        messages.append(f"Error: Variable '{var_name}' no definida.")
+        messages.append(f"Error semántico: Variable '{var_name}' no definida.")
         p[0] = None
         return
 
@@ -448,15 +448,15 @@ def p_list_access(p):
             if isinstance(index_value, int):
                 index = index_value
             else:
-                messages.append(f"Error: Índice '{index_expr}' no es un entero válido.")
+                messages.append(f"Error semántico: Índice '{index_expr}' no es un entero válido.")
                 p[0] = None
                 return
         else:
-            messages.append(f"Error: Índice '{index_expr}' no es un entero ni una variable válida.")
+            messages.append(f"Error semántico: Índice '{index_expr}' no es un entero ni una variable válida.")
             p[0] = None
             return
     else:
-        messages.append(f"Error: Índice '{index_expr}' debe ser un entero o una variable que contenga un entero.")
+        messages.append(f"Error semántico: Índice '{index_expr}' debe ser un entero o una variable que contenga un entero.")
         p[0] = None
         return
 
@@ -465,18 +465,18 @@ def p_list_access(p):
         if isinstance(var_value, (list, str, dict)):
             p[0] = var_value[index]
         else:
-            messages.append(f"Error: Variable '{var_name}' no es un tipo iterable (lista, string o diccionario).")
+            messages.append(f"Error semántico: Variable '{var_name}' no es un tipo iterable (lista, string o diccionario).")
             p[0] = None
     except (IndexError, KeyError):
-        messages.append(f"Error: Índice '{index}' fuera de rango para la variable '{var_name}'.")
+        messages.append(f"Error semántico: Índice '{index}' fuera de rango para la variable '{var_name}'.")
         p[0] = None
 
 # Manejo de errores sintácticos
 def p_error(p):
     if p:
-        messages.append(f"Error de sintaxis en el token '{p.type}' (valor: {p.value}) en la línea {p.lineno}")
+        messages.append(f"Error sintáctico '{p.type}' (valor: {p.value}) en la línea {p.lineno}")
     else:
-        messages.append("Error de sintaxis: unexpected end of file")
+        messages.append("Error sintáctico: fin de archivo inesperado")
 
 parser = yacc.yacc()
 
