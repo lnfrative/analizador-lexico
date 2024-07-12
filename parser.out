@@ -127,9 +127,10 @@ Rule 105   math_expression -> OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 Rule 106   math_expression -> math_expression math_operator OPEN_PARENTHESIS math_expression CLOSE_PARENTHESIS
 Rule 107   array_structure -> OPEN_SQUARE_BRACKET key_declaration CLOSE_SQUARE_BRACKET
 Rule 108   key_declaration -> expression EQUALS GREATER_THAN expression
-Rule 109   key_declaration -> key_declaration COMMA key_declaration
-Rule 110   key_declaration -> empty
-Rule 111   list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
+Rule 109   key_declaration -> expression
+Rule 110   key_declaration -> key_declaration COMMA key_declaration
+Rule 111   key_declaration -> empty
+Rule 112   list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
 
 Terminals, with rules where they appear
 
@@ -144,10 +145,10 @@ BREAK                :
 CALLABLE             : 
 CLOSE_CURLY_BRACKET  : 44 45 46
 CLOSE_PARENTHESIS    : 21 43 71 72 74 79 83 84 85 104 105 106
-CLOSE_SQUARE_BRACKET : 107 111
+CLOSE_SQUARE_BRACKET : 107 112
 CLOSE_TAG            : 1
 COLON                : 
-COMMA                : 48 54 109
+COMMA                : 48 54 110
 COMMENT              : 
 CONCATENATION        : 69
 CONCATENATION_EQUALS : 35 70
@@ -188,7 +189,7 @@ NUMBER               : 59 100
 OBJECT_T             : 29
 OPEN_CURLY_BRACKET   : 44 45 46
 OPEN_PARENTHESIS     : 21 43 71 72 74 79 83 84 85 104 105 106
-OPEN_SQUARE_BRACKET  : 107 111
+OPEN_SQUARE_BRACKET  : 107 112
 OPEN_TAG             : 1
 OPEN_TAG_WITH_ECHO   : 
 OR                   : 94
@@ -200,7 +201,7 @@ RIGHT_SHIFT_EQUALS   : 37
 SEMICOLON            : 9 42 46 74 74 80
 STRING               : 60
 STRING_T             : 26
-VARIABLE             : 14 15 16 17 18 19 20 50 58 102 103 111
+VARIABLE             : 14 15 16 17 18 19 20 50 58 102 103 112
 WHILE                : 79
 WHITESPACE           : 
 XOR_EQUALS           : 40
@@ -216,8 +217,8 @@ casting              : 20
 comparison           : 82 83 84 85
 condition            : 2 17 72 74 79 82 82 83 83 84 84 85 85 86
 data_type            : 21
-empty                : 6 45 49 55 76 78 110
-expression           : 14 42 46 52 56 64 64 65 65 66 66 67 67 68 68 69 69 70 70 81 108 108 111
+empty                : 6 45 49 55 76 78 111
+expression           : 14 42 46 52 56 64 64 65 65 66 66 67 67 68 68 69 69 70 70 81 108 108 109 112
 expression_statement : 7
 for_initialization   : 74
 for_statement        : 12
@@ -226,7 +227,7 @@ function_call        : 63
 function_declaration : 8
 if_statement         : 10 73
 impresion            : 13
-key_declaration      : 107 109 109
+key_declaration      : 107 110 110
 list_access          : 19
 math_expression      : 3 15 20 101 101 102 103 104 104 105 105 106 106
 math_operator        : 101 102 103 104 105 106
@@ -1888,7 +1889,7 @@ state 68
     (68) expression -> . expression MODULO expression
     (69) expression -> . expression CONCATENATION expression
     (70) expression -> . expression CONCATENATION_EQUALS expression
-    (111) list_access -> . VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
+    (112) list_access -> . VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
     (71) function_call -> . IDENTIFIER OPEN_PARENTHESIS parameter_list CLOSE_PARENTHESIS
 
     VARIABLE        shift and go to state 118
@@ -3178,7 +3179,7 @@ state 117
 state 118
 
     (58) expression -> VARIABLE .
-    (111) list_access -> VARIABLE . OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
+    (112) list_access -> VARIABLE . OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET
 
     PLUS            reduce using rule 58 (expression -> VARIABLE .)
     MINUS           reduce using rule 58 (expression -> VARIABLE .)
@@ -3372,8 +3373,9 @@ state 126
 
     (107) array_structure -> OPEN_SQUARE_BRACKET . key_declaration CLOSE_SQUARE_BRACKET
     (108) key_declaration -> . expression EQUALS GREATER_THAN expression
-    (109) key_declaration -> . key_declaration COMMA key_declaration
-    (110) key_declaration -> . empty
+    (109) key_declaration -> . expression
+    (110) key_declaration -> . key_declaration COMMA key_declaration
+    (111) key_declaration -> . empty
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -3927,7 +3929,7 @@ state 146
 
 state 147
 
-    (111) list_access -> VARIABLE OPEN_SQUARE_BRACKET . expression CLOSE_SQUARE_BRACKET
+    (112) list_access -> VARIABLE OPEN_SQUARE_BRACKET . expression CLOSE_SQUARE_BRACKET
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -4090,7 +4092,7 @@ state 158
 state 159
 
     (107) array_structure -> OPEN_SQUARE_BRACKET key_declaration . CLOSE_SQUARE_BRACKET
-    (109) key_declaration -> key_declaration . COMMA key_declaration
+    (110) key_declaration -> key_declaration . COMMA key_declaration
 
     CLOSE_SQUARE_BRACKET shift and go to state 179
     COMMA           shift and go to state 180
@@ -4099,6 +4101,7 @@ state 159
 state 160
 
     (108) key_declaration -> expression . EQUALS GREATER_THAN expression
+    (109) key_declaration -> expression .
     (64) expression -> expression . PLUS expression
     (65) expression -> expression . MINUS expression
     (66) expression -> expression . MULTIPLY expression
@@ -4108,6 +4111,8 @@ state 160
     (70) expression -> expression . CONCATENATION_EQUALS expression
 
     EQUALS          shift and go to state 181
+    CLOSE_SQUARE_BRACKET reduce using rule 109 (key_declaration -> expression .)
+    COMMA           reduce using rule 109 (key_declaration -> expression .)
     PLUS            shift and go to state 48
     MINUS           shift and go to state 49
     MULTIPLY        shift and go to state 50
@@ -4119,10 +4124,10 @@ state 160
 
 state 161
 
-    (110) key_declaration -> empty .
+    (111) key_declaration -> empty .
 
-    CLOSE_SQUARE_BRACKET reduce using rule 110 (key_declaration -> empty .)
-    COMMA           reduce using rule 110 (key_declaration -> empty .)
+    CLOSE_SQUARE_BRACKET reduce using rule 111 (key_declaration -> empty .)
+    COMMA           reduce using rule 111 (key_declaration -> empty .)
 
 
 state 162
@@ -4475,7 +4480,7 @@ state 176
 
 state 177
 
-    (111) list_access -> VARIABLE OPEN_SQUARE_BRACKET expression . CLOSE_SQUARE_BRACKET
+    (112) list_access -> VARIABLE OPEN_SQUARE_BRACKET expression . CLOSE_SQUARE_BRACKET
     (64) expression -> expression . PLUS expression
     (65) expression -> expression . MINUS expression
     (66) expression -> expression . MULTIPLY expression
@@ -4514,10 +4519,11 @@ state 179
 
 state 180
 
-    (109) key_declaration -> key_declaration COMMA . key_declaration
+    (110) key_declaration -> key_declaration COMMA . key_declaration
     (108) key_declaration -> . expression EQUALS GREATER_THAN expression
-    (109) key_declaration -> . key_declaration COMMA key_declaration
-    (110) key_declaration -> . empty
+    (109) key_declaration -> . expression
+    (110) key_declaration -> . key_declaration COMMA key_declaration
+    (111) key_declaration -> . empty
     (58) expression -> . VARIABLE
     (59) expression -> . NUMBER
     (60) expression -> . STRING
@@ -4665,23 +4671,23 @@ state 186
 
 state 187
 
-    (111) list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .
+    (112) list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .
 
-    SEMICOLON       reduce using rule 111 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
-    CLOSE_PARENTHESIS reduce using rule 111 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
-    COMMA           reduce using rule 111 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
+    SEMICOLON       reduce using rule 112 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
+    CLOSE_PARENTHESIS reduce using rule 112 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
+    COMMA           reduce using rule 112 (list_access -> VARIABLE OPEN_SQUARE_BRACKET expression CLOSE_SQUARE_BRACKET .)
 
 
 state 188
 
-    (109) key_declaration -> key_declaration COMMA key_declaration .
-    (109) key_declaration -> key_declaration . COMMA key_declaration
+    (110) key_declaration -> key_declaration COMMA key_declaration .
+    (110) key_declaration -> key_declaration . COMMA key_declaration
 
   ! shift/reduce conflict for COMMA resolved as shift
-    CLOSE_SQUARE_BRACKET reduce using rule 109 (key_declaration -> key_declaration COMMA key_declaration .)
+    CLOSE_SQUARE_BRACKET reduce using rule 110 (key_declaration -> key_declaration COMMA key_declaration .)
     COMMA           shift and go to state 180
 
-  ! COMMA           [ reduce using rule 109 (key_declaration -> key_declaration COMMA key_declaration .) ]
+  ! COMMA           [ reduce using rule 110 (key_declaration -> key_declaration COMMA key_declaration .) ]
 
 
 state 189

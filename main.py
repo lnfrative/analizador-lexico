@@ -411,6 +411,7 @@ def p_array_structure(p):
 def p_key_declaration(p):
     '''
     key_declaration : expression EQUALS GREATER_THAN expression
+                    | expression
                     | key_declaration COMMA key_declaration
                     | empty
     '''
